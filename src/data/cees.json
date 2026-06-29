@@ -1,0 +1,1825 @@
+[
+  {
+    "id": "S_01_01",
+    "name": "Stakeholder Engagement [ALL SITES-GEN]",
+    "description": "Stakeholder Engagement",
+    "abbreviatedTitle": "SE",
+    "setId": "1A",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site developed a strategy/defined process for stakeholder engagement, including with Civil Society Organizations (CSOs) and clients of HIV services. The strategy/defined process includes activities to elicit and use stakeholder feedback for (1) program planning and implementation at least every 3-months and (2) review and/or evaluation of program performance data at least every 3 months.",
+    "instructions": "Instructions: All prevention and treatment services should engage stakeholders especially where CLM efforts overlap with supported sites. For remote CEE collection, assessors must ensure that any personal identifiable information (PII) of beneficiaries is not visible when viewing meeting logs or other documents that may contain this PII.If the site does not engage stakeholders because of confidentiality concerns, address this in comments check NA, and skip this CEE",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_02",
+    "name": "Condom Availability [ALL SITES-GEN]",
+    "description": "Condom Availability",
+    "abbreviatedTitle": "CA",
+    "setId": "1A",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has a reliable supply of condoms. Condoms have at least one month of shelf life before expiration and are easily accessible to patrons/clients at the site.",
+    "instructions": "Instructions: With remote assessment, ensure that any video does not show clients.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_03",
+    "name": "Client Rights, Stigma and Discrimination Policies [ALL SITES-GEN]",
+    "description": "Client Rights, Stigma and Discrimination Policies",
+    "abbreviatedTitle": "CRSDP",
+    "setId": "1A",
+    "required": true,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Every site where HIV services are provided has a written statement, policy, or other written tools describing the rights of clients and the protection of all clients from stigma and discrimination regardless of age, disability, gender identity, sexual orientation, HIV status, race, religion, or sex. All staff are trained on client rights and protection of all clients from stigma and discrimination.",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_04",
+    "name": "Child Safeguarding [ALL SITES-GEN]",
+    "description": "Child Safeguarding",
+    "abbreviatedTitle": "CS",
+    "setId": "1A",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site where PEPFAR supports service provision to children, or where personnel and volunteers regularly contact children, has a written child safeguarding policy to prevent and respond to abuse, exploitation, or neglect by (1) personnel and volunteers or (2) as a result of PEPFAR-supported programming. All personnel and program volunteers are trained on this policy.",
+    "instructions": "Instructions: Does the site\u2019s agreement with the prime partner or implementing USG agency require a child safeguarding policy? If NO, check NA, and SKIP CEE.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_05",
+    "name": "Support and Assessment of Staff Performance [ALL SITES-GEN]",
+    "description": "Support and Assessment of Staff Performance",
+    "abbreviatedTitle": "SASP",
+    "setId": "1A",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has adequate measures in place to monitor and support health worker performance and the quality of their services provided to clients.",
+    "instructions": "Instructions: Evidence of the impact of staff feedback and support could include: a change in provider understanding of client\u2019s needs, enhanced task sharing, improved client appointment scheduling or service flow, or communication with clients.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_06",
+    "name": "TB Infection Control [ALL SITES-GEN]",
+    "description": "TB Infection Control",
+    "abbreviatedTitle": "TBIC",
+    "setId": "1A",
+    "required": true,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each facility has a TB infection control focal person, and implements a standard TB infection control plan to minimize the risk of TB transmission to clients and health care workers. The TB infection control plan includes the following: segregating and fast tracking of individuals who cough, instructing clients on cough etiquette, and well-ventilated waiting and clinic areas.",
+    "instructions": "Instructions: As part of the site walk-through for SIMS, assess Q2 and Q3 throughout and score based on any instance where the observations do not meet the requirements. With remote assessment, ensure that any video does not show clients. Does this site provide clinical services? If NO, check NA, and SKIP CEE:",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_07",
+    "name": "Waste Management [ALL SITES-GEN]",
+    "description": "Waste Management",
+    "abbreviatedTitle": "WM",
+    "setId": "1A",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site implements procedures for collection, storage, and disposal of infectious waste to prevent exposures to workers, clients, and the public. Procedures include segregation of infectious waste, posted waste disposal guidance, and secure storage of infectious waste inside and outside the site.",
+    "instructions": "Instructions: Assess all the components of this CEE throughout the site, then complete the CEE scoring based on any instance where the observations do not meet the requirements. With remote assessment, ensure that any video does not show clients.If the site does not generate infectious waste, check NA, and SKIP this CEE",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_08",
+    "name": "Injection Safety [ALL SITES-GEN]",
+    "description": "Injection Safety",
+    "abbreviatedTitle": "IS",
+    "setId": "1A",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has appropriate injection and phlebotomy equipment and supplies and written, standardized safety procedures available to reduce risk of blood borne pathogen transmission to clients and healthcare workers.",
+    "instructions": "Instructions: Assess all the components of this CEE throughout the site, then complete the CEE scoring based on any instance where the observations do not meet the requirements. With remote assessment,ensure that any video does not show clients.Does this site provide injections or phlebotomy services to clients? If NO, check NA, and SKIP CEE.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_09",
+    "name": "Provision of PrEP Services [ALL SITES-GEN]",
+    "description": "Provision of PrEP Services",
+    "abbreviatedTitle": "PPS",
+    "setId": "1A",
+    "required": true,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: HIV-uninfected men and women who are at substantial risk of infection can access pre-exposure prophylaxis (PrEP) through high quality, safe, and friendly services.",
+    "instructions": "Instructions: For remote CEE collection, assessors must ensure that any personal identifiable information (PII) of beneficiaries is not visible when viewing client intake/assessment or other documents that may contain this PII. If the national policy does not include the provision of PrEP OR the site is not accredited to provide PrEP services, then check NA and SKIP CEE:",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_31",
+    "name": "Elimination of User Fees [ALL SITES - GEN]",
+    "description": "Elimination of User Fees",
+    "abbreviatedTitle": "EUF",
+    "setId": "1A",
+    "required": true,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Sites should not charge formal or informal user fees for client registration, Clinical Treatment services [HIV services, cervical cancer screening, advanced HIV services, STI (sexually transmitted infection), or TB services], or Prevention services [condoms, OI (opportunistic infection) prophylaxis, pre and post exposure prophylaxis (PEP, PrEP), PMTCT, TB preventative therapy (TPT), and voluntary male medical circumcision (VMMC)].",
+    "instructions": "Instructions: User fees should be posted and visible to clients in the site. Assessors may check documentation in accounting registers, receipts, and client records for evidence of formal and informal user fees charged. With remote assessment, ensure that any video does not show clients.",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_32",
+    "name": "Evidence of Treatment and Viral Load Literacy [ALL SITES - GEN]",
+    "description": "Evidence of Treatment and Viral Load Literacy",
+    "abbreviatedTitle": "ETVLL",
+    "setId": "1A",
+    "required": true,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Messaging (e.g., U=U) and activities to reduce stigma and encourage HIV treatment and prevention should be provided to enhance treatment and viral load literacy.",
+    "instructions": "Instructions: (Q2) Evidence of activities include registers, calendars, or monitoring forms that document topics of health talks, support groups, clubs, or other educational discussions at the site. For remote CEE collection, assessors must ensure that any PII of beneficiaries is not visible when viewing meeting logs or other documents that may contain this PII. If the site doesn\u2019t provide treatment activities, check NA, and SKIP CEE.",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_10",
+    "name": "Supply Chain Management [ALL SITES-COMM]",
+    "description": "Supply Chain Management",
+    "abbreviatedTitle": "SCM",
+    "setId": "1B",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has an inventory management protocol for antiretrovirals (ARVs), cotrimoxazole (CTX), isoniazid preventive therapy (IPT)/other TB preventive regimens, and HIV rapid test kits (RTKs), and submits routine and accurate orders to maintain adequate stock (between established minimum/maximum stock levels).",
+    "instructions": "Instructions: Assess this CEE at the central pharmacy to ensure that each service delivery area within a facility has an adequate supply. With remote assessment, ensure that any video does not show clients. Does this site provide ARVs, CTX, IPT/TB preventive therapy or RTKs for PEPFAR-supported clients? If NO, check NA and SKIP CEE:",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_11",
+    "name": "Medication Dispensing [ALL SITES-COMM]",
+    "description": "Medication Dispensing",
+    "abbreviatedTitle": "MD",
+    "setId": "1B",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has a standard written medication dispensing protocol and maintains complete and updated medication dispensing records or registers.",
+    "instructions": "Instructions: Assess this CEE at the main area where HIV-related medications are dispensed to clients. For remote CEE collection, assessors must ensure that any PII of clients is covered not visible when viewing logbooks or other tracking documents that may contain this PII. Does this facility dispense HIV-related medications (e.g., PrEP, ARVs, IPT, and CTX) for clients? If NO, check NA, and SKIP CEE:",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_12",
+    "name": "Supply Chain Reliability-Adult ARVs [ALL SITES-COMM]",
+    "description": "Supply Chain Reliability-Adult ARVs",
+    "abbreviatedTitle": "SCRAARVs",
+    "setId": "1B",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has a reliable supply of adult ARVs.",
+    "instructions": "Instructions: Assess this CEE at the central pharmacy or central store (as applicable) to ensure that each service delivery area within a site has an adequate supply. Use the Comment box to document treatment substitutions made for adolescent and adult clients, including PBFW, and the reduction in appointment spacing. Does this site provide ARVs for adults? If NO, check NA, and SKIP CEE:",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_13",
+    "name": "Supply Chain Reliability-Cotrimoxazole [ALL SITES-COMM]",
+    "description": "Supply Chain Reliability-Cotrimoxazole",
+    "abbreviatedTitle": "SCRC",
+    "setId": "1B",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has a reliable supply of adult cotrimoxazole (CTX).",
+    "instructions": "Instructions: Assess this CEE at the central pharmacy or central store (as applicable) to ensure that each service delivery area within a facility has an adequate supply. Does this site provide CTX for adults? If NO, check NA, and SKIP CEE:",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_14",
+    "name": "Supply Chain Reliability- TB Preventive Therapy [ALL SITES-COMM]",
+    "description": "Supply Chain Reliability- TB Preventive Therapy",
+    "abbreviatedTitle": "SCRTBPT",
+    "setId": "1B",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has a reliable supply of adult isoniazid/other regimen for TB preventive therapy (TPT).",
+    "instructions": "Instructions: Assess this CEE at the central pharmacy or central store (as applicable) to ensure that each service delivery area within a site has an adequate supply. Does this site provide TPT for adults? If NO, check NA, and SKIP CEE:",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_15",
+    "name": "Supply Chain Reliability -Pediatric ARVs [ALL SITES-COMM]",
+    "description": "Supply Chain Reliability -Pediatric ARVs",
+    "abbreviatedTitle": "SCRPARVs",
+    "setId": "1B",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has a reliable supply of pediatric ARVs.",
+    "instructions": "Instructions: Assess this CEE at the central pharmacy or central store (as applicable) to ensure that each service delivery area within a site has an adequate supply. Use the Comment box to document treatment substitutions made for children and adolescent clients, and the reduction in appointment spacing. Does this site provide ARVs for children? If NO, check NA, and SKIP CEE:",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_16",
+    "name": "Supply Chain-Pediatric Cotrimoxazole [ALL SITES-COMM]",
+    "description": "Supply Chain-Pediatric Cotrimoxazole",
+    "abbreviatedTitle": "SCPC",
+    "setId": "1B",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has a reliable supply of pediatric (liquid and tablet) cotrimoxazole (CTX).",
+    "instructions": "Instructions: Assess this CEE at the central pharmacy or central store (as applicable) to ensure that each service delivery area within a site has an adequate supply. Does this site provide CTX for children? If NO, check NA, and SKIP CEE:",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_17",
+    "name": "Supply Chain Reliability- Pediatric TB Preventive Therapy [ALL SITES-COMM]",
+    "description": "Supply Chain Reliability- Pediatric TB Preventive Therapy",
+    "abbreviatedTitle": "SCRPTPT",
+    "setId": "1B",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has a reliable supply of pediatric isoniazid/other regimen for TB preventive therapy (TPT).",
+    "instructions": "Instructions: Assess this CEE at the central pharmacy or central store (as applicable) to ensure that each service delivery area within a site has an adequate supply. Does this site provide TPT for pediatric clients? If NO, check NA, and SKIP CEE:",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_18",
+    "name": "Supply Chain Reliability-Rapid Test Kits [ALL SITES-COMM]",
+    "description": "Supply Chain Reliability-Rapid Test Kits",
+    "abbreviatedTitle": "SCRRTK",
+    "setId": "1B",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each service delivery point at each site has a reliable supply of rapid test kits.",
+    "instructions": "Instructions: This CEE is assessed at the place within the site where rapid test kits are managed (e.g., central store, pharmacy, laboratory, etc.). With remote assessment, ensure that any video does not show clients. Does this site provide RTKs for HIV testing? If NO, check NA, and SKIP CEE:",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_33",
+    "name": "Supply Chain Reliability-Personal Protective Equipment [ALL SITES-COMM]",
+    "description": "Supply Chain Reliability-Personal Protective Equipment",
+    "abbreviatedTitle": "SCR-PPE",
+    "setId": "1B",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has a reliable supply of personal protective equipment (PPE) and procedures for ordering, distribution, and documentation of PPE distribution to health care providers and clients.",
+    "instructions": "Instructions: Use the Comment Box to document which PPE are available at the site and which have had any stock outs.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_19",
+    "name": "Data Quality Assurance (Routine Activities) [ALL SITES-DATA QUAL]",
+    "description": "Data Quality Assurance (Routine Activities)",
+    "abbreviatedTitle": "DQAR",
+    "setId": "1C",
+    "required": true,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site follows routine data quality assurance (DQA) procedures to verify the accuracy and completeness of reported HIV program data on at least a quarterly basis.",
+    "instructions": "Instructions: For remote CEE collection, if the DQA documentation contains any PII of clients, assessors must ensure this is not visible when viewing logbooks or other tracking documents that may contain this PII.",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_20",
+    "name": "Assessment & Utilization of Performance Data in QI Activities [ALL SITES-DATA QUAL]",
+    "description": "Assessment & Utilization of Performance Data in QI Activities",
+    "abbreviatedTitle": "AUOPDQIA",
+    "setId": "1C",
+    "required": true,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has a process for routinely recording, reviewing, and using program data to inform implementation of quality improvement (QI) activities.",
+    "instructions": "",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_21",
+    "name": "Data Reporting Consistency \u2013 TX_NEW-C&T [ALL SITES-DATA QUAL]",
+    "description": "Data Reporting Consistency \u2013 TX_NEW-C&T",
+    "abbreviatedTitle": "DRC-TX_NEW-C&T",
+    "setId": "1C",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Indicator reports in DATIM for PEPFAR Monitoring Evaluation Reporting (MER) indicator TX_NEW match summary reports maintained at facility level for the same reporting period.",
+    "instructions": "Instructions: Does this facility report on the PEPFAR MER TX_NEW indicator?\n        \n        If NO, check NA, and SKIP this CEE.\n        \n        If YES, assessor must retrieve the facility-level DATIM indicator report for the last PEPFAR quarterly report prior to visit.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_22",
+    "name": "Data Reporting Consistency \u2013 HTS_TST [ALL SITES-DATA QUAL]",
+    "description": "Data Reporting Consistency \u2013 HTS_TST",
+    "abbreviatedTitle": "DRC-HTS_TST",
+    "setId": "1C",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Indicator reports in DATIM for MER Indicator HTS_TST match summary reports maintained at facility level for the same reporting period.",
+    "instructions": "Instructions: Does this facility report on PEPFAR HTS_TST indicator?\n        \n        If NO, check NA, and SKIP this CEE.\n        \n        If YES, assessor must retrieve the facility-level DATIM indicator report for the last PEPFAR quarterly report prior to visit.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_23",
+    "name": "Data Reporting Consistency \u2013 PMTCT_STAT [ALL SITES-DATA QUAL]",
+    "description": "Data Reporting Consistency \u2013 PMTCT_STAT",
+    "abbreviatedTitle": "DRC-PMTCT_STAT",
+    "setId": "1C",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Indicator reports in DATIM match summary reports maintained at facility level for the same reporting period.",
+    "instructions": "Instructions: Does this facility report on PEPFAR PMTCT_STAT indicator?\n        \n        If NO, check NA, and SKIP this CEE.\n        \n        If YES, assessor must retrieve the facility-level DATIM indicator report for the last PEPFAR quarterly report prior to visit.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_24",
+    "name": "Data Reporting Consistency \u2013 VMMC_CIRC [ALL SITES-DATA QUAL]",
+    "description": "Data Reporting Consistency \u2013 VMMC_CIRC",
+    "abbreviatedTitle": "DRC-VMMC_CIRC",
+    "setId": "1C",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Indicator reports in DATIM match summary reports maintained at facility level for the same reporting period.",
+    "instructions": "Instructions: Does this facility report on PEPFAR VMMC_CIRC indicator?\n        \n      If NO, check NA, and SKIP this CEE.\n      \n      If YES, assessor must retrieve the facility-level DATIM indicator report for the last PEPFAR quarterly report prior to visit.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_25",
+    "name": "Data Reporting Consistency \u2013 TX_CURR [ALL SITES-DATA QUAL]",
+    "description": "Data Reporting Consistency \u2013 TX_CURR",
+    "abbreviatedTitle": "DRC-TX_CURR",
+    "setId": "1C",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Indicator reports in DATIM match summary reports maintained at facility level for the same reporting period.",
+    "instructions": "Instructions: Does this facility report on PEPFAR TX_CURR indicator?\n        \n        If NO, check NA, and SKIP this CEE.\n        \n        If YES, assessor must retrieve the facility-level DATIM indicator report for the last PEPFAR quarterly report prior to visit.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_26",
+    "name": "Data Reporting Consistency \u2013 PMTCT_EID [ALL SITES-DATA QUAL]",
+    "description": "Data Reporting Consistency \u2013 PMTCT_EID",
+    "abbreviatedTitle": "DRC-PMTCT_EID",
+    "setId": "1C",
+    "required": false,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Indicator reports in DATIM match summary reports maintained at facility level for the same reporting period.",
+    "instructions": "Instructions: Does this facility report on PEPFAR PMTCT_EID indicator?\n        \n        If NO, check NA, and SKIP this CEE.\n        \n       If YES, assessor must retrieve the facility-level DATIM indicator report for the last PEPFAR quarterly report prior to visit",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_27",
+    "name": "Infection Prevention and Control Program [ALL SITES-IPC]",
+    "description": "Infection Prevention and Control Program",
+    "abbreviatedTitle": "IPC",
+    "setId": "1D",
+    "required": true,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has an infection prevention and control (IPC) focal person and implements standard IPC protocols to minimize the risk of infectious disease transmission to clients and health care workers (HCW). The IPC plan includes administrative and engineering/environmental controls and standard and transmission-based precautions.",
+    "instructions": "",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_28",
+    "name": "Environmental Cleaning Procedures [ALL SITES-IPC]",
+    "description": "Environmental Cleaning Procedures",
+    "abbreviatedTitle": "ECP",
+    "setId": "1D",
+    "required": true,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each site has environmental cleaning procedures and protocols, dedicated staff responsible for environmental cleaning who have received training on standardized cleaning methods and actively monitors environmental cleaning practices to ensure compliance with protocols and recommended practices. The site should also have an adequate supply of cleaning supplies for use by site staff to conduct environmental cleaning.",
+    "instructions": "Instructions: Appropriate environment cleaning supplies should include: rubber gloves, plastic aprons, cleaning products, disinfectants, portable containers for cleaning solutions and disinfectants, mops or cleaning squeegee with floor cloths, buckets, surface cleaning clothes, and access to clean water. Adequate supply for the site (rooms, space) and infectious disease needs.",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_29",
+    "name": "Availability of Personal Protective Equipment (PPE) [ALL SITES-IPC]",
+    "description": "Availability of Personal Protective Equipment (PPE)",
+    "abbreviatedTitle": "APPE",
+    "setId": "1D",
+    "required": true,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Sites should ensure that essential PPE are available and staff are trained on the rational and correct use of PPE including what PPE to use based on staff activity and pathogen of concern, and appropriate application and behavior when wearing PPE.",
+    "instructions": "Instructions: Assess all the components of this CEE throughout the site, then complete the CEE scoring based on any instance where the observations do not meet the requirements. With remote assessment, ensure that any video does not show clients.",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_01_30",
+    "name": "Decontamination and Reprocessing of Medical Devices [ALL SITES-IPC]",
+    "description": "Decontamination and Reprocessing of Medical Devices",
+    "abbreviatedTitle": "DRMD",
+    "setId": "1D",
+    "required": true,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: The site should ensure that written procedures for decontamination and reprocessing of medical equipment are available and that staff are trained on the appropriate practices, including ensuring that sterilization cycles have been validated.",
+    "instructions": "Instructions: Only assess this CEE at sites that provide VMMC and/or cervical cancer services. Assess all the components of this CEE throughout the site, then complete the CEE scoring based on any instance where the observations do not meet the requirements.\n        \n        If the site does not perform decontamination and reprocessing procedures, check NA, and SKIP this CEE",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_02_01",
+    "name": "Retesting for Verification before/at ART Initiation [C&T GEN POP]",
+    "description": "Retesting for Verification before/at ART Initiation",
+    "abbreviatedTitle": "RVBARTI",
+    "setId": "2A",
+    "required": false,
+    "supportive": true,
+    "remote": true,
+    "standard": "STANDARD: All newly diagnosed adult and adolescent clients living with HIV are retested to verify their HIV diagnosis prior to, or at the time of, ART initiation using the national HIV testing algorithm.",
+    "instructions": "Instructions: HIV Retesting for verification occurs prior to or at the time of ART initiation using a new specimen from either (1) a newly diagnosed individual or (2) a previously diagnosed individual who has not initiated ART. In either case, a provider who is different from the provider who performed the previous HIV tests for that individual must conduct retesting for verification. This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)",
+    "imageCodes": [
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_02_02",
+    "name": "Client Tracking-ART Clients [C&T GEN POP]",
+    "description": "Client Tracking-ART Clients",
+    "abbreviatedTitle": "CTAC",
+    "setId": "2A",
+    "required": true,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: Each ART site has a standard procedure for identifying and tracking adult and adolescent ART clients who have missed their last clinical review or ARV refill. The system includes procedures for client identification and tracking; standardized documentation showing evidence of more than one attempt to bring the client back into care; and the results/outcome of re-engagement efforts.",
+    "instructions": "Instructions: This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)",
+    "imageCodes": [
+      "Required",
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_02_03",
+    "name": "Rapid ART Initiation [C&T GEN POP]",
+    "description": "Rapid ART Initiation",
+    "abbreviatedTitle": "RAI",
+    "setId": "2A",
+    "required": true,
+    "supportive": false,
+    "remote": true,
+    "standard": "STANDARD: HIV-positive individuals are offered the option of rapid or same-day ART, according to guidelines and national policy.",
+    "instructions": "Instructions: Is rapid or same-day ART currently a part of or allowed per national guidelines?\n        \n        If NO, check NA, and SKIP CEE:\n        \n        This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance.",
+    "imageCodes": [
+      "Required",
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_02_26",
+    "name": "TB Screening [C&T PEDS]",
+    "description": "TB Screening",
+    "abbreviatedTitle": "TB Screening",
+    "setId": "2B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site has standardized procedures for performing and documenting screening for active tuberculosis (TB) on intake and at each clinical visit for HIpediatric clients living with HIV. The TB screening includes all 4 of the following symptoms: current cough, fever, poor weight gain; and contact with a TB client.",
+    "instructions": "",
+    "imageCodes": []
+  },
+  {
+    "id": "S_02_27",
+    "name": "TB Preventive Treatment (TPT) [C&T PEDS]",
+    "description": "TB Preventive Treatment (TPT)",
+    "abbreviatedTitle": "TB Preventive Treatment",
+    "setId": "2B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Pediatric clients living with HIV who screen negative for active tuberculosis (TB) receive TB Preventive Treatment (TPT) per national guidelines.",
+    "instructions": "Instructions: If NO pediatric clients living with HIV were screened TB negative, check NA and SKIP this CEE:",
+    "imageCodes": [
+      "Required"
+    ]
+  },
+  {
+    "id": "S_02_28",
+    "name": "Cotrimoxazole (CTX) [C&T PEDS]",
+    "description": "Cotrimoxazole (CTX)",
+    "abbreviatedTitle": "Cotrimoxazole (CTX)",
+    "setId": "2B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Eligible pediatric clients have documented prescription of cotrimoxazole (CTX) according to national guidelines.",
+    "instructions": "Instructions: If NO clients living with HIV were eligible within the specified time period, check NA and SKIP this CEE:",
+    "imageCodes": [
+      "Required"
+    ]
+  },
+  {
+    "id": "S_02_29",
+    "name": "TB Diagnostic Evaluation Cascade [C&T PEDS]",
+    "description": "TB Diagnostic Evaluation Cascade",
+    "abbreviatedTitle": "TB Diagnostic Evaluation",
+    "setId": "2B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Every site has standardized procedures for documenting pediatric clients living with HIV with presumptive tuberculosis (TB) (in a line list or register) and a referral and follow-up mechanism to ensure TB diagnostic evaluation in accordance with national testing algorithms.",
+    "instructions": "Instructions: This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)\n\nIf there are NO pediatric clients with presumptive TB, check NA, and SKIP this CEE.",
+    "imageCodes": [
+      "Required",
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_02_30",
+    "name": "Support Services for Adolescents Living with HIV [C&T PEDS]",
+    "description": "Support Services for Adolescents Living with HIV",
+    "abbreviatedTitle": "Support Services HIV",
+    "setId": "2B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Adolescent-friendly clinical services are provided to cater to the specific treatment, support and general health needs of adolescents aged 10 to 19 years old living with HIV.",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_02_31",
+    "name": "Community-Based Linkage and Treatment Support Services [C&T PEDS]",
+    "description": "Community-Based Linkage and Treatment Support Services",
+    "abbreviatedTitle": "Community-Based Linkage",
+    "setId": "2B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site that provides care and support services for pediatric clients has standardized procedures for providing and documenting all the following core elements:\n\u2022 Treatment continuity/adherence support for ART beneficiaries/clients\n\u2022 Referral and linkage to health facilities providing comprehensive HIV care\n\u2022 Basic beneficiary/client assessments, documenting psychosocial needs with linkage/referral to services as appropriate",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_02_32",
+    "name": "Service Referral and Linkage System [C&T PEDS]",
+    "description": "Service Referral and Linkage System",
+    "abbreviatedTitle": "Service Referral",
+    "setId": "2B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Sites supporting prevention and care outreach programs for pediatric clients refer beneficiaries/clients to other high-impact HIV services (both community and facility) and track those referrals to support their successful completion.",
+    "instructions": "Instructions: This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)",
+    "imageCodes": [
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_03_01",
+    "name": "Lubricant Availability at Site [KP]",
+    "description": "Lubricant Availability at Site",
+    "abbreviatedTitle": "Lubricant Availability",
+    "setId": "3A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site that targets sex workers (SW), men who have sex with men (MSM), people who inject drugs (PWID), people in closed spaces, or transgender persons has a reliable supply of water- or silicone-based lubricants. Lubricants have at least one month of shelf life before expiration, and are easily accessible to patrons/clients at the site.",
+    "instructions": "Instructions: With remote assessment, ensure that any video does not show clients.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_03_02",
+    "name": "STI Screening and Management for Key Populations [KP]",
+    "description": "STI Screening and Management for Key Populations",
+    "abbreviatedTitle": "STI Screening",
+    "setId": "3A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site that targets sex workers (SW), men who have sex with men (MSM), people who inject drugs (PWID), people in enclosed spaces, or transgender persons regardless of HIV sero-status performs and documents syndromic screening for sexually transmitted infections (STI). All facilities offer STI management and treatment according with national or WHO STI guidelines either onsite or through referral.",
+    "instructions": "Instructions: If national guidelines do not recommend routine syphilis testing for sex workers (SW), men who have sex with men (MSM), people who inject drugs (PWID), people in enclosed spaces, or transgender persons, check NA and SKIP this CEE.",
+    "imageCodes": []
+  },
+  {
+    "id": "S_03_03",
+    "name": "Peer Outreach Management [KP]",
+    "description": "Peer Outreach Management",
+    "abbreviatedTitle": "Peer Outreach",
+    "setId": "3A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site provides peer educators with standardized onsite supportive supervision, including mentorship and training, to improve their peer outreach services for key populations. Supportive supervision comments and recommendations are shared with peer educators.",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_03_04",
+    "name": "Family Planning/HIV Integration Service Delivery [KP]",
+    "description": "Family Planning/HIV Integration Service Delivery",
+    "abbreviatedTitle": "FP/HIV Integration",
+    "setId": "3A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site providing services for key populations provides access to high quality family planning (FP) education and services, on-site or through referrals.",
+    "instructions": "Instructions: If this site provides services exclusively to men who have sex with men (MSM) OR if the agreement with the prime partner or USG implementing agency does not include funding to support family planning education and services, on-site or through referrals, check NA, and SKIP CEE.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_03_05",
+    "name": "Ability to produce KP-specific program data [KP]",
+    "description": "Ability to produce KP-specific program data",
+    "abbreviatedTitle": "KP Program Data",
+    "setId": "3A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site that provides services to key populations documents each client/patron\u2019s KP classification (i.e., KP group with which the client/patron identifies).",
+    "instructions": "Instructions: This CEE may only be collected remotely if the KP designation is on an external part of the client record, such as a sticker or tag, allowing this CEE to be assessed without a chart review. Assessors must ensure that any PII of clients is not visible. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)\n\nIf the site is unable to document this information due to confidentiality and security issues, check NA, and SKIP CEE:",
+    "imageCodes": [
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_03_06",
+    "name": "Human-centered Approaches to Providing Sensitized Services [KP]",
+    "description": "Human-centered Approaches to Providing Sensitized Services",
+    "abbreviatedTitle": "Human-centered Services",
+    "setId": "3A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Services at each site must be provided in a sensitive and friendly manner, particularly to key populations (sex workers, men who have sex with men, people who inject drugs, people in closed settings, and transgender persons) who face stigma, discrimination and high risk of HIV.",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_03_07",
+    "name": "Provision of PrEP Services [KP]",
+    "description": "Provision of PrEP Services",
+    "abbreviatedTitle": "PrEP Services",
+    "setId": "3A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: HIV-uninfected men and women who are at substantial risk of infection can access preexposure prophylaxis (PrEP) through high quality, safe, and friendly services.",
+    "instructions": "Instructions: For remote CEE collection, assessors must ensure that any personal identifiable information (PII) of beneficiaries is not visible when viewing client intake/assessment or other documents that may contain this PII.\n\nIf the national policy does not include the provision of PrEP OR the site is not accredited to provide PrEP services, then check NA and SKIP CEE:",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_03_08",
+    "name": "Retesting for Verification before/at ART Initiation [C&T KP]",
+    "description": "Retesting for Verification before/at ART Initiation",
+    "abbreviatedTitle": "Retesting ART",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All newly diagnosed adult and adolescent clients living with HIV are retested to verify their HIV diagnosis prior to, or at the time of, ART initiation using the national HIV testing algorithm.",
+    "instructions": "Instructions: HIV Retesting for verification occurs prior to or at the time of ART initiation using a new specimen from either (1) a newly diagnosed individual or (2) a previously diagnosed individual who has not initiated ART. In either case, a provider who is different from the provider who performed the previous HIV tests for that individual must conduct retesting for verification.\n\nThis CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)",
+    "imageCodes": [
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_03_09",
+    "name": "Client Tracking-ART Clients [C&T KP]",
+    "description": "Client Tracking-ART Clients",
+    "abbreviatedTitle": "Client Tracking ART",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each ART site has a standard procedure for identifying and tracking adult and adolescent ART clients who have missedon their last clinical review appointment or ARV refill. The system includes procedures for client identification and tracking; standardized documentation showing evidence of more than one attempt to bring the client back into care and the results/outcome of re-engagement efforts.",
+    "instructions": "Instructions: This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)",
+    "imageCodes": [
+      "Required",
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_03_10",
+    "name": "Rapid ART Initiation (C&T KP)",
+    "description": "Rapid ART Initiation",
+    "abbreviatedTitle": "Rapid ART Initiation",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: PLHIV are offered the option of rapid or same-day ART initiation, according to guidelines and national policy.",
+    "instructions": "Instructions: Is rapid or same-day ART currently a part of or allowed per national guidelines?\n\nIf NO, check NA, and SKIP CEE: NA \u2610\n\nThis CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)",
+    "imageCodes": [
+      "Required",
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_03_11",
+    "name": "Viral Load Access and Monitoring [C&T KP]",
+    "description": "Viral Load Access and Monitoring",
+    "abbreviatedTitle": "Viral Load Access",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Clients on antiretroviral therapy (ART) receive routine monitoring for virologic suppression (i.e., VL <50 copies/mL or criteria based on national guidelines) through assessment of viral load per national guidelines, and the results are documented in the medical record.",
+    "instructions": "Instructions: If there are NO clients on ART \u2265 12 months, check NA, and SKIP this CEE",
+    "imageCodes": [
+      "Required"
+    ]
+  },
+  {
+    "id": "S_03_12",
+    "name": "Management of High Viral Load [C&T KP]",
+    "description": "Management of High Viral Load",
+    "abbreviatedTitle": "Management High Viral Load",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Patients on antiretroviral therapy (ART) with virologic non-suppression (i.e., VL \u226550 copies/mL) are tracked and receive enhanced adherence counseling (EAC) and repeat viral load monitoring per national guidelines to assess for virologic failure and the potential need to switch ART regimens.",
+    "instructions": "Instructions: EAC includes focused counseling sessions, typically led by a lay health worker or counselor, on the importance of adhering to the medication. This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)\n\n If a site does not offer these services, check NA and SKIP this CEE.",
+    "imageCodes": [
+      "Required",
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_03_13",
+    "name": "Provision of Differentiated Service Delivery (DSD) Models [C&T KP]",
+    "description": "Provision of Differentiated Service Delivery (DSD) Models",
+    "abbreviatedTitle": "Provision DSD Models",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site offers differentiated service delivery (DSD) models for adolescent and adult clients \u226515 years old (e.g., multi-month drug dispensing, community dispensation) to meet the needs of ART clients.",
+    "instructions": "Instructions: Are differentiated models of service delivery (e.g., multi-month dispensing) currently allowed in national guidelines?\n\nIf NO, check NA, and SKIP CEE:",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_03_14",
+    "name": "Partner Notification Services [C&T KP]",
+    "description": "Partner Notification Services",
+    "abbreviatedTitle": "Partner Notification",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All clients living with HIV are offered partner services that include counseling on safe disclosure of HIV status to their sex partner(s) and/or injecting drug partner(s) and voluntary HIV partner testing, either onsite or through referral to a health facility, or through community-based approaches.",
+    "instructions": "",
+    "imageCodes": []
+  },
+  {
+    "id": "S_03_15",
+    "name": "Routine HIV Testing of Biological Children of Adult Clients [C&T KP]",
+    "description": "Routine HIV Testing of Biological Children of Adult Clients",
+    "abbreviatedTitle": "Routine HIV Testing",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Biological children and adolescents (<19 years old) of adults living with HIV have a documented (or known) HIV status.",
+    "instructions": "Instructions: If there are NO clients on ART \u2265 12 months, check NA and skip this CEE\n\nThis CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)",
+    "imageCodes": [
+      "Required",
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_03_16",
+    "name": "TB Screening [C&T KP]",
+    "description": "TB Screening",
+    "abbreviatedTitle": "TB Screening",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site has standardized procedures for performing and documenting screening for active tuberculosis (TB) on intake and at each clinical visit for adult and adolescent clients living with HIV. The TB screening includes all 4 of the following symptoms: cough, fever, night sweats, and weight loss.",
+    "instructions": "",
+    "imageCodes": []
+  },
+  {
+    "id": "S_03_17",
+    "name": "TB Preventive Treatment (TPT) [C&T KP]",
+    "description": "TB Preventive Treatment (TPT)",
+    "abbreviatedTitle": "TB Preventive Treatment",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: PLHIV clients who screen negative for active tuberculosis (TB) receive TB Preventive Treatment (TPT) per national guidelines.",
+    "instructions": "Instructions: If there are NO KP clients living with HIV were screened TB negative, check NA and SKIP this CEE:",
+    "imageCodes": [
+      "Required"
+    ]
+  },
+  {
+    "id": "S_03_18",
+    "name": "Cotrimoxazole (CTX) [C&T KP]",
+    "description": "Cotrimoxazole (CTX)",
+    "abbreviatedTitle": "Cotrimoxazole (CTX)",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Eligible clients have documented prescription of cotrimoxazole (CTX) according to national guidelines.",
+    "instructions": "Instructions: If NO clients living with HIV were eligible within the specified time period, check NA and SKIP this CEE:",
+    "imageCodes": [
+      "Required"
+    ]
+  },
+  {
+    "id": "S_03_19",
+    "name": "TB Diagnostic Evaluation Cascade [C&T KP]",
+    "description": "TB Diagnostic Evaluation Cascade",
+    "abbreviatedTitle": "TB Diagnostic Evaluation",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Every site has standardized procedures for documenting adult and adolescent clients living with HIV (CLHIV) with presumptive tuberculosis (TB) (in a line list or register) and a referral and follow-up mechanism to ensure TB diagnostic evaluation in accordance with national testing algorithms.",
+    "instructions": "Instructions: This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)\n\nIf there are NO adult or adolescent clients with presumptive TB, check NA, and skip this CEE.",
+    "imageCodes": [
+      "Required",
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_03_20",
+    "name": "Community-Based Linkage and TreatmentSupport Services [C&T KP]",
+    "description": "Community-Based Linkage and TreatmentSupport Services",
+    "abbreviatedTitle": "Community-Based Linkage",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site that provides care and support services has standardized procedures for providing and documenting all the following core elements:\n        \n\u2022 Treatment continuity/adherence support for ART beneficiaries/clients\n\u2022 Referral and linkage to health facilities providing comprehensive HIV care\n\u2022 Basic beneficiary/client assessments, documenting psychosocial needs with linkage/referral to services as appropriate",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_03_21",
+    "name": "Service Referral and Linkage System [C&T KP]",
+    "description": "Service Referral and Linkage System",
+    "abbreviatedTitle": "Service Referral",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Sites supporting prevention and care outreach programs refer beneficiaries/clients to other high-impact HIV services (both community and facility) and track those referrals to support successful completion.",
+    "instructions": "Instructions: This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)",
+    "imageCodes": [
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_03_22",
+    "name": "Family Planning /HIV Integration Service Delivery [C&T KP]",
+    "description": "Family Planning /HIV Integration Service Delivery",
+    "abbreviatedTitle": "FP/HIV Integration",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All clients attending HIV services have access to high quality voluntary family planning counseling and services, including safer pregnancy counseling and contraceptives, depending upon their fertility intentions.",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_03_23",
+    "name": "Community-Based Delivery of Family Planning Services [C&T KP]",
+    "description": "Community-Based Delivery of Family Planning Services",
+    "abbreviatedTitle": "Community-Based FP",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Community-based delivery of family planning services should include high quality, voluntary family planning counseling and services, including safe conception/pregnancy counseling and contraceptives.",
+    "instructions": "Instructions: This CEE should be assessed at sites where contraceptives are distributed in the community.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_03_24",
+    "name": "Cervical Cancer Screening Capacity [C&T KP]",
+    "description": "Cervical Cancer Screening Capacity",
+    "abbreviatedTitle": "Cervical Cancer Screening",
+    "setId": "3B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All sites offering cervical cancer screening and/or precancerous lesion treatment services have in place the procedures, equipment and processes necessary to provide high-quality services.",
+    "instructions": "Instructions: Assess this CEE based on which activities this site is expected to provide (e.g., cervical cancer screening, cryotherapy). This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)",
+    "imageCodes": [
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_04_01",
+    "name": "Retesting for Verification before/at ART Initiation [C&T PMTCT]",
+    "description": "Retesting for Verification before/at ART Initiation",
+    "abbreviatedTitle": "Retesting ART",
+    "setId": "4A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All newly diagnosed pregnant and breastfeeding clients living with HIV are retested to verify their HIV diagnosis prior to, or at the time of, ART initiation using the national HIV testing algorithm.",
+    "instructions": "Instructions: HIV Retesting for verification occurs prior to or at the time of ART initiation using a new specimen from either (1) a newly diagnosed individual or (2) a previously diagnosed individual who has not initiated ART. In either case, a provider who is different from the provider who performed the previous HIV tests for that individual must conduct retesting for verification.\n\nThis CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)",
+    "imageCodes": [
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_04_02",
+    "name": "Client Tracking-ART Clients [C&T PMTCT]",
+    "description": "Client Tracking-ART Clients",
+    "abbreviatedTitle": "Client Tracking ART",
+    "setId": "4A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each ART site has a standard procedure for identifying and tracking pregnant and breastfeeding ART clients who have missedtheir last clinical review appointments or ARV refill. The system includes: procedures for client identification and tracking; standardized documentation showing evidence of more than one attempt to bring the client back into care; and the results/outcome of re-engagementefforts.",
+    "instructions": "Instructions: This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)\n\nIf there are NO pregnant and breastfeeding clients living with HIV, check NA, and SKIP CEE.",
+    "imageCodes": [
+      "Required",
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_04_03",
+    "name": "Viral Load Access and Monitoring [C&T PMTCT]",
+    "description": "Viral Load Access and Monitoring",
+    "abbreviatedTitle": "Viral Load Access",
+    "setId": "4A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Pregnant and breastfeeding clients on antiretroviral therapy (ART) receive routine monitoring for virologic suppression (i.e., VL <50 copies/mL or criteria based on national guidelines) through assessment of viral load, per national guidelines, and the results are documented in the medical record.",
+    "instructions": "Instructions: If there are no pregnant and breastfeeding clients on ART \u2265 6 months, check NA, and SKIP CEE.",
+    "imageCodes": [
+      "Required"
+    ]
+  },
+  {
+    "id": "S_04_04",
+    "name": "Management of High Viral Load [C&T PMTCT]",
+    "description": "Management of High Viral Load",
+    "abbreviatedTitle": "Management High Viral Load",
+    "setId": "4A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Pregnant and breastfeeding clients living with HIVon antiretroviral therapy (ART) with virologic non-suppression are tracked and receive enhanced adherence counseling (EAC) and repeat viral load monitoring per national guidelines to assess for virologic failure and the potential need to switch ART regimens.",
+    "instructions": "Instructions: EAC includes focused counseling sessions, typically led by a lay health worker or counselor, on the importance of adhering to the medication. This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)\n\nIf a site does not offer these services, check NA and SKIP this CEE.",
+    "imageCodes": [
+      "Required",
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_04_05",
+    "name": "Provision of Differentiated Service Delivery (DSD) Models [C&T PMTCT]",
+    "description": "Provision of Differentiated Service Delivery (DSD) Models",
+    "abbreviatedTitle": "Provision DSD Models",
+    "setId": "4A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site offers differentiated service delivery (DSD) models for pregnant and breastfeeding clients (e.g., appointment spacing, multi-month drug dispensing, community dispensation) to meet the needs of ART clients.",
+    "instructions": "Instructions: Are differentiated models of service delivery (e.g., appointment spacing, multi-month dispensing) currently allowed in national guidelines?\n\nIf NO, check NA, and SKIP CEE:",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_04_06",
+    "name": "Support Services for Pregnant Adolescents living with HIV in ANC [C&T-PMTCT]",
+    "description": "Support Services for Pregnant Adolescents living with HIV in ANC",
+    "abbreviatedTitle": "Support Services Pregnant Adolescents",
+    "setId": "4A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Adolescent-friendly clinical services are provided to cater to the specific treatment, support and general health needs of pregnant adolescents <20 years old living with HIV.",
+    "instructions": "Instructions: If there are NO pregnant adolescents, check NA, and SKIP this CEE:",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_04_07",
+    "name": "Partner Notification Services [C&T PMTCT]",
+    "description": "Partner Notification Services",
+    "abbreviatedTitle": "Partner Notification",
+    "setId": "4A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Pregnant and breastfeeding clients living with HIV are offered partner services that include counseling on safe disclosure of HIV status to their sex partner(s) and/or injecting drug partner(s) and voluntary HIV partner testing, either onsite or through referral to a health facility or through community-based approaches.",
+    "instructions": "",
+    "imageCodes": []
+  },
+  {
+    "id": "S_04_08",
+    "name": "Routine HIV Testing of Biological Children of Adult Clients [C&T PMTCT]",
+    "description": "Routine HIV Testing of Biological Children of Adult Clients",
+    "abbreviatedTitle": "Routine HIV Testing",
+    "setId": "4A",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Biological children and adolescents (<19years old) of pregnant and breastfeeding women living with HIV have a documented (or known) HIV status.",
+    "instructions": "Instructions: If there are no pregnant or breastfeeding ART clients, check NA, and SKIP CEE. \n\nThis CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance.",
+    "imageCodes": [
+      "Required",
+      "RemoteConditional",
+      "S_04_09"
+    ]
+  },
+  {
+    "id": "S_04_16",
+    "name": "Tracking HIV-Exposed Infants [HEI]",
+    "description": "Tracking HIV-Exposed Infants",
+    "abbreviatedTitle": "Tracking HEI",
+    "setId": "4B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site providing services for HIV-exposed infants (HEIs) has a standard procedure foridentifying and tracking HEIs who have missed an appointment. The tracking system includes procedures for client identification and tracking; standardized documentation showing evidence ofmore than one attempt to bring the client back into care, and results of tracking efforts.",
+    "instructions": "Instructions: This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)\n\nIf there are NO HIV-exposed infants, select NA, and SKIP this CEE:",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_04_17",
+    "name": "Collection of a Second Specimen for Confirmatory Testing [HEI]",
+    "description": "Collection of a Second Specimen for Confirmatory Testing",
+    "abbreviatedTitle": "Confirmatory Testing",
+    "setId": "4B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All infants with an initial positive virologic test result (from either Laboratory or Point of Care Testing) have a second specimen collected for confirmatory testing.",
+    "instructions": "Instructions: If the site does not offer infant virologic testing onsite select NA, and SKIP the CEE:",
+    "imageCodes": []
+  },
+  {
+    "id": "S_04_18",
+    "name": "CTX for HIV-Exposed Infants [HEI]",
+    "description": "CTX for HIV-Exposed Infants",
+    "abbreviatedTitle": "CTX for HEI",
+    "setId": "4B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All HIV-exposed infants (HEIs) initiate cotrimoxazole (CTX) by eight weeks of age.",
+    "instructions": "Instructions: If NO HIV-exposed infants were seen in the previous year, select NA, and SKIP this CEE:",
+    "imageCodes": [
+      "Required"
+    ]
+  },
+  {
+    "id": "S_04_19",
+    "name": "HEI Follow-Up and Final HIV Status [HEI]",
+    "description": "HEI Follow-Up and Final HIV Status",
+    "abbreviatedTitle": "HEI Follow-Up",
+    "setId": "4B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All HIV-exposed infants (HEIs) are tracked through the end of breastfeeding and have a documented final HIV outcome by 24 months of age.",
+    "instructions": "Instructions: This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is covered not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)\n\nIf NO HIV-exposed infants were seen in the previous year, select NA, and SKIP this CEE:",
+    "imageCodes": [
+      "Required",
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_04_20",
+    "name": "Rapid Enrollment of HIV-Infected Infants into ART Services [HEI]",
+    "description": "Rapid Enrollment of HIV-Infected Infants into ART Services",
+    "abbreviatedTitle": "Rapid Enrollment into ART",
+    "setId": "4B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All HIV-infected infants are enrolled into ART services within 7 days from time of receipt of positive test results",
+    "instructions": "Instructions: If the site does not offer infant virologic testing onsite select NA, and SKIP the CEE:",
+    "imageCodes": [
+      "Required"
+    ]
+  },
+  {
+    "id": "S_04_21",
+    "name": "Supply Chain Reliability (Early Infant Diagnosis) DBS or POC [HEI]",
+    "description": "Supply Chain Reliability (Early Infant Diagnosis) DBS or POC",
+    "abbreviatedTitle": "Supply Chain Reliability",
+    "setId": "4B",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each PMTCT site has a reliable supply of Early Infant Diagnosis (EID) collection supplies for specimens (including dried blood spot (DBS)) obtained for conventional laboratory-based testing or for point-of-care testing (POCT) and has fully functional platforms for testing.",
+    "instructions": "Instructions: If specimen collection for EID does not occur at this site, check NA, and SKIP this CEE:",
+    "imageCodes": []
+  },
+  {
+    "id": "S_05_01",
+    "name": "Precision and Safeguarding of VMMC Surgical Records [VMMC]",
+    "description": "Precision and Safeguarding of VMMC Surgical Records",
+    "abbreviatedTitle": "Precision VMMC Records",
+    "setId": "5",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site retains accurate, complete, and updated VMMC client records in a secure location.",
+    "instructions": "Instructions: This CEE applies to both electronic and paper-based records. Although some sites may use both, assessors should collect data from the primary data source.",
+    "imageCodes": []
+  },
+  {
+    "id": "S_05_02",
+    "name": "Adverse Event (AE) Prevention and Management [VMMC]",
+    "description": "Adverse Event (AE) Prevention and Management",
+    "abbreviatedTitle": "AE Prevention",
+    "setId": "5",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each VMMC site has processes in place to ensure the VMMC services provided are safe.",
+    "instructions": "Instructions: With remote assessment, ensure that any video does not show clients.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_05_03",
+    "name": "VMMC Adverse Event (AE) Register [VMMC]",
+    "description": "VMMC Adverse Event (AE) Register",
+    "abbreviatedTitle": "VMMC AE Register",
+    "setId": "5",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site should have a VMMC Adverse Event Register in which intermediate and/or final outcomes are documented.",
+    "instructions": "Instructions: Use the Comment box to note the age range of clients with AEs listed in the entries reviewed.\n\nThis CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is covered/not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)",
+    "imageCodes": [
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_06_01",
+    "name": "Capacity to Provide Post-Violence Care Services [AGYW, GBV, and OVC]",
+    "description": "Capacity to Provide Post-Violence Care Services",
+    "abbreviatedTitle": "Post-Violence Care",
+    "setId": "6",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site providing post-violence care services has written procedures for provision of accessible and affordable post-violence care services for adults, adolescents, and children. All staff providing post-violence care services are trained on the provision and documentation of those services.",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_06_02",
+    "name": "Availability of Post-Violence Care Services [AGYW, GBV, and OVC]",
+    "description": "Availability of Post-Violence Care Services",
+    "abbreviatedTitle": "Availability Post-Violence Care",
+    "setId": "6",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site providing post-violence care services provides the minimum package of services and referrals.",
+    "instructions": "Instructions: The CEE is to be assessed only at sites that provide post-violence care services to AGYW, GBV, OVC populations. For remote CEE collection, assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents that may contain this PII.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_06_03",
+    "name": "Gender Norms [AGYW, GBV, and OVC]",
+    "description": "Gender Norms",
+    "abbreviatedTitle": "Gender Norms",
+    "setId": "6",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site providing or supporting gender norms interventions has staff trained in delivering these interventions and has staff performance monitored at least quarterly. These interventions use a standard curriculum and that entails more than a single stand-alone session.",
+    "instructions": "Instructions: CEE is to be assessed at sites funded to provide gender norms interventions to AGYW and/or OVC.\n\nNote: Gender norms intervention: Activities that address harmful gender norms related to HIV/AIDS seek to change traditional, cultural, and social norms that contribute to behaviors that increase HIV/AIDS risk in both men and women, including gender-based violence and that impede access to care and treatment services for those who need them.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_06_04",
+    "name": "Case Management Services [AGYW, GBV, and OVC]",
+    "description": "Case Management Services",
+    "abbreviatedTitle": "Case Management",
+    "setId": "6",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site has standard procedures for supporting case management for children and families affected by HIV including standard procedures to support identification, assessment, case plan development, case plan monitoring, case plan achievement/graduation, case closure, case file confidentiality, client satisfaction and minimize attrition.",
+    "instructions": "Instructions: The CEE is assessed at community sites providing OVC services only.",
+    "imageCodes": [
+      "Required"
+    ]
+  },
+  {
+    "id": "S_06_05",
+    "name": "Case Management Workforce Strengthening [AGYW, GBV, and OVC]",
+    "description": "Case Management Workforce Strengthening",
+    "abbreviatedTitle": "Case Mgmt Workforce",
+    "setId": "6",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site has standard procedures for planning, developing and supporting social service workers responsible for case management (including both professional or para-professional, paid or unpaid social service workers employed by government or non-governmental organizations), which are aligned with national standards.",
+    "instructions": "Instructions: The CEE is assessed at all sites providing OVC services only.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_06_07",
+    "name": "Services to Support HIV Testing for OVC [AGYW, GBV, and OVC]",
+    "description": "Services to Support HIV Testing for OVC",
+    "abbreviatedTitle": "HIV Testing Support",
+    "setId": "6",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site has a case management system that captures pertinent information related to HIV status for children and their caregivers, including a standard process to assess children for HIV risk factors and to facilitate linkages to HIV testing if needed.",
+    "instructions": "Instructions: This CEE is to be assessed at sites (community and facility) providing OVC services only.",
+    "imageCodes": [
+      "Required"
+    ]
+  },
+  {
+    "id": "S_06_08",
+    "name": "Services to support HIV Treatment Linkage, Engagement and Viral Suppression for OVC [AGYW, GBV, and OVC]",
+    "description": "Services to support HIV Treatment Linkage, Engagement and Viral Suppression for OVC",
+    "abbreviatedTitle": "HIV Treatment Support",
+    "setId": "6",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site providing OVC services has case management procedures that capture pertinent information related to HIV Treatment Linkage, Engagement, and Viral Suppression for children and their caregivers.",
+    "instructions": "Instructions: The CEE is to be assessed at sites (i.e., community and/or facility) providing OVC services only.",
+    "imageCodes": [
+      "Required"
+    ]
+  },
+  {
+    "id": "S_06_09",
+    "name": "DREAMS Mentoring [AGYW, GBV, and OVC]",
+    "description": "DREAMS Mentoring",
+    "abbreviatedTitle": "DREAMS Mentoring",
+    "setId": "6",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All sites implementing DREAMS should ensure there are SOPs for recruiting mentors, there are mentor job descriptions, mentors receive a standardized package of training that includes first-line support. DREAMS mentors should have resources including a mobile phone to be able to perform their duties, remuneration and routine supportive supervision.",
+    "instructions": "Instructions: CEE is to be assessed at sites funded to provide DREAMS services.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_07_01",
+    "name": "Compliance with National Testing Algorithm [HTS]",
+    "description": "Compliance with National Testing Algorithm",
+    "abbreviatedTitle": "National Testing Algorithm Compliance",
+    "setId": "7",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site performs and records rapid HIV testing in accordance with national testing algorithms.",
+    "instructions": "Instructions: If a 3rd rapid test is not required per national guidelines, make a note in the COMMENTS sections and CHECK #3 in Q2 so as to avoid incorrectly scoring Red. For remote CEE collection, assessors must ensure that any PII of clients is not visible when viewing logbooks or other tracking documents that may contain this PII.",
+    "imageCodes": [
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_07_02",
+    "name": "Quality Assurance of HIV Testing Services [HTS]",
+    "description": "Quality Assurance of HIV Testing Services",
+    "abbreviatedTitle": "QA of HIV Testing Services",
+    "setId": "7",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Quality assurance procedures are in place to monitor the quality of HIV rapid testing in a timely manner. These procedures include direct observation and the use of standardized laboratory logbooks.",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_07_03",
+    "name": "HTS Linkage to HIV Care and Treatment at the Site Level [HTS]",
+    "description": "HTS Linkage to HIV Care and Treatment at the Site Level",
+    "abbreviatedTitle": "HTS Linkage to Care",
+    "setId": "7",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All sites that provide HTS have a standardized protocol or process for tracking successful and unsuccessful linkage of HIV-infected beneficiaries/clients to HIV care and treatment services.",
+    "instructions": "Instructions: This CEE may only be collected remotely if there are logbooks or registers with this information that do not require a client chart review. Assessors must ensure that any PII of clients is covered not visible when viewing logbooks or other tracking documents. If a chart review is required, do not assess remotely. (see SIMS Implementation Guide for further guidance)",
+    "imageCodes": [
+      "RemoteConditional"
+    ]
+  },
+  {
+    "id": "S_07_04",
+    "name": "Site Level HIV Proficiency Testing [HTS]",
+    "description": "Site Level HIV Proficiency Testing",
+    "abbreviatedTitle": "Site Proficiency Testing",
+    "setId": "7",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Sites offering HIV Testing services (HTS) meet HIV proficiency testing participation and pass rate requirements.",
+    "instructions": "Instructions: Is HIV proficiency testing part of the national guidelines for sites offering HTS?\n\nIf NO, check NA, and SKIP CEE",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_07_05",
+    "name": "HTS Safety Measures at the Site [HTS]",
+    "description": "HTS Safety Measures at the Site",
+    "abbreviatedTitle": "HTS Safety Measures",
+    "setId": "7",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site has HIV Testing Services (HTS) safety measures implemented by all HIV testing providers. These safety measures include use of disposable gloves, personal hygiene, and proper waste management.",
+    "instructions": "Instructions: With remote assessment, ensure that any video does not show clients.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_07_06",
+    "name": "Confidentiality of HIV Testing Services at the Site [HTS]",
+    "description": "Confidentiality of HIV Testing Services at the Site",
+    "abbreviatedTitle": "Confidentiality of Testing",
+    "setId": "7",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: HIV testing services (HTS) are provided privately and confidentially, and include information on how to report violations of privacy and confidentiality.",
+    "instructions": "Instructions: With remote assessment, ensure that any video does not show clients.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_07_07",
+    "name": "HIV Self-Testing [HTS]",
+    "description": "HIV Self-Testing",
+    "abbreviatedTitle": "HIV Self-Testing",
+    "setId": "7",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Use of HIV self-test kits, and linkage to additional HIV testing, is documented.",
+    "instructions": "Instructions: Are HIV Self-Test kits distributed within the sub-national unit/district that this site is located?\n\nIs HIV self-testing part of the national HIV Testing Services (HTS) guidelines?\n\nIf NO to either question, check NA, and SKIP CEE",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_07_08",
+    "name": "Index Testing Training & Supportive Supervision [HTS]",
+    "description": "Index Testing Training & Supportive Supervision",
+    "abbreviatedTitle": "Index Testing Training",
+    "setId": "7",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All staff who provide index testing services are trained using a standardized national training curriculum that covers the WHO\u2019s 5Cs (consent, confidentiality, counseling, correct test results, and connection to treatment and/or prevention services) and the minimum standards for index testing, including an intimate partner violence (IPV) risk assessment and first line support following IPV disclosure, supportive supervision, and adverse event monitoring and response. . Supportive supervision comments and recommendations are shared with staff members.",
+    "instructions": "Instructions: Only assess this CEE at sites that provide index testing services.\n\nIf the site does not provide HIV partner testing services, check NA, and SKIP this CEE.",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_07_09",
+    "name": "Monitoring Adverse Events from Index Testing [HTS]",
+    "description": "Monitoring Adverse Events from Index Testing",
+    "abbreviatedTitle": "Monitoring Index Testing",
+    "setId": "7",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All sites where PEPFAR supports index testing service provision have procedures and processes in place to assess, mitigate and reduce potential risk for social harm or impact arising from partner notification and index testing. All personnel providing index testing services are trained on providing partner notification services appropriately and safely.",
+    "instructions": "Instructions: Only assess this CEE at sites that provided index testing services. Social harm is defined as any intended or unintended cause of physical, economic, emotional or psychosocial injury or hurt from one person to another, a person to themselves, or an institution to a person, occurring before, during or after HTS, including partner notification services. Intimate partner violence (IPV) is defined as behavior within an intimate relationship that causes physical, psychological, or sexual harm to those in the relationship, including acts of physical violence, sexual violence, stalking, emotional or psychological abuse and controlling behaviors.\n\nIf the site does not provide HIV partner testing services, check NA, and SKIP this CEE.",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_07_10",
+    "name": "Secure Handling & Storage of Index Testing Data [HTS]",
+    "description": "Secure Handling & Storage of Index Testing Data",
+    "abbreviatedTitle": "Secure Data Handling",
+    "setId": "7",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site retains accurate, complete, and updated index testing records in a secure location and maintains a shared confidentiality agreement with any outside organization that assists with the testing of sex partner(s), drug-injecting partners, and biological child(ren) of index clients.",
+    "instructions": "Instructions: Only assess this CEE at sites that provided index testing services\n        \nIf the site does not provide index testing services, check NA, and SKIP this CEE",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_07_11",
+    "name": "Intimate Partner Violence Risk Assessment and Support for Index Testing [HTS]",
+    "description": "Intimate Partner Violence Risk Assessment and Support for Index Testing",
+    "abbreviatedTitle": "IPV Risk Assessment",
+    "setId": "7",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Sites offering index testing services have an appropriate system in place for HTS providers to assess clients for fear of or experience with Intimate Partner Violence (IPV) from (a) named partner(s).",
+    "instructions": "Instructions: This CEE should be assessed at sites offering HIV partner testing services (including both sexual and needle-sharing partner(s)) as part of index testing.\n\nIf the site does not provide HIV partner testing services, check NA, and SKIP this CEE.",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_07_12",
+    "name": "Supporting Clients who Disclose Intimate Partner Violence",
+    "description": "Supporting Clients who Disclose Intimate Partner Violence",
+    "abbreviatedTitle": "Support for IPV",
+    "setId": "7",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Sites offering index testing services have an appropriate system in place for HTS providers to respond to and support clients who disclose their fear of or experience with Intimate Partner Violence (IPV) from (a) named partner(s).",
+    "instructions": "Instructions: This CEE should be assessed at sites offering HIV partner testing services (including both sexual and needle-sharing partner(s)) as part of index testing.\n\nIf the site does not provide HIV partner testing services, check NA, and SKIP this CEE.",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_07_13",
+    "name": "HTS Linkage to HIV Prevention Services (HTS)",
+    "description": "HTS Linkage to HIV Prevention Services",
+    "abbreviatedTitle": "HTS Linkage to Prevention",
+    "setId": "7",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All sites that provide HTS have a standardized protocol or process for linking HIV-negative adult and adolescent persons to high quality HIV prevention services [e.g., VMMC, PrEP, preventing transmission within serodifferent couples, OVC, DREAMS, PMTCT (ANC and post ANC)].",
+    "instructions": "",
+    "imageCodes": [
+      "Required",
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_08_01",
+    "name": "Routine PITC for Clients Patients with TB or Presumptive TB [TB]",
+    "description": "Routine PITC for Clients Patients with TB or Presumptive TB",
+    "abbreviatedTitle": "Routine PITC TB Patients",
+    "setId": "8",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Routine HIV provider-initiated testing and counseling (PITC) is provided to all clientswith tuberculosis (TB) and presumptive TB.",
+    "instructions": "Instructions:\n        \nWhat age bracket is served by this site? Select ONE:\n\n\u25a1 Pediatric patients only (<15 years of age)\n\u25a1 Adult patients only (\u226515 years of age)\n\u25a1 Both pediatric and adult patients (mixed)",
+    "imageCodes": []
+  },
+  {
+    "id": "S_08_02",
+    "name": "ART Provision for PLHIV with Active or Presumptive TB [TB]",
+    "description": "ART Provision for PLHIV with Active or Presumptive TB",
+    "abbreviatedTitle": "ART Provision for TB Patients",
+    "setId": "8",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All and PLHIV with active Tuberculosis (TB) or presumptive TB are initiated on ART regardless of CD4 count.",
+    "instructions": "Instructions:\n        \nWhat age bracket is served by this site? Select ONE:\n\n\u25a1 Pediatric patients only (<15 years of age)\n\u25a1 Adult patients only (\u226515 years of age)\n\u25a1 Both pediatric and adult patients (mixed)",
+    "imageCodes": []
+  },
+  {
+    "id": "S_09_01",
+    "name": "Intake Treatment Plan Development [MAT]",
+    "description": "Intake Treatment Plan Development",
+    "abbreviatedTitle": "Intake Treatment Plan",
+    "setId": "9",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: During a client intake assessment, a METHADONE OR BUPRENORPHINE MEDICATION ASSISTED TREATMENT (MAT) plan is developed for every client that lists his/her physical and mental health- and social- needs.",
+    "instructions": "",
+    "imageCodes": []
+  },
+  {
+    "id": "S_09_02",
+    "name": "TB screening and Management in MAT Facilities [MAT]",
+    "description": "TB screening and Management in MAT Facilities",
+    "abbreviatedTitle": "TB screening and Management",
+    "setId": "9",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All sites providing MAT perform and document screening for active tuberculosis (TB) on intake and at each clinical visit, and provide access to TB treatment either on site or through referral.",
+    "instructions": "",
+    "imageCodes": []
+  },
+  {
+    "id": "S_09_03",
+    "name": "Dose Reduction and Termination [MAT]",
+    "description": "Dose Reduction and Termination",
+    "abbreviatedTitle": "Dose Reduction and Termination",
+    "setId": "9",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Clinical staff guide clients who decide voluntarily to discontinue MAT through standardized tapering and termination procedures, including provision of on-going counseling and client-clinician agreement on a decreasing dosage schedule.",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_09_04",
+    "name": "HIV Testing [MAT]",
+    "description": "HIV Testing",
+    "abbreviatedTitle": "HIV Testing",
+    "setId": "9",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: All MAT clients are offered voluntary HIV testing during the client intake assessment. HIV uninfected clients are offered voluntary retesting at least every 12 months.",
+    "instructions": "",
+    "imageCodes": []
+  },
+  {
+    "id": "S_09_05",
+    "name": "Supply Chain Reliability (methadone and buprenorphine) [MAT]",
+    "description": "Supply Chain Reliability (methadone and buprenorphine)",
+    "abbreviatedTitle": "Supply Chain Reliability",
+    "setId": "9",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site has a reliable supply of methadone and/or buprenorphine.",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_10_01",
+    "name": "Quality Management Systems (QMS) [LAB]",
+    "description": "Quality Management Systems (QMS)",
+    "abbreviatedTitle": "Quality Management Systems",
+    "setId": "10",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each laboratory is implementing a Quality Management System (QMS) program for continuous quality improvement and/or accreditation. As part of a QMS, each facility laboratory provides and documents routine personnel training, performs and documents routine equipment maintenance, has an inventory control system for supplies and reagents, and conducts regular quality improvement activities.",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_10_02",
+    "name": "Laboratory Biosafety [LAB]",
+    "description": "Laboratory Biosafety",
+    "abbreviatedTitle": "Laboratory Biosafety",
+    "setId": "10",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each laboratory has a biosafety program that includes the following elements: availability and proper use of Personal Protective Equipment (PPE) and waste containers, training on biosafety for laboratory personnel and laboratory biosafety SOPs and/or biosafety manual.",
+    "instructions": "Instructions: With remote assessment, ensure that any video does not show clients.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_10_03",
+    "name": "Test SOPs [LAB]",
+    "description": "Test SOPs",
+    "abbreviatedTitle": "Test SOPs",
+    "setId": "10",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "TANDARD: Each laboratory has current written standard operating procedures (SOPs) available and accessible for all the core HIV-related tests that are performed.",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_10_04",
+    "name": "Quality Testing Monitoring [LAB]",
+    "description": "Quality Testing Monitoring",
+    "abbreviatedTitle": "Quality Testing Monitoring",
+    "setId": "10",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each laboratory performs and monitors routine Quality Control (QC) testing on all core HIV related tests and participates in proficiency testing (PT) or external quality assessment (EQA) programs for all core HIV-related tests that they perform. PT/EQA results and feedback are available onsite.",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_10_05",
+    "name": "Testing Interruptions [LAB]",
+    "description": "Testing Interruptions",
+    "abbreviatedTitle": "Testing Interruptions",
+    "setId": "10",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each laboratory provides continuous and reliable services, in which there are minimal to no testing interruptions due to supply or reagent stock outs, expired supplies or reagents, equipment failures, staff shortages, or infrastructure issues.",
+    "instructions": "",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_10_06",
+    "name": "Waste Management [LAB]",
+    "description": "Waste Management",
+    "abbreviatedTitle": "Waste Management",
+    "setId": "10",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site implements procedures for collection, storage, and disposal of infectious waste to prevent exposures to workers, clients, and the public. Procedures include segregation of infectious waste, posted waste disposal guidance, and secure storage of infectious waste inside and outside the site.",
+    "instructions": "Instructions: Assess all the components of this CEE throughout the site, then complete the CEE scoring based on any instance where the observations do not meet the requirements. With remote assessment, ensure that any video does not show clients.\n\nIf the site does not generate infectious waste, check NA, and SKIP this CEE",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_10_07",
+    "name": "Injection Safety Safety [LAB]",
+    "description": "Injection Safety Safety",
+    "abbreviatedTitle": "Injection Safety",
+    "setId": "10",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Each site has appropriate injection and phlebotomy equipment and supplies and written, standardized safety procedures available to reduce risk of blood borne pathogen transmission to clients and healthcare workers.",
+    "instructions": "Instructions: Assess all the components of this CEE throughout the site, then complete the CEE scoring based on any instance where the observations do not meet the requirements. With remote assessment, ensure that any video does not show clients.\n\nDoes this site provide injections or phlebotomy services to clients?\n\nIf NO, check NA, and SKIP CEE.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_10_08",
+    "name": "HIV Viral Load Laboratory Capacity [LAB]",
+    "description": "HIV Viral Load Laboratory Capacity",
+    "abbreviatedTitle": "HIV Viral Load Capacity",
+    "setId": "10",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: The laboratory has the capacity and systems to meet the testing demands for HIV viral load scale-up.",
+    "instructions": "Instructions: With remote assessment, ensure that any video does not show clients.\n\nDoes this laboratory perform HIV viral load testing?\n\nIf NO, check NA, and SKIP this CEE.",
+    "imageCodes": [
+      "Remote"
+    ]
+  },
+  {
+    "id": "S_10_09",
+    "name": "HIV Viral Load Specimen Referral and Results Management [LAB]",
+    "description": "HIV Viral Load Specimen Referral and Results Management",
+    "abbreviatedTitle": "Viral Load Specimen Referral",
+    "setId": "10",
+    "required": false,
+    "supportive": false,
+    "remote": false,
+    "standard": "STANDARD: Laboratories that do not perform HIV viral load testinghave capacities and tools in place for referred specimen and handling results to ensure specimen integrity and achievement of established acceptable turnaround time for referral testing services.",
+    "instructions": "Instructions: With remote assessment, ensure that any video does not show clients.\n\nDoes this laboratory offer specimen referral services for HIV viral load testing? If NO, check NA, and SKIP this CEE.",
+    "imageCodes": [
+      "Remote"
+    ]
+  }
+]

@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Poppins', sans-serif;
+    @apply bg-slate-50 text-slate-900 min-h-screen antialiased;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 0, 32, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 0, 32, 0.4);
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-panel-dark {
+  background: rgba(78, 26, 34, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.wine-gradient {
+  background: linear-gradient(135deg, #4E1A22 0%, #800020 100%);
+}
+
+.wine-light-gradient {
+  background: linear-gradient(135deg, #FFF5F6 0%, #FFEBEF 100%);
+}
+
+.rose-gold-gradient {
+  background: linear-gradient(135deg, #E0C3FC 0%, #8EC5FC 100%); /* Placeholder-like, let's use actual rose gold */
+}
+
+.rose-gold-gradient-real {
+  background: linear-gradient(135deg, #C39B9B 0%, #B76E79 100%);
+}
+
+/* Micro-animations */
+.animate-hover-scale {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.animate-hover-scale:hover {
+  transform: translateY(-2px) scale(1.02);
+}
