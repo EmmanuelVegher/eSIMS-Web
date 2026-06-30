@@ -44,6 +44,7 @@ export interface UserProfile {
   role: "User" | "Admin";
   state?: string;
   facilityName?: string;
+  photoURL?: string | null;
 }
 
 interface AppContextType {
@@ -95,6 +96,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           role:             data.role              || "User",
           state:            data.state             || "",
           facilityName:     data.facilityName      || "",
+          // photoURL comes from Firebase Auth, not Firestore
+          photoURL:         auth.currentUser?.photoURL ?? null,
         });
         if (data.role === "Admin") {
           routerNavigate("/admin");

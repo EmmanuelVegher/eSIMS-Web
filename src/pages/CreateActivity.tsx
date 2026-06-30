@@ -9,7 +9,9 @@ export const CreateActivity: React.FC = () => {
   const { navigate } = useApp();
 
   const [startDate, setStartDate] = useState("");
+  const [startTime, setStartTime] = useState("00:00");        // default midnight
   const [proposedEndDate, setProposedEndDate] = useState("");
+  const [endTime, setEndTime]     = useState("23:59");        // default end-of-day
 
   const [assessmentType, setAssessmentType] = useState("Comprehensive Assessment");
   const [fiscalYear, setFiscalYear] = useState("FY 2025");
@@ -106,8 +108,8 @@ export const CreateActivity: React.FC = () => {
         id: activityId,
         assessmentType,
         fiscalYear,
-        startDate: startDate + "T00:00:00.000",
-        proposedEndDate: proposedEndDate + "T00:00:00.000",
+        startDate: startDate ? `${startDate}T${startTime}:00.000` : "",
+        proposedEndDate: proposedEndDate ? `${proposedEndDate}T${endTime}:00.000` : "",
         states: selectedStates.join(","),
         organizations: selectedOrgs.join(","),
         facilities: selectedFacilities.join(","),
@@ -116,7 +118,9 @@ export const CreateActivity: React.FC = () => {
 
       setSuccess("Site Assessment successfully scheduled and compiled in Firestore!");
       setStartDate("");
+      setStartTime("00:00");
       setProposedEndDate("");
+      setEndTime("23:59");
       setSelectedOrgs([]);
       setSelectedStates([]);
       setSelectedFacilities([]);
@@ -264,34 +268,64 @@ export const CreateActivity: React.FC = () => {
               </div>
             )}
 
-            {/* Dates Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wide">Start Date</label>
-                <div className="relative">
-                  <input
-                    type="date"
-                    required
-                    value={startDate}
-                    onChange={e => setStartDate(e.target.value)}
-                    className="w-full pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:border-wine-800 text-xs font-medium focus:outline-none transition"
-                  />
-                  <Calendar className="absolute left-3.5 top-3 w-4.5 h-4.5 text-slate-400" />
+            {/* Dates & Time Grid */}
+            <div className="space-y-4">
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wide">Assessment Window</label>
+
+              {/* Start */}
+              <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                <div className="px-4 pt-3 pb-1">
+                  <span className="text-[10px] font-black text-wine-800 uppercase tracking-widest">Start</span>
                 </div>
+                <div className="grid grid-cols-2 divide-x divide-slate-100">
+                  <div className="relative">
+                    <Calendar className="absolute left-3.5 top-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
+                    <input
+                      type="date"
+                      required
+                      value={startDate}
+                      onChange={e => setStartDate(e.target.value)}
+                      className="w-full pl-10 pr-3 py-3 bg-transparent text-xs font-medium text-slate-700 focus:outline-none"
+                    />
+                  </div>
+                  <div className="relative">
+                    <input
+                      type="time"
+                      value={startTime}
+                      onChange={e => setStartTime(e.target.value || "00:00")}
+                      className="w-full px-4 py-3 bg-transparent text-xs font-medium text-slate-700 focus:outline-none"
+                    />
+                  </div>
+                </div>
+                <p className="px-4 pb-2 text-[10px] text-slate-400">Defaults to 12:00 AM if no time selected</p>
               </div>
 
-              <div>
-                <label className="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wide">Proposed End Date</label>
-                <div className="relative">
-                  <input
-                    type="date"
-                    required
-                    value={proposedEndDate}
-                    onChange={e => setProposedEndDate(e.target.value)}
-                    className="w-full pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:border-wine-800 text-xs font-medium focus:outline-none transition"
-                  />
-                  <Calendar className="absolute left-3.5 top-3 w-4.5 h-4.5 text-slate-400" />
+              {/* End */}
+              <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                <div className="px-4 pt-3 pb-1">
+                  <span className="text-[10px] font-black text-wine-800 uppercase tracking-widest">Proposed End</span>
                 </div>
+                <div className="grid grid-cols-2 divide-x divide-slate-100">
+                  <div className="relative">
+                    <Calendar className="absolute left-3.5 top-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
+                    <input
+                      type="date"
+                      required
+                      value={proposedEndDate}
+                      onChange={e => setProposedEndDate(e.target.value)}
+                      className="w-full pl-10 pr-3 py-3 bg-transparent text-xs font-medium text-slate-700 focus:outline-none"
+                    />
+                  </div>
+                  <div className="relative">
+                    <input
+                      type="time"
+                      value={endTime}
+                      onChange={e => setEndTime(e.target.value || "23:59")}
+                      className="w-full px-4 py-3 bg-transparent text-xs font-medium text-slate-700 focus:outline-none"
+                    />
+                  </div>
+                </div>
+                <p className="px-4 pb-2 text-[10px] text-slate-400">Defaults to 11:59 PM if no time selected</p>
               </div>
             </div>
 

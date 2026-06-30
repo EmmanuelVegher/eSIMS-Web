@@ -14,7 +14,7 @@ import {
   ChevronRight,
   LogOut,
   Shield,
-  User,
+  UserCircle,
   Menu,
   X,
   Map,
@@ -38,30 +38,17 @@ interface NavItem {
 // Sidebar Nav Structure
 // ─────────────────────────────────────────────────────────────────────────────
 const navItems: NavItem[] = [
-  {
-    label: "Dashboard",
-    path: "/admin",
-    icon: LayoutDashboard,
-  },
-  {
-    label: "Schedule SIMS",
-    path: "/admin/create-activity",
-    icon: CalendarPlus,
-    badge: "New",
-  },
-  {
-    label: "All SIMS Activities",
-    path: "/admin/activities",
-    icon: ClipboardList,
-  },
+  { label: "Dashboard",          path: "/admin",                  icon: LayoutDashboard },
+  { label: "Schedule SIMS",      path: "/admin/create-activity",  icon: CalendarPlus, badge: "New" },
+  { label: "All SIMS Activities", path: "/admin/activities",       icon: ClipboardList },
   {
     label: "SIMS Coverage Reports",
     path: "/admin/coverage",
     icon: Map,
     children: [
-      { label: "Coverage Matrix", path: "/admin/coverage/matrix", icon: Grid3x3 },
-      { label: "SET Reports",     path: "/admin/coverage/sets",   icon: FileBarChart },
-      { label: "Partner Reports", path: "/admin/coverage/partners", icon: Building2 },
+      { label: "Coverage Matrix",  path: "/admin/coverage/matrix",   icon: Grid3x3 },
+      { label: "SET Reports",      path: "/admin/coverage/sets",     icon: FileBarChart },
+      { label: "Partner Reports",  path: "/admin/coverage/partners", icon: Building2 },
     ],
   },
   {
@@ -69,16 +56,12 @@ const navItems: NavItem[] = [
     path: "/admin/analytics",
     icon: TrendingUp,
     children: [
-      { label: "CEE Grade Trends", path: "/admin/analytics/grades",   icon: BarChart2 },
-      { label: "Site Performance",  path: "/admin/analytics/sites",    icon: Activity },
-      { label: "State Comparison",  path: "/admin/analytics/states",   icon: Map },
+      { label: "CEE Grade Trends", path: "/admin/analytics/grades",  icon: BarChart2 },
+      { label: "Site Performance", path: "/admin/analytics/sites",   icon: Activity },
+      { label: "State Comparison", path: "/admin/analytics/states",  icon: Map },
     ],
   },
-  {
-    label: "CEE Manager",
-    path: "/admin/cee-manager",
-    icon: Grid3x3,
-  },
+  { label: "CEE Manager",        path: "/admin/cee-manager",      icon: Grid3x3 },
   {
     label: "Settings",
     path: "/admin/settings",
@@ -88,7 +71,41 @@ const navItems: NavItem[] = [
       { label: "Database Setup",   path: "/seeder",         icon: Database },
     ],
   },
+  { label: "My Profile",         path: "/admin/profile",          icon: UserCircle },
 ];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Avatar helper – shows photo if available, else initials
+// ─────────────────────────────────────────────────────────────────────────────
+const Avatar: React.FC<{
+  photoURL?: string | null;
+  initials: string;
+  size?: "sm" | "md" | "lg";
+  className?: string;
+}> = ({ photoURL, initials, size = "md", className = "" }) => {
+  const dim = size === "sm" ? "w-6 h-6" : size === "lg" ? "w-10 h-10" : "w-8 h-8";
+  const text = size === "sm" ? "text-[10px]" : size === "lg" ? "text-base" : "text-xs";
+
+  if (photoURL) {
+    return (
+      <img
+        src={photoURL}
+        alt="Profile"
+        className={`${dim} rounded-full object-cover shrink-0 ring-2 ring-wine-800/30 ${className}`}
+        onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+      />
+    );
+  }
+
+  return (
+    <div className={`${dim} rounded-full wine-gradient flex items-center justify-center shrink-0 shadow-inner ${className}`}>
+      <span className={`text-white font-black ${text}`}>{initials}</span>
+    </div>
+  );
+};
+
+// Export Avatar for use in other components
+export { Avatar };
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Individual Nav Link
@@ -132,7 +149,11 @@ const NavLink: React.FC<{
             : "text-slate-400 hover:bg-white/60 hover:text-slate-700"}
         `}
       >
-        <item.icon className={`shrink-0 ${depth === 0 ? "w-5 h-5" : "w-4 h-4"} ${isActive && !hasChildren ? "text-white" : "text-slate-400 group-hover:text-wine-800"}`} />
+        <item.icon
+          className={`shrink-0 ${depth === 0 ? "w-5 h-5" : "w-4 h-4"} ${
+            isActive && !hasChildren ? "text-white" : "text-slate-400 group-hover:text-wine-800"
+          }`}
+        />
 
         {!collapsed && (
           <>
@@ -145,7 +166,7 @@ const NavLink: React.FC<{
               </span>
             )}
             {hasChildren && (
-              <ChevronRight className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-90" : ""} text-slate-350`} />
+              <ChevronRight className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-90" : ""} text-slate-400`} />
             )}
           </>
         )}
@@ -180,8 +201,11 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
   headerRight,
 }) => {
   const { profile, logout } = useApp();
+  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const initials = `${profile?.firstName?.charAt(0) ?? "A"}${profile?.lastName?.charAt(0) ?? ""}`;
 
   return (
     <div className="min-h-screen flex bg-[#F6F4F5]">
@@ -194,9 +218,9 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
         />
       )}
 
-      {/* ────────────────────────────────────────────────────────────── */}
-      {/* SIDEBAR                                                        */}
-      {/* ────────────────────────────────────────────────────────────── */}
+      {/* ──────────────────────────────────────────────────────────── */}
+      {/* SIDEBAR                                                      */}
+      {/* ──────────────────────────────────────────────────────────── */}
       <aside
         className={`
           fixed top-0 left-0 h-full z-50
@@ -208,11 +232,26 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
           ${mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
       >
-        {/* Logo */}
+        {/* ── Logo ── */}
         <div className={`flex items-center gap-3 px-4 py-5 border-b border-white/8 shrink-0 ${collapsed ? "justify-center" : ""}`}>
-          <div className="w-9 h-9 rounded-xl wine-gradient flex items-center justify-center shadow-lg shrink-0">
+          {/* Use simsicon2.png, fall back to letter S */}
+          <img
+            src="/simsicon2.png"
+            alt="e-SIMS"
+            className="w-9 h-9 rounded-xl object-contain shadow-lg shrink-0"
+            onError={e => {
+              // fallback: hide image and show letter tile
+              const img = e.currentTarget as HTMLImageElement;
+              img.style.display = "none";
+              const sibling = img.nextElementSibling as HTMLElement | null;
+              if (sibling) sibling.style.display = "flex";
+            }}
+          />
+          {/* Hidden fallback tile */}
+          <div className="w-9 h-9 rounded-xl wine-gradient items-center justify-center shadow-lg shrink-0 hidden">
             <span className="text-white font-black text-sm">S</span>
           </div>
+
           {!collapsed && (
             <div className="min-w-0">
               <p className="text-white font-bold text-sm tracking-tight leading-tight truncate">e-SIMS Admin</p>
@@ -221,32 +260,33 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
           )}
         </div>
 
-        {/* Scrollable nav */}
+        {/* ── Scrollable nav ── */}
         <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-1 scrollbar-none">
           {navItems.map(item => (
             <NavLink key={item.path} item={item} collapsed={collapsed} />
           ))}
         </nav>
 
-        {/* Bottom: User card + collapse toggle */}
-        <div className="shrink-0 border-t border-white/8 p-3 space-y-2">
-          {/* User card */}
-          {!collapsed && (
-            <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/5">
-              <div className="w-8 h-8 rounded-full wine-gradient flex items-center justify-center shrink-0 shadow-inner">
-                <span className="text-white font-black text-xs">
-                  {profile?.firstName?.charAt(0) || "A"}
-                </span>
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-white text-[12px] font-bold truncate leading-tight">
+        {/* ── Bottom: User card + Profile link + collapse toggle ── */}
+        <div className="shrink-0 border-t border-white/8 p-3 space-y-1.5">
+
+          {/* User card – clickable → goes to profile page */}
+          <button
+            onClick={() => navigate("/admin/profile")}
+            title={collapsed ? "My Profile" : undefined}
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition group ${collapsed ? "justify-center" : ""}`}
+          >
+            <Avatar photoURL={profile?.photoURL} initials={initials} size="md" />
+            {!collapsed && (
+              <div className="min-w-0 flex-1 text-left">
+                <p className="text-white text-[12px] font-bold truncate leading-tight group-hover:text-wine-300 transition">
                   {profile?.firstName} {profile?.lastName}
                 </p>
                 <p className="text-white/30 text-[10px] truncate mt-0.5">{profile?.organizationName}</p>
               </div>
-              <Shield className="w-3.5 h-3.5 text-wine-400 shrink-0" />
-            </div>
-          )}
+            )}
+            {!collapsed && <Shield className="w-3.5 h-3.5 text-wine-400 shrink-0" />}
+          </button>
 
           <button
             onClick={logout}
@@ -268,9 +308,9 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
         </div>
       </aside>
 
-      {/* ────────────────────────────────────────────────────────────── */}
-      {/* MAIN CONTENT AREA                                             */}
-      {/* ────────────────────────────────────────────────────────────── */}
+      {/* ──────────────────────────────────────────────────────────── */}
+      {/* MAIN CONTENT AREA                                            */}
+      {/* ──────────────────────────────────────────────────────────── */}
       <div
         className={`flex-1 flex flex-col min-h-screen transition-all duration-300 ${collapsed ? "lg:ml-[70px]" : "lg:ml-[260px]"}`}
       >
@@ -295,19 +335,19 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Caller-supplied right-side buttons */}
             {headerRight}
 
-            {/* Avatar pill */}
-            <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200/60">
-              <div className="w-6 h-6 rounded-full wine-gradient flex items-center justify-center shrink-0">
-                <span className="text-white text-[10px] font-black">{profile?.firstName?.charAt(0) || "A"}</span>
-              </div>
-              <span className="text-xs font-semibold text-slate-600 max-w-[120px] truncate">
+            {/* Profile avatar pill – clickable → profile page */}
+            <button
+              onClick={() => navigate("/admin/profile")}
+              className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200/60 hover:bg-wine-50 hover:border-wine-200 transition group"
+            >
+              <Avatar photoURL={profile?.photoURL} initials={initials} size="sm" />
+              <span className="text-xs font-semibold text-slate-600 max-w-[120px] truncate group-hover:text-wine-800">
                 {profile?.firstName} {profile?.lastName}
               </span>
               <Shield className="w-3.5 h-3.5 text-wine-700" />
-            </div>
+            </button>
           </div>
         </header>
 

@@ -12,6 +12,7 @@ import { AdminDashboard } from "./pages/AdminDashboard";
 import { CreateActivity } from "./pages/CreateActivity";
 import { CeeManager }     from "./pages/CeeManager";
 import { AdminSettings }  from "./pages/AdminSettings";
+import { AdminProfile }   from "./pages/AdminProfile";
 import { SeederPage }     from "./pages/SeederPage";
 
 // ------------------------------------------------------------------
@@ -50,6 +51,7 @@ function App() {
             <Route path="/admin/create-activity" element={<CreateActivity />} />
             <Route path="/admin/cee-manager"     element={<CeeManager />} />
             <Route path="/admin/settings"        element={<AdminSettings />} />
+            <Route path="/admin/profile"         element={<AdminProfile />} />
           </Route>
 
           {/* 404 catch-all */}
