@@ -4,7 +4,8 @@ import { db } from "../firebase";
 import { collection, doc, setDoc, deleteDoc, getDocs } from "firebase/firestore";
 import ceesData from "../data/cees.json";
 import questionsData from "../data/questions.json";
-import { ArrowLeft, Edit2, Trash2, Plus, Save, X, Settings2, HelpCircle, FileText, Check } from "lucide-react";
+import { Edit2, Trash2, Plus, Save, X, Settings2, HelpCircle, FileText, Check } from "lucide-react";
+import { AdminLayout } from "../components/AdminLayout";
 
 export const CeeManager: React.FC = () => {
   const { navigate } = useApp();
@@ -156,45 +157,31 @@ export const CeeManager: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-16">
-      {/* Header */}
-      <header className="glass-panel sticky top-0 z-40 border-b border-slate-200/80 px-6 py-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => navigate("admin-dashboard")}
-              className="p-2 rounded-lg hover:bg-wine-50 text-slate-500 hover:text-wine-800 transition"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </button>
-            <div>
-              <span className="text-[10px] font-bold text-wine-800 uppercase tracking-widest">Database Configurator</span>
-              <h1 className="text-xl font-bold text-slate-800">CEE & Question Manager</h1>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <select
-              value={selectedSet}
-              onChange={e => setSelectedSet(e.target.value)}
-              className="px-3. py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 focus:outline-none"
-            >
-              {Object.entries(setTitles).map(([key, label]) => (
-                <option key={key} value={key}>{label}</option>
-              ))}
-            </select>
-            <button
-              onClick={() => setShowAddCee(true)}
-              className="px-3.5 py-1.5 bg-wine-800 hover:bg-wine-700 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Add CEE</span>
-            </button>
-          </div>
+    <AdminLayout
+      title="CEE & Question Manager"
+      subtitle="Database Configurator"
+      headerRight={
+        <div className="flex items-center gap-3">
+          <select
+            value={selectedSet}
+            onChange={e => setSelectedSet(e.target.value)}
+            className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 focus:outline-none shadow-sm"
+          >
+            {Object.entries(setTitles).map(([key, label]) => (
+              <option key={key} value={key}>{label}</option>
+            ))}
+          </select>
+          <button
+            onClick={() => setShowAddCee(true)}
+            className="px-3.5 py-1.5 bg-wine-800 hover:bg-wine-700 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Add CEE</span>
+          </button>
         </div>
-      </header>
-
-      <main className="max-w-6xl mx-auto px-6 mt-8">
+      }
+    >
+      <div className="max-w-6xl mx-auto">
         {loading ? (
           <div className="py-12 text-center text-slate-400 font-semibold">Loading data...</div>
         ) : (
@@ -255,7 +242,6 @@ export const CeeManager: React.FC = () => {
             })}
           </div>
         )}
-      </main>
 
       {/* CEE Add/Edit Modal */}
       {showAddCee && (
@@ -387,6 +373,8 @@ export const CeeManager: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </AdminLayout>
+
   );
 };

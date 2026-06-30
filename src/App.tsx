@@ -1,57 +1,63 @@
 import React from "react";
-import { AppProvider, useApp } from "./context/AppContext";
-import { Auth } from "./pages/Auth";
-import { Overview } from "./pages/Overview";
-import { Activities } from "./pages/Activities";
-import { Assessment } from "./pages/Assessment";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AppProvider } from "./context/AppContext";
+import { ProtectedRoute, PublicOnlyRoute } from "./components/RouteGuards";
+
+// Pages
+import { Auth }           from "./pages/Auth";
+import { Overview }       from "./pages/Overview";
+import { Activities }     from "./pages/Activities";
+import { Assessment }     from "./pages/Assessment";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { CreateActivity } from "./pages/CreateActivity";
-import { CeeManager } from "./pages/CeeManager";
-import { Loader2 } from "lucide-react";
+import { CeeManager }     from "./pages/CeeManager";
+import { AdminSettings }  from "./pages/AdminSettings";
+import { SeederPage }     from "./pages/SeederPage";
 
-const AppContent: React.FC = () => {
-  const { page, loading } = useApp();
-
-  if (loading) {
-    return (
-      <div className="min-h-screen w-full flex items-center justify-center bg-slate-900">
-        <div className="flex flex-col items-center gap-3 text-white">
-          <Loader2 className="w-12 h-12 animate-spin text-rosegold-500" />
-          <span className="text-sm font-semibold tracking-wider uppercase text-rosegold-200">Loading eSIMS Platform...</span>
-        </div>
-      </div>
-    );
-  }
-
-  // Auth pages route
-  if (page === "login" || page === "signup" || page === "forgot-password") {
-    return <Auth />;
-  }
-
-  // Dashboard pages route
-  switch (page) {
-    case "overview":
-      return <Overview />;
-    case "activities":
-      return <Activities />;
-    case "assessment":
-      return <Assessment />;
-    case "admin-dashboard":
-      return <AdminDashboard />;
-    case "admin-create-activity":
-      return <CreateActivity />;
-    case "admin-cee-manager":
-      return <CeeManager />;
-    default:
-      return <Auth />;
-  }
-};
-
+// ------------------------------------------------------------------
+// IMPORTANT: BrowserRouter must wrap AppProvider so that
+// useNavigate() inside AppProvider has access to the router context.
+// ------------------------------------------------------------------
 function App() {
   return (
-    <AppProvider>
-      <AppContent />
-    </AppProvider>
+    <BrowserRouter>
+      <AppProvider>
+        <Routes>
+
+          {/* Root redirect */}
+          <Route path="/" element={<Navigate to="/login" replace />} />
+
+          {/* ── Public-only (logged-in users are bounced away) ── */}
+          <Route element={<PublicOnlyRoute />}>
+            <Route path="/login"           element={<Auth />} />
+            <Route path="/signup"          element={<Auth />} />
+            <Route path="/forgot-password" element={<Auth />} />
+          </Route>
+
+          {/* Utility – accessible without login for first-time DB setup */}
+          <Route path="/seeder" element={<SeederPage />} />
+
+          {/* ── Protected – any authenticated user ── */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/overview"   element={<Overview />} />
+            <Route path="/activities" element={<Activities />} />
+            <Route path="/assessment" element={<Assessment />} />
+          </Route>
+
+          {/* ── Protected – Admin role only ── */}
+          <Route element={<ProtectedRoute requiredRole="Admin" />}>
+            <Route path="/admin"                 element={<AdminDashboard />} />
+            <Route path="/admin/create-activity" element={<CreateActivity />} />
+            <Route path="/admin/cee-manager"     element={<CeeManager />} />
+            <Route path="/admin/settings"        element={<AdminSettings />} />
+          </Route>
+
+          {/* 404 catch-all */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
+
+        </Routes>
+      </AppProvider>
+    </BrowserRouter>
   );
 }
 

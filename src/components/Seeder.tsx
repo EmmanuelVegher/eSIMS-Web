@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { db } from "../firebase";
-import { doc, writeBatch, collection, getDocs } from "firebase/firestore";
+import { doc, writeBatch, collection, getDocs, setDoc } from "firebase/firestore";
 import ceesData from "../data/cees.json";
 import questionsData from "../data/questions.json";
 import { Database, CheckCircle, Loader2, AlertCircle } from "lucide-react";
@@ -10,11 +10,13 @@ export const Seeder: React.FC = () => {
   const [status, setStatus] = useState<{
     roles: "idle" | "running" | "success" | "error";
     orgs: "idle" | "running" | "success" | "error";
+    sets: "idle" | "running" | "success" | "error";
     cees: "idle" | "running" | "success" | "error";
     questions: "idle" | "running" | "success" | "error";
   }>({
     roles: "idle",
     orgs: "idle",
+    sets: "idle",
     cees: "idle",
     questions: "idle",
   });
@@ -80,9 +82,73 @@ export const Seeder: React.FC = () => {
             organizationName: org.name,
             stateName: fac.state
           }).commit();
+
+          // Seed flat facilities root collection
+          const flatFacRef = doc(db, "facilities", fac.code);
+          await writeBatch(db).set(flatFacRef, {
+            id: fac.code,
+            facilityName: fac.name,
+            lga: fac.lga,
+            datimCode: fac.code,
+            organizationName: org.name,
+            stateName: fac.state
+          }).commit();
         }
       }
+
+      // 2b. Migrate any existing custom nested facilities to flat facilities
+      setProgress("Migrating any custom nested facilities...");
+      const orgsSnapForMigration = await getDocs(collection(db, "organizations"));
+      for (const orgDoc of orgsSnapForMigration.docs) {
+        const orgId = orgDoc.id;
+        const statesSnap = await getDocs(collection(db, "organizations", orgId, "Facilities"));
+        for (const stateDoc of statesSnap.docs) {
+          const stateId = stateDoc.id;
+          const facSnap = await getDocs(collection(db, "organizations", orgId, "Facilities", stateId, stateId));
+          for (const facDoc of facSnap.docs) {
+            const facData = facDoc.data();
+            const flatFacRef = doc(db, "facilities", facDoc.id);
+            await setDoc(flatFacRef, {
+              id: facDoc.id,
+              facilityName: facData.facilityName || "",
+              lga: facData.lga || "",
+              datimCode: facData.datimCode || facDoc.id,
+              organizationName: orgId,
+              stateName: stateId
+            });
+          }
+        }
+      }
+
       setStatus(prev => ({ ...prev, orgs: "success" }));
+
+      // 2c. Seed Sets from mobile app definition
+      setStatus(prev => ({ ...prev, sets: "running" }));
+      setProgress("Seeding SIMS Sets...");
+      const setsList = [
+        { id: '1A', name: 'ALL SITES-GENERAL' },
+        { id: '1B', name: 'ALL SITES -COMMODITIES MANAGEMENT' },
+        { id: '1C', name: 'ALL SITES –DATA QUALITY' },
+        { id: '1D', name: 'ALL SITES- INFECTION PREVENTION AND CONTROL (IPC)' },
+        { id: '2A', name: 'CARE AND TREATMENT-GENERAL POPULATION (NON-KEY POPS FACILITIES)' },
+        { id: '2B', name: 'CARE AND TREATMENT FOR HIV-INFECTED CHILDREN' },
+        { id: '3A', name: 'KEY POPULATIONS-GENERAL' },
+        { id: '3B', name: 'CARE AND TREATMENT-KEY POPULATIONS (C&T KEY POPS)' },
+        { id: '4A', name: 'PMTCT-ANC, POSTNATAL, and L&D' },
+        { id: '4B', name: 'HIV EXPOSED INFANTS (HEI)' },
+        { id: '5', name: 'VOLUNTARY MEDICAL MALE CIRCUMCISION (VMMC)' },
+        { id: '6', name: 'AGYW, GBV and OVC' },
+        { id: '7', name: 'HTS' },
+        { id: '8', name: 'TB TREATMENT SERVICE POINT' },
+        { id: '9', name: 'METHADONE OR BUPRENORPHINE MEDICATION ASSISTED TREATMENT (MAT)' },
+        { id: '10', name: 'LABORATORY' },
+      ];
+      const setsBatch = writeBatch(db);
+      for (const s of setsList) {
+        setsBatch.set(doc(db, "sets", s.id), s);
+      }
+      await setsBatch.commit();
+      setStatus(prev => ({ ...prev, sets: "success" }));
 
       // 3. Seed CEEs
       setStatus(prev => ({ ...prev, cees: "running" }));
@@ -159,11 +225,15 @@ export const Seeder: React.FC = () => {
           {getStatusIcon(status.orgs)}
         </div>
         <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100">
-          <span className="text-sm font-medium text-slate-700">3. eSIMS CEE Definitions ({ceesData.length})</span>
+          <span className="text-sm font-medium text-slate-700">3. eSIMS Set Definitions (16)</span>
+          {getStatusIcon(status.sets)}
+        </div>
+        <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100">
+          <span className="text-sm font-medium text-slate-700">4. eSIMS CEE Definitions ({ceesData.length})</span>
           {getStatusIcon(status.cees)}
         </div>
         <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100">
-          <span className="text-sm font-medium text-slate-700">4. Question Bank & Rules ({questionsData.length})</span>
+          <span className="text-sm font-medium text-slate-700">5. Question Bank & Rules ({questionsData.length})</span>
           {getStatusIcon(status.questions)}
         </div>
       </div>

@@ -1,99 +1,98 @@
 import React, { useState, useEffect } from "react";
 import { useApp } from "../context/AppContext";
 import { db } from "../firebase";
-import { collection, doc, addDoc, getDocs, setDoc } from "firebase/firestore";
-import { ArrowLeft, Calendar, Building, Landmark, CheckCircle, Loader2, AlertCircle } from "lucide-react";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { Calendar, Building, Landmark, CheckCircle, Loader2, AlertCircle, Layers, CalendarDays } from "lucide-react";
+import { AdminLayout } from "../components/AdminLayout";
 
 export const CreateActivity: React.FC = () => {
   const { navigate } = useApp();
 
   const [startDate, setStartDate] = useState("");
   const [proposedEndDate, setProposedEndDate] = useState("");
-  
-  const [selectedOrg, setSelectedOrg] = useState("");
-  const [selectedState, setSelectedState] = useState("");
-  const [selectedFacility, setSelectedFacility] = useState("");
 
-  // Dropdown lists
-  const [organizations, setOrganizations] = useState<any[]>([]);
-  const [states, setStates] = useState<string[]>([]);
-  const [facilities, setFacilities] = useState<any[]>([]);
+  const [assessmentType, setAssessmentType] = useState("Comprehensive Assessment");
+  const [fiscalYear, setFiscalYear] = useState("FY 2025");
+
+  // Selection states (arrays supporting multiple selects)
+  const [selectedOrgs, setSelectedOrgs] = useState<string[]>([]);
+  const [selectedStates, setSelectedStates] = useState<string[]>([]);
+  const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
+
+  // Flat facilities loaded once from Firestore
+  const [allFacilities, setAllFacilities] = useState<any[]>([]);
 
   // Status
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Load organizations
+  // Load flat facilities once
   useEffect(() => {
-    const fetchOrgs = async () => {
+    const fetchAllFacilities = async () => {
       try {
-        const orgsSnap = await getDocs(collection(db, "organizations"));
-        const orgsList: any[] = [];
-        orgsSnap.forEach(docSnap => {
-          orgsList.push({ id: docSnap.id, ...docSnap.data() });
+        const snap = await getDocs(collection(db, "facilities"));
+        const list: any[] = [];
+        snap.forEach(docSnap => {
+          list.push({ id: docSnap.id, ...docSnap.data() });
         });
-        setOrganizations(orgsList.length ? orgsList : [
-          { id: "Caritas Nigeria", organizationName: "Caritas Nigeria" },
-          { id: "CCFN", organizationName: "CCFN" },
-          { id: "IHVN", organizationName: "IHVN" }
-        ]);
+        
+        // Fallbacks if Firestore empty
+        if (list.length === 0) {
+          list.push(
+            { id: "FCT_ADH_01", facilityName: "Asokoro District Hospital", stateName: "FCT", organizationName: "Caritas Nigeria", datimCode: "FCT_ADH_01" },
+            { id: "FCT_GH_02", facilityName: "Garki Hospital", stateName: "FCT", organizationName: "Caritas Nigeria", datimCode: "FCT_GH_02" },
+            { id: "EN_UNTH_01", facilityName: "UNTH Enugu", stateName: "Enugu", organizationName: "Caritas Nigeria", datimCode: "EN_UNTH_01" },
+            { id: "EN_MCH_02", facilityName: "Mother of Christ Hospital", stateName: "Enugu", organizationName: "CCFN", datimCode: "EN_MCH_02" }
+          );
+        }
+        setAllFacilities(list);
       } catch (e) {
-        console.error(e);
+        console.error("Error loading facilities:", e);
       }
     };
-    fetchOrgs();
+    fetchAllFacilities();
   }, []);
 
-  // Fetch states when Org changes
-  useEffect(() => {
-    if (!selectedOrg) {
-      setStates([]);
-      setSelectedState("");
-      return;
-    }
-    const fetchStates = async () => {
-      try {
-        const statesSnap = await getDocs(collection(db, "organizations", selectedOrg, "Facilities"));
-        const statesList: string[] = [];
-        statesSnap.forEach(docSnap => {
-          statesList.push(docSnap.id);
-        });
-        setStates(statesList);
-      } catch (e) {
-        console.error(e);
-        setStates(["FCT", "Enugu"]); // fallbacks
-      }
-    };
-    fetchStates();
-  }, [selectedOrg]);
+  // Derive unique organizations from the flat facilities list
+  const organizationsList = Array.from(new Set(allFacilities.map(f => f.organizationName)))
+    .map(name => ({ id: name, organizationName: name }));
 
-  // Fetch facilities when State changes
-  useEffect(() => {
-    if (!selectedState || !selectedOrg) {
-      setFacilities([]);
-      setSelectedFacility("");
-      return;
+  // Derive unique states for the selected organizations
+  const statesList = Array.from(
+    new Set(
+      allFacilities
+        .filter(f => selectedOrgs.includes(f.organizationName))
+        .map(f => f.stateName)
+    )
+  );
+
+  // Derive facilities for the selected states & organizations
+  const facilitiesList = allFacilities.filter(
+    f => selectedOrgs.includes(f.organizationName) && selectedStates.includes(f.stateName)
+  );
+
+  // Toggle checks helper
+  const handleToggle = (list: string[], setList: React.Dispatch<React.SetStateAction<string[]>>, item: string) => {
+    if (list.includes(item)) {
+      setList(list.filter(x => x !== item));
+    } else {
+      setList([...list, item]);
     }
-    const fetchFacilities = async () => {
-      try {
-        const facSnap = await getDocs(collection(db, "organizations", selectedOrg, "Facilities", selectedState, selectedState));
-        const facList: any[] = [];
-        facSnap.forEach(docSnap => {
-          facList.push({ id: docSnap.id, ...docSnap.data() });
-        });
-        setFacilities(facList);
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    fetchFacilities();
-  }, [selectedState, selectedOrg]);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedOrg || !selectedState || !selectedFacility || !startDate || !proposedEndDate) {
-      setError("Please fill in all details.");
+    if (
+      selectedOrgs.length === 0 ||
+      selectedStates.length === 0 ||
+      selectedFacilities.length === 0 ||
+      !startDate ||
+      !proposedEndDate ||
+      !assessmentType ||
+      !fiscalYear
+    ) {
+      setError("Please select at least one organization, state, and facility, along with timelines.");
       return;
     }
 
@@ -105,19 +104,22 @@ export const CreateActivity: React.FC = () => {
       const activityId = `SIMS_ACT_${Date.now()}`;
       await setDoc(doc(db, "sims_activities", activityId), {
         id: activityId,
-        startDate,
-        proposedEndDate,
-        states: selectedState,
-        organizations: selectedOrg,
-        facilities: selectedFacility
+        assessmentType,
+        fiscalYear,
+        startDate: startDate + "T00:00:00.000",
+        proposedEndDate: proposedEndDate + "T00:00:00.000",
+        states: selectedStates.join(","),
+        organizations: selectedOrgs.join(","),
+        facilities: selectedFacilities.join(","),
+        status: "Active"
       });
 
       setSuccess("Site Assessment successfully scheduled and compiled in Firestore!");
       setStartDate("");
       setProposedEndDate("");
-      setSelectedOrg("");
-      setSelectedState("");
-      setSelectedFacility("");
+      setSelectedOrgs([]);
+      setSelectedStates([]);
+      setSelectedFacilities([]);
 
       setTimeout(() => {
         navigate("admin-dashboard");
@@ -132,24 +134,8 @@ export const CreateActivity: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-16">
-      {/* Header */}
-      <header className="glass-panel sticky top-0 z-40 border-b border-slate-200/80 px-6 py-4">
-        <div className="max-w-xl mx-auto flex items-center gap-4">
-          <button
-            onClick={() => navigate("admin-dashboard")}
-            className="p-2 rounded-lg hover:bg-wine-50 text-slate-500 hover:text-wine-800 transition"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div>
-            <span className="text-[10px] font-bold text-wine-800 uppercase tracking-widest">TIMS Configurator</span>
-            <h1 className="text-lg font-bold text-slate-800">Schedule Site Assessment</h1>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-xl mx-auto px-6 mt-8">
+    <AdminLayout title="Schedule Site Assessment" subtitle="SIMS Configurator">
+      <div className="max-w-xl mx-auto">
         <div className="glass-panel p-8 rounded-2xl border border-slate-200/80 shadow-md">
           {error && (
             <div className="mb-6 p-4 rounded-xl bg-red-50 text-red-700 text-xs flex gap-2 items-center">
@@ -167,63 +153,113 @@ export const CreateActivity: React.FC = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             
-            {/* Cascading Org Dropdown */}
+            {/* Assessment Type */}
             <div>
-              <label className="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wide">Implementing Organization</label>
+              <label className="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wide">Assessment Type</label>
               <div className="relative">
                 <select
                   required
-                  value={selectedOrg}
-                  onChange={e => setSelectedOrg(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:border-wine-800 text-xs font-medium focus:outline-none transition appearance-none"
+                  value={assessmentType}
+                  onChange={e => setAssessmentType(e.target.value)}
+                  className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:border-wine-800 text-xs font-medium focus:outline-none transition appearance-none cursor-pointer"
                 >
-                  <option value="">Select Organization</option>
-                  {organizations.map(org => (
-                    <option key={org.id} value={org.id}>{org.organizationName || org.id}</option>
-                  ))}
+                  <option value="Comprehensive Assessment">Comprehensive Assessment</option>
+                  <option value="Follow-up Assessment">Follow-up Assessment</option>
+                  <option value="Ad-hoc Assessment">Ad-hoc Assessment</option>
                 </select>
-                <Building className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-slate-400" />
+                <Layers className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-slate-400" />
               </div>
             </div>
 
-            {/* Cascading State Dropdown */}
-            {selectedOrg && (
+            {/* Fiscal Year */}
+            <div>
+              <label className="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wide">Fiscal Year</label>
+              <div className="relative">
+                <select
+                  required
+                  value={fiscalYear}
+                  onChange={e => setFiscalYear(e.target.value)}
+                  className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:border-wine-800 text-xs font-medium focus:outline-none transition appearance-none cursor-pointer"
+                >
+                  <option value="FY 2024">FY 2024</option>
+                  <option value="FY 2025">FY 2025</option>
+                  <option value="FY 2026">FY 2026</option>
+                </select>
+                <CalendarDays className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-slate-400" />
+              </div>
+            </div>
+
+            {/* Implementing Organizations (Multi-select) */}
+            <div>
+              <label className="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wide">Implementing Organizations</label>
+              <div className="bg-white border border-slate-200 rounded-xl p-3.5 space-y-2 max-h-36 overflow-y-auto">
+                {organizationsList.map(org => {
+                  const checked = selectedOrgs.includes(org.id);
+                  return (
+                    <label key={org.id} className="flex items-center gap-3 text-xs font-medium text-slate-700 cursor-pointer select-none">
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() => handleToggle(selectedOrgs, setSelectedOrgs, org.id)}
+                        className="rounded text-wine-800 focus:ring-wine-800/10"
+                      />
+                      <span>{org.organizationName || org.id}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Target States (Multi-select) */}
+            {selectedOrgs.length > 0 && (
               <div>
-                <label className="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wide">Target State</label>
-                <div className="relative">
-                  <select
-                    required
-                    value={selectedState}
-                    onChange={e => setSelectedState(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:border-wine-800 text-xs font-medium focus:outline-none transition appearance-none"
-                  >
-                    <option value="">Select State</option>
-                    {states.map(state => (
-                      <option key={state} value={state}>{state}</option>
-                    ))}
-                  </select>
-                  <Landmark className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-slate-400" />
+                <label className="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wide">Target States</label>
+                <div className="bg-white border border-slate-200 rounded-xl p-3.5 space-y-2 max-h-36 overflow-y-auto">
+                  {statesList.length > 0 ? (
+                    statesList.map(state => {
+                      const checked = selectedStates.includes(state);
+                      return (
+                        <label key={state} className="flex items-center gap-3 text-xs font-medium text-slate-700 cursor-pointer select-none">
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={() => handleToggle(selectedStates, setSelectedStates, state)}
+                            className="rounded text-wine-800 focus:ring-wine-800/10"
+                          />
+                          <span>{state}</span>
+                        </label>
+                      );
+                    })
+                  ) : (
+                    <p className="text-slate-400 text-xs italic">No states mapped to selected organizations</p>
+                  )}
                 </div>
               </div>
             )}
 
-            {/* Cascading Facility Dropdown */}
-            {selectedState && (
+            {/* Target Facilities (Multi-select) */}
+            {selectedStates.length > 0 && (
               <div>
-                <label className="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wide">Target Facility</label>
-                <div className="relative">
-                  <select
-                    required
-                    value={selectedFacility}
-                    onChange={e => setSelectedFacility(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:border-wine-800 text-xs font-medium focus:outline-none transition appearance-none"
-                  >
-                    <option value="">Select Facility</option>
-                    {facilities.map(fac => (
-                      <option key={fac.id} value={fac.facilityName}>{fac.facilityName} ({fac.datimCode || fac.id})</option>
-                    ))}
-                  </select>
-                  <Building className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-slate-400" />
+                <label className="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wide">Target Facilities</label>
+                <div className="bg-white border border-slate-200 rounded-xl p-3.5 space-y-2 max-h-48 overflow-y-auto font-medium">
+                  {facilitiesList.length > 0 ? (
+                    facilitiesList.map(fac => {
+                      const checked = selectedFacilities.includes(fac.facilityName);
+                      return (
+                        <label key={fac.id} className="flex items-center gap-3 text-xs text-slate-700 cursor-pointer select-none">
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={() => handleToggle(selectedFacilities, setSelectedFacilities, fac.facilityName)}
+                            className="rounded text-wine-800 focus:ring-wine-800/10"
+                          />
+                          <span>{fac.facilityName} ({fac.datimCode || fac.id})</span>
+                        </label>
+                      );
+                    })
+                  ) : (
+                    <p className="text-slate-400 text-xs italic">No facilities found in selected state areas</p>
+                  )}
                 </div>
               </div>
             )}
@@ -275,7 +311,7 @@ export const CreateActivity: React.FC = () => {
             </button>
           </form>
         </div>
-      </main>
-    </div>
+      </div>
+    </AdminLayout>
   );
 };

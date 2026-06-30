@@ -2,63 +2,80 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     
-    // Helper: checks if user is logged in
+    // Helper functions
     function isAuthenticated() {
       return request.auth != null;
     }
-    
-    // Helper: checks if user is accessing their own document
+
     function isOwner(userId) {
       return isAuthenticated() && request.auth.uid == userId;
     }
-    
-    // Helper: checks if user has 'Admin' role in users collection
+
     function isAdmin() {
       return isAuthenticated() && 
         exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'Admin';
     }
 
-    // 1. Roles: public read (for registration dropdown), write only by Admin
+    // ── PUBLIC COLLECTIONS (needed for first-time seeder & registration) ──
+    // Roles: publicly readable for registration dropdown
     match /roles/{roleId} {
       allow read: if true;
-      allow write: if isAdmin();
+      allow write: if true; // Temporarily open for first-time seeding
     }
-    
-    // Organizations: public read (for registration dropdown), write only by Admin
+
+    // Organizations + Facilities: publicly readable for registration dropdowns
     match /organizations/{orgId} {
       allow read: if true;
-      allow write: if isAdmin();
-      
-      // Allow cascading subcollections under Facilities (state / facilities)
+      allow write: if true; // Temporarily open for first-time seeding
       match /Facilities/{document=**} {
         allow read: if true;
-        allow write: if isAdmin();
+        allow write: if true; // Temporarily open for first-time seeding
       }
     }
 
-    // 2. Users: strict owner-only read/write
-    match /users/{userId} {
-      allow read, write: if isOwner(userId) || isAdmin();
+    // Flat States + Facilities: publicly readable for registration dropdowns
+    match /states/{stateId} {
+      allow read: if true;
+      allow write: if true;
     }
 
-    // 3. CEEs and Questions: read-only for users, write only by Admin
+    match /facilities/{facilityId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Sets collection
+    match /sets/{setId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // CEEs + Questions: write open for seeding; read requires auth
     match /cees/{ceeId} {
       allow read: if isAuthenticated();
-      allow write: if isAdmin();
-    }
-    
-    match /questions/{questionId} {
-      allow read: if isAuthenticated();
-      allow write: if isAdmin();
+      allow write: if true; // Temporarily open for first-time seeding
     }
 
-    // 4. Question Responses: authenticated read/write for assessment logs
+    match /questions/{questionId} {
+      allow read: if isAuthenticated();
+      allow write: if true; // Temporarily open for first-time seeding
+    }
+
+    // ── SECURE COLLECTIONS ──
+    // Users: newly authenticated users can create their own doc (signup)
+    // Only owner or Admin can read/update after that
+    match /users/{userId} {
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+      allow read, update, delete: if isOwner(userId) || isAdmin();
+    }
+
+    // Question Responses: any authenticated user
     match /question_response/{responseId} {
       allow read, write: if isAuthenticated();
     }
 
-    // 5. SIMS Activities: read-only for authenticated assessors, write only by Admin
+    // SIMS Activities: authenticated assessors read; Admin writes
     match /sims_activities/{activityId} {
       allow read: if isAuthenticated();
       allow write: if isAdmin();

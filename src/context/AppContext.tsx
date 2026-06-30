@@ -2,19 +2,40 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { auth, db } from "../firebase";
 import { onAuthStateChanged, signOut, type User } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
+// ------------------------------------------------------------------
+// Types
+// ------------------------------------------------------------------
 export type PageType =
   | "login"
   | "signup"
   | "forgot-password"
+  | "seeder"
   | "overview"
   | "activities"
   | "assessment"
   | "admin-dashboard"
   | "admin-create-activity"
-  | "admin-cee-manager";
+  | "admin-cee-manager"
+  | "admin-settings";
 
-interface UserProfile {
+// Map from logical page names → URL paths
+const PAGE_PATHS: Record<PageType, string> = {
+  "login":                 "/login",
+  "signup":                "/signup",
+  "forgot-password":       "/forgot-password",
+  "seeder":                "/seeder",
+  "overview":              "/overview",
+  "activities":            "/activities",
+  "assessment":            "/assessment",
+  "admin-dashboard":       "/admin",
+  "admin-create-activity": "/admin/create-activity",
+  "admin-cee-manager":     "/admin/cee-manager",
+  "admin-settings":        "/admin/settings",
+};
+
+export interface UserProfile {
   uid: string;
   email: string;
   firstName: string;
@@ -28,7 +49,6 @@ interface UserProfile {
 interface AppContextType {
   firebaseUser: User | null;
   profile: UserProfile | null;
-  page: PageType;
   loading: boolean;
   activeActivity: any | null;
   activeCeeId: string | null;
@@ -41,25 +61,25 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+// ------------------------------------------------------------------
+// AppProvider – MUST be rendered inside <BrowserRouter> (done in App.tsx)
+// so that useNavigate() is available in the React tree.
+// ------------------------------------------------------------------
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // useNavigate is safe here because App.tsx wraps AppProvider inside BrowserRouter
+  const routerNavigate = useNavigate();
+
   const [firebaseUser, setFirebaseUser] = useState<User | null>(null);
-  const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [page, setPage] = useState<PageType>("login");
-  const [loading, setLoading] = useState(true);
+  const [profile, setProfile]           = useState<UserProfile | null>(null);
+  const [loading, setLoading]           = useState(true);
   const [activeActivity, setActiveActivityState] = useState<any | null>(null);
-  const [activeCeeId, setActiveCeeIdState] = useState<string | null>(null);
+  const [activeCeeId,    setActiveCeeIdState]    = useState<string | null>(null);
 
-  const navigate = (newPage: PageType) => {
-    setPage(newPage);
-  };
+  // Thin wrapper so callers still use logical page names
+  const navigate = (newPage: PageType) => routerNavigate(PAGE_PATHS[newPage]);
 
-  const setActiveActivity = (activity: any | null) => {
-    setActiveActivityState(activity);
-  };
-
-  const setActiveCeeId = (ceeId: string | null) => {
-    setActiveCeeIdState(ceeId);
-  };
+  const setActiveActivity = (activity: any | null) => setActiveActivityState(activity);
+  const setActiveCeeId    = (ceeId: string | null) => setActiveCeeIdState(ceeId);
 
   const fetchProfile = async (uid: string) => {
     try {
@@ -68,34 +88,31 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         const data = userDoc.data();
         setProfile({
           uid,
-          email: data.email || "",
-          firstName: data.firstName || "",
-          lastName: data.lastName || "",
-          organizationName: data.organizationName || "",
-          role: data.role || "User",
-          state: data.state || "",
-          facilityName: data.facilityName || "",
+          email:            data.email            || "",
+          firstName:        data.firstName         || "",
+          lastName:         data.lastName          || "",
+          organizationName: data.organization || data.organizationName || "",
+          role:             data.role              || "User",
+          state:            data.state             || "",
+          facilityName:     data.facilityName      || "",
         });
-        // Direct route based on roles
         if (data.role === "Admin") {
-          setPage("admin-dashboard");
+          routerNavigate("/admin");
         } else {
-          setPage("overview");
+          routerNavigate("/overview");
         }
       } else {
         setProfile(null);
-        setPage("login");
+        routerNavigate("/login");
       }
     } catch (e) {
       console.error("Error fetching user profile:", e);
-      setPage("login");
+      routerNavigate("/login");
     }
   };
 
   const refreshProfile = async () => {
-    if (firebaseUser) {
-      await fetchProfile(firebaseUser.uid);
-    }
+    if (firebaseUser) await fetchProfile(firebaseUser.uid);
   };
 
   const logout = async () => {
@@ -106,7 +123,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setFirebaseUser(null);
       setActiveActivityState(null);
       setActiveCeeIdState(null);
-      setPage("login");
+      routerNavigate("/login");
     } catch (e) {
       console.error("Error signing out:", e);
     } finally {
@@ -121,11 +138,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         await fetchProfile(user.uid);
       } else {
         setProfile(null);
-        setPage("login");
+        const publicPaths = ["/login", "/signup", "/forgot-password", "/seeder"];
+        if (!publicPaths.includes(window.location.pathname)) {
+          routerNavigate("/login");
+        }
       }
       setLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
 
@@ -134,7 +153,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       value={{
         firebaseUser,
         profile,
-        page,
         loading,
         activeActivity,
         activeCeeId,

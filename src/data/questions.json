@@ -83,7 +83,7 @@
   {
     "id": "S_01_02_Q2",
     "ceeId": "S_01_02",
-    "text": "Q2. Are condoms easily accessible to patrons/clients at the site (e.g., in a bowl on the counter, in a dispenser, or distributed directly to clients/patrons at the site)? Note: Condoms are \u2018easily accessible\u2019 if available on-site, regardless of whether they are for sale or distributed free.",
+    "text": "Q2. Are condoms easily accessible to patrons/clients at the site (e.g., in a bowl on the counter, in a dispenser, or distributed directly to clients/patrons at the site)? Note: Condoms are ‘easily accessible’ if available on-site, regardless of whether they are for sale or distributed free.",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -1288,7 +1288,7 @@
   {
     "id": "S_01_18_Q3",
     "ceeId": "S_01_18",
-    "text": "Q3. Is there adequate and secure space for storing rapid test kits according to the manufacturer\u2019s specifications?",
+    "text": "Q3. Is there adequate and secure space for storing rapid test kits according to the manufacturer’s specifications?",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "No",
@@ -1392,7 +1392,7 @@
   {
     "id": "S_01_20_Q1",
     "ceeId": "S_01_20",
-    "text": "Q1. Does the site review key programmatic/performance indicators at least quarterly over the last 12 months at a minimum? Note: Programmatic/performance indicators can include PEPFAR Monitoring Evaluation and Reporting (MER) and/or Quality Improvement indicators. Documentation may include run charts, bar graphs, site reports, QI team improvement journals etc. If the site only reports annual review of key indicators, this response should be \u201cNo\u201d",
+    "text": "Q1. Does the site review key programmatic/performance indicators at least quarterly over the last 12 months at a minimum? Note: Programmatic/performance indicators can include PEPFAR Monitoring Evaluation and Reporting (MER) and/or Quality Improvement indicators. Documentation may include run charts, bar graphs, site reports, QI team improvement journals etc. If the site only reports annual review of key indicators, this response should be “No”",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -1501,30 +1501,9 @@
       "if (_cellfiveValues[0] <= 5){return Colors.green;}"
     ],
     "tableData": [
-      [
-        "Indicator Name",
-        "DATIM Report",
-        "Facility Report(s)",
-        "Difference DATIM \u2013 Facility (A-B)",
-        "% Difference (C/B)",
-        "Absolute difference proportion?"
-      ],
-      [
-        "Example Indicator",
-        "400",
-        "460",
-        "400-460 = -60",
-        "(-60/460) = -13%",
-        "13%"
-      ],
-      [
-        "TX_NEW",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ]
+      "[\"Indicator Name\",\"DATIM Report\",\"Facility Report(s)\",\"Difference DATIM – Facility (A-B)\",\"% Difference (C/B)\",\"Absolute difference proportion?\"]",
+      "[\"Example Indicator\",\"400\",\"460\",\"400-460 = -60\",\"(-60/460) = -13%\",\"13%\"]",
+      "[\"TX_NEW\",\"\",\"\",\"\",\"\",\"\"]"
     ],
     "numQuestion": "",
     "denQuestion": "",
@@ -1572,30 +1551,9 @@
       "if (_cellfiveValues[0] <= 5){return Colors.green;}"
     ],
     "tableData": [
-      [
-        "Indicator Name",
-        "DATIM Report",
-        "Facility Report(s)",
-        "Difference DATIM \u2013 Facility (A-B)",
-        "% Difference (C/B)",
-        "Absolute difference proportion?"
-      ],
-      [
-        "Example Indicator",
-        "400",
-        "460",
-        "400-460 = -60",
-        "(-60/460) = -13%",
-        "13%"
-      ],
-      [
-        "HTS_TST",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ]
+      "[\"Indicator Name\",\"DATIM Report\",\"Facility Report(s)\",\"Difference DATIM – Facility (A-B)\",\"% Difference (C/B)\",\"Absolute difference proportion?\"]",
+      "[\"Example Indicator\",\"400\",\"460\",\"400-460 = -60\",\"(-60/460) = -13%\",\"13%\"]",
+      "[\"HTS_TST\",\"\",\"\",\"\",\"\",\"\"]"
     ],
     "numQuestion": "",
     "denQuestion": "",
@@ -1643,30 +1601,9 @@
       "if (_cellfiveValues[0] <= 5){return Colors.green;}"
     ],
     "tableData": [
-      [
-        "Indicator Name",
-        "DATIM Report",
-        "Facility Report(s)",
-        "Difference DATIM \u2013 Facility (A-B)",
-        "% Difference (C/B)",
-        "Absolute difference proportion?"
-      ],
-      [
-        "Example Indicator",
-        "400",
-        "460",
-        "400-460 = -60",
-        "(-60/460) = -13%",
-        "13%"
-      ],
-      [
-        "PMTCT_STAT",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ]
+      "[\"Indicator Name\",\"DATIM Report\",\"Facility Report(s)\",\"Difference DATIM – Facility (A-B)\",\"% Difference (C/B)\",\"Absolute difference proportion?\"]",
+      "[\"Example Indicator\",\"400\",\"460\",\"400-460 = -60\",\"(-60/460) = -13%\",\"13%\"]",
+      "[\"PMTCT_STAT\",\"\",\"\",\"\",\"\",\"\"]"
     ],
     "numQuestion": "",
     "denQuestion": "",
@@ -1714,30 +1651,9 @@
       "if (_cellfiveValues[0] <= 5){return Colors.green;}"
     ],
     "tableData": [
-      [
-        "Indicator Name",
-        "DATIM Report",
-        "Facility Report(s)",
-        "Difference DATIM \u2013 Facility (A-B)",
-        "% Difference (C/B)",
-        "Absolute difference proportion?"
-      ],
-      [
-        "Example Indicator",
-        "400",
-        "460",
-        "400-460 = -60",
-        "(-60/460) = -13%",
-        "13%"
-      ],
-      [
-        "VMMC_CIRC",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ]
+      "[\"Indicator Name\",\"DATIM Report\",\"Facility Report(s)\",\"Difference DATIM – Facility (A-B)\",\"% Difference (C/B)\",\"Absolute difference proportion?\"]",
+      "[\"Example Indicator\",\"400\",\"460\",\"400-460 = -60\",\"(-60/460) = -13%\",\"13%\"]",
+      "[\"VMMC_CIRC\",\"\",\"\",\"\",\"\",\"\"]"
     ],
     "numQuestion": "",
     "denQuestion": "",
@@ -1785,30 +1701,9 @@
       "if (_cellfiveValues[0] <= 5){return Colors.green;}"
     ],
     "tableData": [
-      [
-        "Indicator Name",
-        "DATIM Report",
-        "Facility Report(s)",
-        "Difference DATIM \u2013 Facility (A-B)",
-        "% Difference (C/B)",
-        "Absolute difference proportion?"
-      ],
-      [
-        "Example Indicator",
-        "400",
-        "460",
-        "400-460 = -60",
-        "(-60/460) = -13%",
-        "13%"
-      ],
-      [
-        "TX_CURR",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ]
+      "[\"Indicator Name\",\"DATIM Report\",\"Facility Report(s)\",\"Difference DATIM – Facility (A-B)\",\"% Difference (C/B)\",\"Absolute difference proportion?\"]",
+      "[\"Example Indicator\",\"400\",\"460\",\"400-460 = -60\",\"(-60/460) = -13%\",\"13%\"]",
+      "[\"TX_CURR\",\"\",\"\",\"\",\"\",\"\"]"
     ],
     "numQuestion": "",
     "denQuestion": "",
@@ -1856,30 +1751,9 @@
       "if (_cellfiveValues[0] <= 5){return Colors.green;}"
     ],
     "tableData": [
-      [
-        "Indicator Name",
-        "DATIM Report",
-        "Facility Report(s)",
-        "Difference DATIM \u2013 Facility (A-B)",
-        "% Difference (C/B)",
-        "Absolute difference proportion?"
-      ],
-      [
-        "Example Indicator",
-        "400",
-        "460",
-        "400-460 = -60",
-        "(-60/460) = -13%",
-        "13%"
-      ],
-      [
-        "PMTCT_EID",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ]
+      "[\"Indicator Name\",\"DATIM Report\",\"Facility Report(s)\",\"Difference DATIM – Facility (A-B)\",\"% Difference (C/B)\",\"Absolute difference proportion?\"]",
+      "[\"Example Indicator\",\"400\",\"460\",\"400-460 = -60\",\"(-60/460) = -13%\",\"13%\"]",
+      "[\"PMTCT_EID\",\"\",\"\",\"\",\"\",\"\"]"
     ],
     "numQuestion": "",
     "denQuestion": "",
@@ -2121,11 +1995,11 @@
   {
     "id": "S_02_01_Q3",
     "ceeId": "S_02_01",
-    "text": "Q3. Review the last 10 register entries or charts (whichever source has the most updated information) of adult and adolescent clients \u226515 years old who newly initiated ART in the last 3 months to confirm that retesting for verification prior to or at ART initiation is documented. What percent of adult and adolescent client records reviewed have documentation that retesting for verification occurred before ART initiation? (i.e., the site knows the client or client was retested for verification before/at ART initiation)",
+    "text": "Q3. Review the last 10 register entries or charts (whichever source has the most updated information) of adult and adolescent clients ≥15 years old who newly initiated ART in the last 3 months to confirm that retesting for verification prior to or at ART initiation is documented. What percent of adult and adolescent client records reviewed have documentation that retesting for verification occurred before ART initiation? (i.e., the site knows the client or client was retested for verification before/at ART initiation)",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow, If \u226590% = Green",
+    "scoring": "If <90% = Yellow, If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -2171,7 +2045,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow, If \u226590% = Green",
+    "scoring": "If <90% = Yellow, If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -2190,7 +2064,7 @@
   {
     "id": "S_02_03_Q1",
     "ceeId": "S_02_03",
-    "text": "Q1. Does this site offer rapid ART initiation/test and start (within 7 days of diagnosis) OR same-day initiation to newly diagnosed adults and adolescents \u226515 years old?",
+    "text": "Q1. Does this site offer rapid ART initiation/test and start (within 7 days of diagnosis) OR same-day initiation to newly diagnosed adults and adolescents ≥15 years old?",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -2217,7 +2091,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow, If \u226590% = Green",
+    "scoring": "If <90% = Yellow, If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -2259,7 +2133,7 @@
   {
     "id": "S_02_04_Q2",
     "ceeId": "S_02_04",
-    "text": "Q2. Review 10 charts of adult and adolescent clients \u226515 years old on ART \u226512 months. What percentage of charts reviewed, from adult and adolescent clients \u226515 years old on ART \u226512 months, show that the most recent viral load test was ordered within the appropriate interval, per the national guidelines? Note: Modify chart review to fit the national guidelines. Countries may opt to exclude charts if viral load was collected within the last 4 weeks to allow adequate time for results to be returned; replace any excluded charts to review a total of ten. Viral load monitoring is expected to occur on an ongoing basis (e.g., every 3, 6, or 12 months per national guidelines).",
+    "text": "Q2. Review 10 charts of adult and adolescent clients ≥15 years old on ART ≥12 months. What percentage of charts reviewed, from adult and adolescent clients ≥15 years old on ART ≥12 months, show that the most recent viral load test was ordered within the appropriate interval, per the national guidelines? Note: Modify chart review to fit the national guidelines. Countries may opt to exclude charts if viral load was collected within the last 4 weeks to allow adequate time for results to be returned; replace any excluded charts to review a total of ten. Viral load monitoring is expected to occur on an ongoing basis (e.g., every 3, 6, or 12 months per national guidelines).",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
@@ -2274,15 +2148,15 @@
       ""
     ],
     "tableData": [],
-    "numQuestion": "No of charts reviewed, from adult and adolescent clients \u2265-15 years old on ART \u226512 months, showing that the most recent viral load test was ordered within the appropriate interval, per the national guidelines",
-    "denQuestion": "No of charts reviewed from adult and adolescent clients \u2265-15 years old on ART \u226512 months",
-    "conditionalStatement": "If \u226590%, then Q3",
+    "numQuestion": "No of charts reviewed, from adult and adolescent clients ≥-15 years old on ART ≥12 months, showing that the most recent viral load test was ordered within the appropriate interval, per the national guidelines",
+    "denQuestion": "No of charts reviewed from adult and adolescent clients ≥-15 years old on ART ≥12 months",
+    "conditionalStatement": "If ≥90%, then Q3",
     "nextQuestionCondition": "null"
   },
   {
     "id": "S_02_04_Q3",
     "ceeId": "S_02_04",
-    "text": "Q3. Review the same 10 charts of adult and adolescent clients \u226515 years old on ART \u226512 months. What percent of adult and adolescent charts reviewed have a documented result returned for the most recent viral load test?",
+    "text": "Q3. Review the same 10 charts of adult and adolescent clients ≥15 years old on ART ≥12 months. What percent of adult and adolescent charts reviewed have a documented result returned for the most recent viral load test?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
@@ -2297,8 +2171,8 @@
       "_calculateNumeratorDenominatorScore(question) > 90"
     ],
     "tableData": [],
-    "numQuestion": "No of charts reviewed, from adult and adolescent clients \u226515 years old on ART \u226512 months, with a documented returned result for the most recent viral load test",
-    "denQuestion": "No of charts reviewed from adult and adolescent clients \u226515 years old on ART \u226512 months, with recent viral load test",
+    "numQuestion": "No of charts reviewed, from adult and adolescent clients ≥15 years old on ART ≥12 months, with a documented returned result for the most recent viral load test",
+    "denQuestion": "No of charts reviewed from adult and adolescent clients ≥15 years old on ART ≥12 months, with recent viral load test",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -2324,7 +2198,7 @@
   {
     "id": "S_02_05_Q2",
     "ceeId": "S_02_05",
-    "text": "Q2. Review 10 records (e.g., charts, high viral load register, EMR entries) of adult and adolescent clientson ART \u226512 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator and proceed with Q3. What percent of records reviewed have documentation of at least 1 EAC session within a month (or per national guidelines) of virologic non-suppression (e.g., VL \u226550 copies/mL or criteria based on national guidelines)? Notes: This review should distinguish the management of clients with non-suppressed viral load results from clientswith virologic suppression. If assessing Set 2B at this site and reviewing pediatric records, select only adults \u226520 years old. If only assessing Set 2A, select both adolescents and adults \u226515 years old.",
+    "text": "Q2. Review 10 records (e.g., charts, high viral load register, EMR entries) of adult and adolescent clientson ART ≥12 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator and proceed with Q3. What percent of records reviewed have documentation of at least 1 EAC session within a month (or per national guidelines) of virologic non-suppression (e.g., VL ≥50 copies/mL or criteria based on national guidelines)? Notes: This review should distinguish the management of clients with non-suppressed viral load results from clientswith virologic suppression. If assessing Set 2B at this site and reviewing pediatric records, select only adults ≥20 years old. If only assessing Set 2A, select both adolescents and adults ≥15 years old.",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "81",
@@ -2340,20 +2214,20 @@
     ],
     "tableData": [],
     "numQuestion": "No of records of clients who received at least 1 EAC session after date of virologic non-suppression",
-    "denQuestion": "No of records reviewed of adult and adolescent clients on ART \u226512 months with virologic non-suppression",
-    "conditionalStatement": "If \u2265 80%, then Q3",
+    "denQuestion": "No of records reviewed of adult and adolescent clients on ART ≥12 months with virologic non-suppression",
+    "conditionalStatement": "If ≥ 80%, then Q3",
     "nextQuestionCondition": "null"
   },
   {
     "id": "S_02_05_Q3",
     "ceeId": "S_02_05",
-    "text": "Q3. Review the same 10 records of clients on ART \u226512 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator .What percent of the same records reviewed (e.g., charts, high viral load register or EMR entries) have documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL \u226550 copies/mL)?",
+    "text": "Q3. Review the same 10 records of clients on ART ≥12 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator .What percent of the same records reviewed (e.g., charts, high viral load register or EMR entries) have documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL ≥50 copies/mL)?",
     "type": "numerator_denominator",
     "options": [
       "1) 3-5 month ARV dispensing for eligible clients receiving ARV refills"
     ],
     "correctAnswer": "81",
-    "scoring": "If <90% = Yellow,If \u226590% = Green",
+    "scoring": "If <90% = Yellow,If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -2365,8 +2239,8 @@
       "S_02_06_Q1"
     ],
     "tableData": [],
-    "numQuestion": "No of records reviewed (e.g., charts, high viral load register or EMR entries) with documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL \u226550 copies/mL",
-    "denQuestion": "No of records reviewed of adult and adolescent clients on ART \u226512 months with virologic non-suppression and eligible for follow-up viral load.",
+    "numQuestion": "No of records reviewed (e.g., charts, high viral load register or EMR entries) with documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL ≥50 copies/mL",
+    "denQuestion": "No of records reviewed of adult and adolescent clients on ART ≥12 months with virologic non-suppression and eligible for follow-up viral load.",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -2415,11 +2289,11 @@
   {
     "id": "S_02_07_Q3",
     "ceeId": "S_02_07",
-    "text": "Q3. Review 10 charts of adult and adolescent clients living with HIV \u226515 years old on ART \u226512 months. What percent of reviewed client records document provision of counseling services to support client decisions on safe disclosure or partner testing ?",
+    "text": "Q3. Review 10 charts of adult and adolescent clients living with HIV ≥15 years old on ART ≥12 months. What percent of reviewed client records document provision of counseling services to support client decisions on safe disclosure or partner testing ?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90%=Yellow, If \u226590%=Green",
+    "scoring": "If <90%=Yellow, If ≥90%=Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -2461,11 +2335,11 @@
   {
     "id": "S_02_08_Q2",
     "ceeId": "S_02_08",
-    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of HIV-positive adults and adolescent clients \u226515 years old on ART \u226512 months. What percentage of reviewed charts have documentation of HIV testing status (e.g., positive, negative, declined) for all biological children <19y?",
+    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of HIV-positive adults and adolescent clients ≥15 years old on ART ≥12 months. What percentage of reviewed charts have documentation of HIV testing status (e.g., positive, negative, declined) for all biological children <19y?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70%=Red,If \u226570% and <90% = Yellow,If \u226590%= Green",
+    "scoring": "If <70%=Red,If ≥70% and <90% = Yellow,If ≥90%= Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -2507,11 +2381,11 @@
   {
     "id": "S_02_09_Q2",
     "ceeId": "S_02_09",
-    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of HIV-positive adult and adolescent clients \u226515 years old on ART \u226512 months. What percent of adult and adolescent records reviewed have documented TB-symptom screening results (i.e., at minimum screen positive or negative; presence of cough, fever, night sweats, or weight loss) at the last clinical assessment?",
+    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of HIV-positive adult and adolescent clients ≥15 years old on ART ≥12 months. What percent of adult and adolescent records reviewed have documented TB-symptom screening results (i.e., at minimum screen positive or negative; presence of cough, fever, night sweats, or weight loss) at the last clinical assessment?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70%=Red,If \u226570% and <90% = Yellow,If \u226590%=Green",
+    "scoring": "If <70%=Red,If ≥70% and <90% = Yellow,If ≥90%=Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -2522,8 +2396,8 @@
       "_calculateNumeratorDenominatorScore(question) >= 90"
     ],
     "tableData": [],
-    "numQuestion": "No of register entries or charts reviewed, from HIV-positive adult and adolescent clients \u226515 years old on ART \u226512 months, with documented TB-symptom screening results at the last clinical assessment",
-    "denQuestion": "No of register entries or charts reviewed from HIV-positive adult and adolescent clients \u226515 years old on ART \u226512 months",
+    "numQuestion": "No of register entries or charts reviewed, from HIV-positive adult and adolescent clients ≥15 years old on ART ≥12 months, with documented TB-symptom screening results at the last clinical assessment",
+    "denQuestion": "No of register entries or charts reviewed from HIV-positive adult and adolescent clients ≥15 years old on ART ≥12 months",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -2553,7 +2427,7 @@
   {
     "id": "S_02_10_Q2",
     "ceeId": "S_02_10",
-    "text": "Q2. Does this site have a TPT register and/or another method that allows tracking of who started and completed TPT within a given reporting period? Note: \u201cCompleted\u201d includes those clients who started and completed 3 or 6 months of TPT and those on continuous TPT after 3 or 6 months of \u201ccompletion\u201d(3 vs 6 month is dependent on regimen-specific duration).",
+    "text": "Q2. Does this site have a TPT register and/or another method that allows tracking of who started and completed TPT within a given reporting period? Note: “Completed” includes those clients who started and completed 3 or 6 months of TPT and those on continuous TPT after 3 or 6 months of “completion”(3 vs 6 month is dependent on regimen-specific duration).",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -2576,7 +2450,7 @@
   {
     "id": "S_02_10_Q3",
     "ceeId": "",
-    "text": "'''Q3. Review 10 register entries or charts (whichever source has the most updated information) of adult and adolescent clients \u226515 years old on ART >12 months",
+    "text": "'''Q3. Review 10 register entries or charts (whichever source has the most updated information) of adult and adolescent clients ≥15 years old on ART >12 months",
     "type": "",
     "options": [],
     "correctAnswer": "",
@@ -2595,11 +2469,11 @@
   {
     "id": "S_02_11_Q1",
     "ceeId": "S_02_11",
-    "text": "Q1. Review 10 register entries or charts (whichever source has the most updated information) of adults and adolescent clients living with HIV \u226515 years old on ART >12 months. Of the total 10 records, select clients that are eligible for CTX based on the national guidelines. Include that number in the denominator, even if it is less than 10. What percent of adult and adolescent clients living with HIV records reviewed have documentation of CTX prescription per the national guidelines at the last clinical assessment?",
+    "text": "Q1. Review 10 register entries or charts (whichever source has the most updated information) of adults and adolescent clients living with HIV ≥15 years old on ART >12 months. Of the total 10 records, select clients that are eligible for CTX based on the national guidelines. Include that number in the denominator, even if it is less than 10. What percent of adult and adolescent clients living with HIV records reviewed have documentation of CTX prescription per the national guidelines at the last clinical assessment?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70%=Red,If \u226570% and <90% = Yellow,If \u226590%=Green",
+    "scoring": "If <70%=Red,If ≥70% and <90% = Yellow,If ≥90%=Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -2664,7 +2538,7 @@
   {
     "id": "S_02_12_Q3",
     "ceeId": "S_02_12",
-    "text": "Q3. Review the last 10 entries in the line list/register of adult and adolescent clients \u226515 with presumptive TB. What percent of the reviewed entries of adult and adolescent clients living with HIV who are presumed to have TB have documented smear microscopy, culture or Xpert MTB/RIF results?",
+    "text": "Q3. Review the last 10 entries in the line list/register of adult and adolescent clients ≥15 with presumptive TB. What percent of the reviewed entries of adult and adolescent clients living with HIV who are presumed to have TB have documented smear microscopy, culture or Xpert MTB/RIF results?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "81",
@@ -2679,9 +2553,9 @@
       ""
     ],
     "tableData": [],
-    "numQuestion": "No of reviewed entries of adult and adolescent clients living with HIV who are \u226515 and presumed to have TB with documented smear microscopy, culture or Xpert MTB/RIF results",
-    "denQuestion": "No of reviewed entries of adults and adolescent clients living with HIV who are \u226515 and who are presumed to have TB",
-    "conditionalStatement": "If \u226580%, then Q4",
+    "numQuestion": "No of reviewed entries of adult and adolescent clients living with HIV who are ≥15 and presumed to have TB with documented smear microscopy, culture or Xpert MTB/RIF results",
+    "denQuestion": "No of reviewed entries of adults and adolescent clients living with HIV who are ≥15 and who are presumed to have TB",
+    "conditionalStatement": "If ≥80%, then Q4",
     "nextQuestionCondition": "null"
   },
   {
@@ -2691,7 +2565,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90%=Yellow,If \u226590%=Green",
+    "scoring": "If <90%=Yellow,If ≥90%=Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -2702,8 +2576,8 @@
       "_calculateNumeratorDenominatorScore(question) >= 90"
     ],
     "tableData": [],
-    "numQuestion": "No of same reviewed entries of adult and adolescent clients living with HIV who are \u226515 and who are presumed to have TB, with documented receipt of molecular testing as their first-line diagnostic test",
-    "denQuestion": "No of same reviewed entries of adults and adolescent clients \u226515 who are presumed to have TB",
+    "numQuestion": "No of same reviewed entries of adult and adolescent clients living with HIV who are ≥15 and who are presumed to have TB, with documented receipt of molecular testing as their first-line diagnostic test",
+    "denQuestion": "No of same reviewed entries of adults and adolescent clients ≥15 who are presumed to have TB",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -2771,7 +2645,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70% = Yellow,If \u226570% = Green",
+    "scoring": "If <70% = Yellow,If ≥70% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -3113,7 +2987,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow,If \u226590% = Green",
+    "scoring": "If <90% = Yellow,If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -3159,7 +3033,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow,If \u226590% = Green",
+    "scoring": "If <90% = Yellow,If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -3201,11 +3075,11 @@
   {
     "id": "S_02_33_Q2",
     "ceeId": "S_02_33",
-    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of newly diagnosed C/ALHIV < 15 years old who attended the clinic within the last 90 days.\n\nWhat percentage of register entries or charts reviewed showed evidence that C/ALHIV < 15y received same day or rapid ART initiation with optimized first-line ART based on their weight?\n\n**Note:** Records should only be from newly diagnosed C/ALHIV < 15y. Optimized first-line ART regimen by weight band:\n    \n    \u2022 3. 0 \u2013 19.9 kg: ABC/3TC + DTG 10 mg DT\n    \u2022 20 \u2013 29.9 kg: ABC/3TC + DTG 50 mg FCT\n    \u2022 30+ kg: TLD FDC",
+    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of newly diagnosed C/ALHIV < 15 years old who attended the clinic within the last 90 days.\n\nWhat percentage of register entries or charts reviewed showed evidence that C/ALHIV < 15y received same day or rapid ART initiation with optimized first-line ART based on their weight?\n\n**Note:** Records should only be from newly diagnosed C/ALHIV < 15y. Optimized first-line ART regimen by weight band:\n    \n    • 3. 0 – 19.9 kg: ABC/3TC + DTG 10 mg DT\n    • 20 – 29.9 kg: ABC/3TC + DTG 50 mg FCT\n    • 30+ kg: TLD FDC",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow,If \u226590% = Green",
+    "scoring": "If <90% = Yellow,If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -3243,11 +3117,11 @@
   {
     "id": "S_02_34_Q2",
     "ceeId": "S_02_34",
-    "text": "Q2. Review 10 charts of CLHIV (< 10 years of age) who have been on ART for 90 days or greater:  5 charts for CLHIV < 5 years of age and 5 charts for CLHIV 5-9 years of age.\n\nWhat percentage of reviewed charts showed evidence that CLHIV (<10 years of age) are receiving optimized antiretroviral therapy for their respective weight band?\n\n**Note:** Optimized treatment may also be referred to as \u2018first-line\u2019 by providers. \nRecords should only be from CLHIV (< 10 years of age) on ART for at least 90 days. \nOptimized ART regimen by weight band includes:\n\n   \u2022 3.0 \u2013 19.9 kg: ABC/3TC + DTG 10 mg DT\n   \u2022 20 \u2013 29.9 kg: ABC/3TC + DTG 50 mg FCT\n   \u2022 \u2265 30 kg: TLD FDC",
+    "text": "Q2. Review 10 charts of CLHIV (< 10 years of age) who have been on ART for 90 days or greater:  5 charts for CLHIV < 5 years of age and 5 charts for CLHIV 5-9 years of age.\n\nWhat percentage of reviewed charts showed evidence that CLHIV (<10 years of age) are receiving optimized antiretroviral therapy for their respective weight band?\n\n**Note:** Optimized treatment may also be referred to as ‘first-line’ by providers. \nRecords should only be from CLHIV (< 10 years of age) on ART for at least 90 days. \nOptimized ART regimen by weight band includes:\n\n   • 3.0 – 19.9 kg: ABC/3TC + DTG 10 mg DT\n   • 20 – 29.9 kg: ABC/3TC + DTG 50 mg FCT\n   • ≥ 30 kg: TLD FDC",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow,If \u226590% = Green",
+    "scoring": "If <90% = Yellow,If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -3289,7 +3163,7 @@
   {
     "id": "S_02_21_Q2",
     "ceeId": "S_02_21",
-    "text": "Q2. Is there a specific place to document the child\u2019s weight and ART dose for each clinic visit in the client chart or relevant care and treatment register?",
+    "text": "Q2. Is there a specific place to document the child’s weight and ART dose for each clinic visit in the client chart or relevant care and treatment register?",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -3335,7 +3209,7 @@
   {
     "id": "S_02_22_Q2",
     "ceeId": "S_02_22",
-    "text": "Q2. Review 10 charts of pediatric clients <15 years old on ART \u226512 months.\n\nWhat percentage of charts reviewed document that the most recent viral load test was ordered within the appropriate interval, per the national guidelines?\n\n**Note:** Modify chart review to fit the national guidelines. Countries may opt to exclude charts if viral load was collected within the last 4 weeks to allow adequate time for results to be returned; replace any excluded charts to review a total of ten. Viral load monitoring is expected to occur on an ongoing basis (e.g., every 3, 6, or 12 months per national guidelines).",
+    "text": "Q2. Review 10 charts of pediatric clients <15 years old on ART ≥12 months.\n\nWhat percentage of charts reviewed document that the most recent viral load test was ordered within the appropriate interval, per the national guidelines?\n\n**Note:** Modify chart review to fit the national guidelines. Countries may opt to exclude charts if viral load was collected within the last 4 weeks to allow adequate time for results to be returned; replace any excluded charts to review a total of ten. Viral load monitoring is expected to occur on an ongoing basis (e.g., every 3, 6, or 12 months per national guidelines).",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
@@ -3358,11 +3232,11 @@
   {
     "id": "S_02_22_Q3",
     "ceeId": "S_02_22",
-    "text": "Q3. Review the same 10 charts of pediatric clients<15 years old on ART \u226512.\n        \nWhat percent of charts reviewed have a documented result returned for the most recent viral load test?",
+    "text": "Q3. Review the same 10 charts of pediatric clients<15 years old on ART ≥12.\n        \nWhat percent of charts reviewed have a documented result returned for the most recent viral load test?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "91",
-    "scoring": "If <80% = Red,If \u226580% and <=90% =Yellow,If >90% = Green",
+    "scoring": "If <80% = Red,If ≥80% and <=90% =Yellow,If >90% = Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -3400,7 +3274,7 @@
   {
     "id": "S_02_23_Q2",
     "ceeId": "S_02_23",
-    "text": "Q2. Review 10 records (e.g., charts, high viral load register, EMR entries) of 5 pediatric (<10 years old) and 5 young adolescent (10-14 years old) clients on ART \u226512 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator and proceed with Q3.\n\nWhat percent of pediatric and adolescent records reviewed have documentation of at least one EAC session within a month (or per national guidelines) ofthe date of virologic non-suppression (e.g., VL \u22651000 copies/mL or criteria based on national guidelines)?\n\n**Note:** This review should distinguish the management of patients with non-suppressed viral load results from patients with virologic suppression.",
+    "text": "Q2. Review 10 records (e.g., charts, high viral load register, EMR entries) of 5 pediatric (<10 years old) and 5 young adolescent (10-14 years old) clients on ART ≥12 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator and proceed with Q3.\n\nWhat percent of pediatric and adolescent records reviewed have documentation of at least one EAC session within a month (or per national guidelines) ofthe date of virologic non-suppression (e.g., VL ≥1000 copies/mL or criteria based on national guidelines)?\n\n**Note:** This review should distinguish the management of patients with non-suppressed viral load results from patients with virologic suppression.",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "81",
@@ -3417,17 +3291,17 @@
     "tableData": [],
     "numQuestion": "No of client records reviewed, from pediatric clients with virologic non-suppression, with documentation of at least one EAC session after the date of virologic non-suppression",
     "denQuestion": "No of client records reviewed for clients with virologic non-suppression",
-    "conditionalStatement": "If \u2265 80%, then Q3",
+    "conditionalStatement": "If ≥ 80%, then Q3",
     "nextQuestionCondition": "null"
   },
   {
     "id": "S_02_23_Q3",
     "ceeId": "S_02_23",
-    "text": "Q3. Review the same 10 records of 5 pediatric (<10 years old) and 5 adolescent (10-19 years old) clients on ART \u226512 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator.\n\nWhat percent of the same pediatric and adolescent records reviewed (e.g., charts, high viral load register or EMR entries) have documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL \u226550copies/mL)?",
+    "text": "Q3. Review the same 10 records of 5 pediatric (<10 years old) and 5 adolescent (10-19 years old) clients on ART ≥12 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator.\n\nWhat percent of the same pediatric and adolescent records reviewed (e.g., charts, high viral load register or EMR entries) have documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL ≥50copies/mL)?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow, If \u226590% = Green",
+    "scoring": "If <90% = Yellow, If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -3438,8 +3312,8 @@
       "_calculateNumeratorDenominatorScore(question) > 89"
     ],
     "tableData": [],
-    "numQuestion": "No of client records reviewed (e.g., charts, high viral load register or EMR entries) with documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL \u226550 copies/mL)",
-    "denQuestion": "No of client records reviewed of clients on ART \u226512 months with virologic non-suppression and eligible for follow-up viral load",
+    "numQuestion": "No of client records reviewed (e.g., charts, high viral load register or EMR entries) with documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL ≥50 copies/mL)",
+    "denQuestion": "No of client records reviewed of clients on ART ≥12 months with virologic non-suppression and eligible for follow-up viral load",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -3535,7 +3409,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow, If \u226590% = Green",
+    "scoring": "If <90% = Yellow, If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -3577,11 +3451,11 @@
   {
     "id": "S_02_26_Q2",
     "ceeId": "S_02_26",
-    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of pediatric clients living with HIV <15 on ART \u226512 months.\n        \nWhat percent of pediatric records reviewed have documented TB-symptom screening results (i.e., screen positive or negative; presence of current cough, fever, poor weight gain; and contact with a TB client) at the last clinical assessment?",
+    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of pediatric clients living with HIV <15 on ART ≥12 months.\n        \nWhat percent of pediatric records reviewed have documented TB-symptom screening results (i.e., screen positive or negative; presence of current cough, fever, poor weight gain; and contact with a TB client) at the last clinical assessment?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70%=Red, If \u226570% and <90% =Yellow, If \u226590%=Green",
+    "scoring": "If <70%=Red, If ≥70% and <90% =Yellow, If ≥90%=Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -3592,8 +3466,8 @@
       "_calculateNumeratorDenominatorScore(question) > 89"
     ],
     "tableData": [],
-    "numQuestion": "No of register entries or charts reviewed, from HIV-positive pediatric clients <15 years old on ART \u226512 months, with documented TB-symptom screening results at the last clinical assessment",
-    "denQuestion": "No of register entries or charts reviewed from positive pediatric clients <15 years old on ART \u226512 months",
+    "numQuestion": "No of register entries or charts reviewed, from HIV-positive pediatric clients <15 years old on ART ≥12 months, with documented TB-symptom screening results at the last clinical assessment",
+    "denQuestion": "No of register entries or charts reviewed from positive pediatric clients <15 years old on ART ≥12 months",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -3623,7 +3497,7 @@
   {
     "id": "S_02_27_Q2",
     "ceeId": "S_02_27",
-    "text": "Q2. Does this site have a TPT register and/or another method that allows tracking of who started and who completed TPT within a given reporting period?\n        \n**Note:** \u201cCompleted\u201d includes those clients who started and completed 3 or 6 months of TPT and those on continuous TPT after 3 or 6 months of \u201ccompletion\u201d (3 vs 6 month is dependent on regimen-specific duration).",
+    "text": "Q2. Does this site have a TPT register and/or another method that allows tracking of who started and who completed TPT within a given reporting period?\n        \n**Note:** “Completed” includes those clients who started and completed 3 or 6 months of TPT and those on continuous TPT after 3 or 6 months of “completion” (3 vs 6 month is dependent on regimen-specific duration).",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -3646,11 +3520,11 @@
   {
     "id": "S_02_27_Q3",
     "ceeId": "S_02_27",
-    "text": "Q3. Review 10 register entries or charts (whichever source has the most updated information) of pediatric clients on ART \u226512 months.\n        \nWhat percent of reviewed records show evidence those pediatric clients living with HIV who screened negative for active TB during their HIV clinic visits and were TPT eligible (per national guidelines), were ever initiated on TPT?",
+    "text": "Q3. Review 10 register entries or charts (whichever source has the most updated information) of pediatric clients on ART ≥12 months.\n        \nWhat percent of reviewed records show evidence those pediatric clients living with HIV who screened negative for active TB during their HIV clinic visits and were TPT eligible (per national guidelines), were ever initiated on TPT?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70%=Red, If \u226570% and <90% =Yellow, If \u226590%=Green",
+    "scoring": "If <70%=Red, If ≥70% and <90% =Yellow, If ≥90%=Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -3661,8 +3535,8 @@
       "_calculateNumeratorDenominatorScore(question) > 89"
     ],
     "tableData": [],
-    "numQuestion": "No of register entries or charts reviewed, from pediatric clients <15 years old on ART \u226512 months who screened negative for active TB during their HIV clinic visits, with evidence showing the client was started on TPT?",
-    "denQuestion": "No of register entries or charts reviewed from HIV-positive pediatric clients <15 years old on ART \u226512 months who screened negative for active TB during their HIV clinic visits",
+    "numQuestion": "No of register entries or charts reviewed, from pediatric clients <15 years old on ART ≥12 months who screened negative for active TB during their HIV clinic visits, with evidence showing the client was started on TPT?",
+    "denQuestion": "No of register entries or charts reviewed from HIV-positive pediatric clients <15 years old on ART ≥12 months who screened negative for active TB during their HIV clinic visits",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -3673,7 +3547,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70%=Red, If \u226570% and <90% =Yellow, If \u226590%=Green",
+    "scoring": "If <70%=Red, If ≥70% and <90% =Yellow, If ≥90%=Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -3742,7 +3616,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If \u2264 80%=Yellow,If >80% = Green",
+    "scoring": "If ≤ 80%=Yellow,If >80% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -3860,7 +3734,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "60",
-    "scoring": "If <60% = Yellow,If \u226560% = Green",
+    "scoring": "If <60% = Yellow,If ≥60% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -3898,7 +3772,7 @@
   {
     "id": "S_03_01_Q2",
     "ceeId": "S_03_01",
-    "text": "Q2. Are lubricants easily accessible to patrons/clients at the site (e.g., in a bowl on the counter, in a dispenser, or distributed directly to clients/patrons at the site)?\n\nNote: Lubricants are \u2018easily accessible\u2019 if available on-site, regardless of whether they are for sale or distributed free.",
+    "text": "Q2. Are lubricants easily accessible to patrons/clients at the site (e.g., in a bowl on the counter, in a dispenser, or distributed directly to clients/patrons at the site)?\n\nNote: Lubricants are ‘easily accessible’ if available on-site, regardless of whether they are for sale or distributed free.",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -3996,7 +3870,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "91",
-    "scoring": "If \u226490%=Yellow,If >90% = Green",
+    "scoring": "If ≤90%=Yellow,If >90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -4277,7 +4151,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "70",
-    "scoring": "If <70%=Yellow,If \u226570%=Green",
+    "scoring": "If <70%=Yellow,If ≥70%=Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -4475,11 +4349,11 @@
   {
     "id": "S_03_08_Q3",
     "ceeId": "S_03_08",
-    "text": "Q3. Review 10 register entries or charts (whichever source has the most updated information) of adult and adolescent clients \u226515 years old who newly initiated on ART in the last 3 months to confirm that retesting for verification prior to or at ART initiation is documented.\n\nWhat percent of adult and adolescent client records reviewed have documentation that retesting for verification occurred before ART initiation? (i.e., the site knows the client or client was retested for verification prior to or at ART initiation)",
+    "text": "Q3. Review 10 register entries or charts (whichever source has the most updated information) of adult and adolescent clients ≥15 years old who newly initiated on ART in the last 3 months to confirm that retesting for verification prior to or at ART initiation is documented.\n\nWhat percent of adult and adolescent client records reviewed have documentation that retesting for verification occurred before ART initiation? (i.e., the site knows the client or client was retested for verification prior to or at ART initiation)",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow,If \u226590% = Green",
+    "scoring": "If <90% = Yellow,If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -4490,8 +4364,8 @@
       "_calculateNumeratorDenominatorScore(question) > 89"
     ],
     "tableData": [],
-    "numQuestion": "No of reviewed records, of adult and adolescent clients \u226515 years old who newly initiated on ART in the last 3 months, with documented retesting for verification",
-    "denQuestion": "No of records reviewed of adult and adolescent clients \u226515 years old who newly initiated on ART in the last 3 months",
+    "numQuestion": "No of reviewed records, of adult and adolescent clients ≥15 years old who newly initiated on ART in the last 3 months, with documented retesting for verification",
+    "denQuestion": "No of records reviewed of adult and adolescent clients ≥15 years old who newly initiated on ART in the last 3 months",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -4525,7 +4399,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow,If \u226590% = Green",
+    "scoring": "If <90% = Yellow,If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -4544,7 +4418,7 @@
   {
     "id": "S_03_10_Q1",
     "ceeId": "S_03_10",
-    "text": "Q1. Does this site offer rapid ART initiation/test and start (within 7 days of diagnosis) OR same-day initiation to newly diagnosed adults and adolescents \u226515 years old?",
+    "text": "Q1. Does this site offer rapid ART initiation/test and start (within 7 days of diagnosis) OR same-day initiation to newly diagnosed adults and adolescents ≥15 years old?",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -4571,7 +4445,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow,If \u226590% = Green",
+    "scoring": "If <90% = Yellow,If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -4613,7 +4487,7 @@
   {
     "id": "S_03_11_Q2",
     "ceeId": "S_03_11",
-    "text": "Q2. Review 10 charts of adult and adolescent clients \u226515 years old on ART \u226512 months.\n\nWhat percentage of charts reviewed, from adult and adolescent clients \u226515 years old on ART \u226512 months, show that the most recent viral load test was ordered within the appropriate interval, per the national guidelines?\n\nNote: Modify chart review to fit the national guidelines. Countries may opt to exclude charts if viral load was collected within the last 4 weeks to allow adequate time for results to be returned; replace any excluded charts to review a total of ten. Viral load monitoring is expected to occur on an ongoing basis (e.g., every 3, 6, or 12 months per national guidelines).",
+    "text": "Q2. Review 10 charts of adult and adolescent clients ≥15 years old on ART ≥12 months.\n\nWhat percentage of charts reviewed, from adult and adolescent clients ≥15 years old on ART ≥12 months, show that the most recent viral load test was ordered within the appropriate interval, per the national guidelines?\n\nNote: Modify chart review to fit the national guidelines. Countries may opt to exclude charts if viral load was collected within the last 4 weeks to allow adequate time for results to be returned; replace any excluded charts to review a total of ten. Viral load monitoring is expected to occur on an ongoing basis (e.g., every 3, 6, or 12 months per national guidelines).",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
@@ -4628,19 +4502,19 @@
       ""
     ],
     "tableData": [],
-    "numQuestion": "No of charts reviewed, from adult and adolescent clients \u226515 years old on ART \u226512 months, showing that the most recent viral load test was ordered within the appropriate interval, per the national guidelines",
-    "denQuestion": "No of charts reviewed from adult and adolescent clients \u226515 years old on ART \u226512 months",
-    "conditionalStatement": "If \u226590%, then Q3",
+    "numQuestion": "No of charts reviewed, from adult and adolescent clients ≥15 years old on ART ≥12 months, showing that the most recent viral load test was ordered within the appropriate interval, per the national guidelines",
+    "denQuestion": "No of charts reviewed from adult and adolescent clients ≥15 years old on ART ≥12 months",
+    "conditionalStatement": "If ≥90%, then Q3",
     "nextQuestionCondition": "null"
   },
   {
     "id": "S_03_11_Q3",
     "ceeId": "S_03_11",
-    "text": "Q3. Review the same 10 charts of adult and adolescent clients \u226515 years old on ART \u226512 months.\n\nWhat percent of adult and adolescent charts reviewed have a documented result returned for the most recent viral load test?",
+    "text": "Q3. Review the same 10 charts of adult and adolescent clients ≥15 years old on ART ≥12 months.\n\nWhat percent of adult and adolescent charts reviewed have a documented result returned for the most recent viral load test?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "91",
-    "scoring": "If <80% = Red,If \u226580% and <90% =Yellow,If >90% = Green",
+    "scoring": "If <80% = Red,If ≥80% and <90% =Yellow,If >90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -4651,8 +4525,8 @@
       "_calculateNumeratorDenominatorScore(question) > 90"
     ],
     "tableData": [],
-    "numQuestion": "No of charts reviewed, from adult and adolescent clients \u226515 years old on ART \u226512 months, with a documented returned result for the most recent viral load test",
-    "denQuestion": "No of charts reviewed, from adult and adolescent clients \u226515 years old on ART \u226512 months, with recent viral load test",
+    "numQuestion": "No of charts reviewed, from adult and adolescent clients ≥15 years old on ART ≥12 months, with a documented returned result for the most recent viral load test",
+    "denQuestion": "No of charts reviewed, from adult and adolescent clients ≥15 years old on ART ≥12 months, with recent viral load test",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -4678,7 +4552,7 @@
   {
     "id": "S_03_12_Q2",
     "ceeId": "S_03_12",
-    "text": "Q2. Review 10 records (e.g., charts, high viral load register, EMR entries) of adult and adolescent clients on ART \u226512 months with virologic non-suppression.\n\n    \u2022 If assessing Set 2B at this site and reviewing pediatric records, select only adults \u226520 years old. If only assessing Set 2A, select both adolescents and adults \u226515 years old.\n\nWhat percent of records reviewed have documentation of at least 1 EAC session within a month (or per national guidelines) ofthe date of virologic non-suppression (e.g., VL \u2265500 copies/mL or criteria based on national guidelines)?\n\n**Notes:** This review should distinguish the management of clients with non-suppressed viral load results from patients with virologic suppression.",
+    "text": "Q2. Review 10 records (e.g., charts, high viral load register, EMR entries) of adult and adolescent clients on ART ≥12 months with virologic non-suppression.\n\n    • If assessing Set 2B at this site and reviewing pediatric records, select only adults ≥20 years old. If only assessing Set 2A, select both adolescents and adults ≥15 years old.\n\nWhat percent of records reviewed have documentation of at least 1 EAC session within a month (or per national guidelines) ofthe date of virologic non-suppression (e.g., VL ≥500 copies/mL or criteria based on national guidelines)?\n\n**Notes:** This review should distinguish the management of clients with non-suppressed viral load results from patients with virologic suppression.",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "80",
@@ -4695,19 +4569,19 @@
     "tableData": [],
     "numQuestion": "No of adult and adolescent client records with evidence of at least one EAC session after date of virologic non-suppression",
     "denQuestion": "of adult and adolescent client records reviewed for clients with virologic non-suppression",
-    "conditionalStatement": "If \u2265 80%, then Q3",
+    "conditionalStatement": "If ≥ 80%, then Q3",
     "nextQuestionCondition": "null"
   },
   {
     "id": "S_03_12_Q3",
     "ceeId": "S_03_12",
-    "text": "Q3. Review the same 10 records of patients on ART \u226512 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator.\n\nWhat percent of the same records reviewed (e.g., charts, high viral load register or EMR entries) have documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL \u2265500 copies/mL)?",
+    "text": "Q3. Review the same 10 records of patients on ART ≥12 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator.\n\nWhat percent of the same records reviewed (e.g., charts, high viral load register or EMR entries) have documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL ≥500 copies/mL)?",
     "type": "numerator_denominator",
     "options": [
       "1) 3-5 month ARV dispensing for eligible clients receiving ARV refills"
     ],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow,If \u226590% = Green",
+    "scoring": "If <90% = Yellow,If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -4719,8 +4593,8 @@
       "S_03_13_Q1"
     ],
     "tableData": [],
-    "numQuestion": "No of records reviewed (e.g., charts, high viral load register or EMR entries) with documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL \u226550 copies/mL",
-    "denQuestion": "No of records reviewed of adult and adolescent patients on ART \u226512 months with virologic non-suppression and eligible for follow-up viral load",
+    "numQuestion": "No of records reviewed (e.g., charts, high viral load register or EMR entries) with documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL ≥50 copies/mL",
+    "denQuestion": "No of records reviewed of adult and adolescent patients on ART ≥12 months with virologic non-suppression and eligible for follow-up viral load",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -4769,7 +4643,7 @@
   {
     "id": "S_03_14_Q3",
     "ceeId": "",
-    "text": "'''Q4. Review 10 charts of adult and adolescent clients living with HIV \u226515 years old.\n\nWhat percent of reviewed client records document provision of counseling services to support client decisions on safe disclosure or partner testing",
+    "text": "'''Q4. Review 10 charts of adult and adolescent clients living with HIV ≥15 years old.\n\nWhat percent of reviewed client records document provision of counseling services to support client decisions on safe disclosure or partner testing",
     "type": "",
     "options": [],
     "correctAnswer": "",
@@ -4811,11 +4685,11 @@
   {
     "id": "S_03_15_Q2",
     "ceeId": "S_03_15",
-    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of adults and adolescent clients living with HIV \u226515 years old on ART \u226512 months.\n\nWhat percentage of reviewed charts have documentation of HIV testing status (e.g., positive, negative, declined) for all biological children <19y?",
+    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of adults and adolescent clients living with HIV ≥15 years old on ART ≥12 months.\n\nWhat percentage of reviewed charts have documentation of HIV testing status (e.g., positive, negative, declined) for all biological children <19y?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70%=Red,If \u226570% and <90% =Yellow,If \u226590%= Green",
+    "scoring": "If <70%=Red,If ≥70% and <90% =Yellow,If ≥90%= Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -4857,11 +4731,11 @@
   {
     "id": "S_03_16_Q2",
     "ceeId": "S_03_16",
-    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of adult and adolescent clients living with HIV \u226515 years old on ART \u226512 months.\n        \nWhat percent of adult and adolescent records reviewed have documented TB-symptom screening results (i.e., at minimum screen positive or negative; presence of cough, fever, night sweats, or weight loss) at the last clinical assessment?",
+    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of adult and adolescent clients living with HIV ≥15 years old on ART ≥12 months.\n        \nWhat percent of adult and adolescent records reviewed have documented TB-symptom screening results (i.e., at minimum screen positive or negative; presence of cough, fever, night sweats, or weight loss) at the last clinical assessment?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70%=Red,If \u226570% and <90% =Yellow,If \u226590%= Green",
+    "scoring": "If <70%=Red,If ≥70% and <90% =Yellow,If ≥90%= Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -4872,8 +4746,8 @@
       "_calculateNumeratorDenominatorScore(question) > 89"
     ],
     "tableData": [],
-    "numQuestion": "No of register entries or charts reviewed, from adult and adolescent clients \u226515 years old on ART \u226512 months, with documented TB-symptom screening results at the last clinical assessment",
-    "denQuestion": "of register entries or charts reviewed from adult and adolescent clients \u226515 years old on ART \u226512 months",
+    "numQuestion": "No of register entries or charts reviewed, from adult and adolescent clients ≥15 years old on ART ≥12 months, with documented TB-symptom screening results at the last clinical assessment",
+    "denQuestion": "of register entries or charts reviewed from adult and adolescent clients ≥15 years old on ART ≥12 months",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -4903,7 +4777,7 @@
   {
     "id": "S_03_17_Q2",
     "ceeId": "S_03_17",
-    "text": "Q2. Does this site have a TPT register and/or another method that allows tracking of who started and completed TPT within a given reporting period?\n        \n        Note: \u201cCompleted\u201d includes those clients who started and completed 3 or 6 months of TPT and those on continuous TPT after 3 or 6 months of \u201ccompletion\u201d (3 vs 6 month is dependent on regimen-specific duration).",
+    "text": "Q2. Does this site have a TPT register and/or another method that allows tracking of who started and completed TPT within a given reporting period?\n        \n        Note: “Completed” includes those clients who started and completed 3 or 6 months of TPT and those on continuous TPT after 3 or 6 months of “completion” (3 vs 6 month is dependent on regimen-specific duration).",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -4926,7 +4800,7 @@
   {
     "id": "S_03_17_Q3",
     "ceeId": "",
-    "text": "'''Q3. Review 10 register entries or charts (whichever source has the most updated information) of adult and adolescent clients \u226515 years old on ART \u226512 months",
+    "text": "'''Q3. Review 10 register entries or charts (whichever source has the most updated information) of adult and adolescent clients ≥15 years old on ART ≥12 months",
     "type": "",
     "options": [],
     "correctAnswer": "",
@@ -4945,11 +4819,11 @@
   {
     "id": "S_03_18_Q1",
     "ceeId": "S_03_18",
-    "text": "Q1. Review 10 register entries or charts (whichever source has the most updated information) of adults and adolescent clients living with HIV \u226515 years old on ART >12 months.\n\nOf the total 10 records, select clients that are eligible for CTX based on the national guidelines. Include that number in the denominator, even if it is less than 10.\n\nWhat percent of adult and adolescent client records reviewed have documentation of CTX prescription per the national guidelines at the last clinical assessment?",
+    "text": "Q1. Review 10 register entries or charts (whichever source has the most updated information) of adults and adolescent clients living with HIV ≥15 years old on ART >12 months.\n\nOf the total 10 records, select clients that are eligible for CTX based on the national guidelines. Include that number in the denominator, even if it is less than 10.\n\nWhat percent of adult and adolescent client records reviewed have documentation of CTX prescription per the national guidelines at the last clinical assessment?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70%=Red,If \u226570% and <90% =Yellow,If \u226590%= Green",
+    "scoring": "If <70%=Red,If ≥70% and <90% =Yellow,If ≥90%= Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -4960,8 +4834,8 @@
       "_calculateNumeratorDenominatorScore(question) > 89"
     ],
     "tableData": [],
-    "numQuestion": "No of eligible adults and adolescent clients \u226515 years old on ART >12 months, who received a CTX prescription",
-    "denQuestion": "No of records reviewed from CTX eligible (per national guidelines) clients living with HIV whot \u226515 years old and on ART >12 months",
+    "numQuestion": "No of eligible adults and adolescent clients ≥15 years old on ART >12 months, who received a CTX prescription",
+    "denQuestion": "No of records reviewed from CTX eligible (per national guidelines) clients living with HIV whot ≥15 years old and on ART >12 months",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -5014,7 +4888,7 @@
   {
     "id": "S_03_19_Q3",
     "ceeId": "S_03_19",
-    "text": "Q3. Review the last 10 entries in the line list/register of adult and adolescent clients living with HIV \u226515 years of age with presumptive TB.\n\nWhat percent of the reviewed entries of adult and adolescent clients living with HIV who are presumed to have TB have documented smear microscopy, culture or Xpert MTB/RIF results?",
+    "text": "Q3. Review the last 10 entries in the line list/register of adult and adolescent clients living with HIV ≥15 years of age with presumptive TB.\n\nWhat percent of the reviewed entries of adult and adolescent clients living with HIV who are presumed to have TB have documented smear microscopy, culture or Xpert MTB/RIF results?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "80",
@@ -5029,9 +4903,9 @@
       "_calculateNumeratorDenominatorScore(question) > 79"
     ],
     "tableData": [],
-    "numQuestion": "No of reviewed entries of adult and adolescent clients \u226515 years old who are presumed to have TB with documented smear microscopy, culture or Xpert MTB/RIF results",
-    "denQuestion": "No of reviewed entries of adults and adolescent clients \u226515 years old who are presumed to have TB",
-    "conditionalStatement": "If \u226580%, then Q4",
+    "numQuestion": "No of reviewed entries of adult and adolescent clients ≥15 years old who are presumed to have TB with documented smear microscopy, culture or Xpert MTB/RIF results",
+    "denQuestion": "No of reviewed entries of adults and adolescent clients ≥15 years old who are presumed to have TB",
+    "conditionalStatement": "If ≥80%, then Q4",
     "nextQuestionCondition": "null"
   },
   {
@@ -5041,7 +4915,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90%=Yellow , If \u226590%=Green",
+    "scoring": "If <90%=Yellow , If ≥90%=Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -5052,8 +4926,8 @@
       "_calculateNumeratorDenominatorScore(question) > 89"
     ],
     "tableData": [],
-    "numQuestion": "No of same reviewed entries, of HIV-positive adult and adolescent clients \u226515 years old who are presumed to have TB, with documented receipt of molecular testing as their first-line diagnostic test",
-    "denQuestion": "No of same reviewed entries of HIV-positive adults and adolescent clients \u226515 years old who are presumed to have TB",
+    "numQuestion": "No of same reviewed entries, of HIV-positive adult and adolescent clients ≥15 years old who are presumed to have TB, with documented receipt of molecular testing as their first-line diagnostic test",
+    "denQuestion": "No of same reviewed entries of HIV-positive adults and adolescent clients ≥15 years old who are presumed to have TB",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -5121,7 +4995,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "70",
-    "scoring": "If <70%=Yellow , If \u226570%=Green",
+    "scoring": "If <70%=Yellow , If ≥70%=Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -5394,7 +5268,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90%=Yellow , If \u226590%=Green",
+    "scoring": "If <90%=Yellow , If ≥90%=Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -5464,7 +5338,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90%=Yellow , If \u226590% = Green",
+    "scoring": "If <90%=Yellow , If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -5510,7 +5384,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90%=Yellow , If \u226590% = Green",
+    "scoring": "If <90%=Yellow , If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -5552,7 +5426,7 @@
   {
     "id": "S_04_03_Q2",
     "ceeId": "S_04_03",
-    "text": "Q2. Review 10 randomly selected charts of pregnant and breastfeeding clients on ART >6 months.\n\nWhat percentage of charts reviewed, from pregnant and breastfeeding clients \u226515 years old on ART \u226512 months, show that the most recent viral load test was ordered within the appropriate interval, per the national guidelines?\n\nNote: Modify chart review to fit the national guidelines. Countries may opt to exclude charts if viral load was collected within the last 4 weeks to allow adequate time for results to be returned; replace any excluded charts to review a total of ten. Viral load monitoring is expected to occur on an ongoing basis (e.g., every 3, 6, or 12 months per national guidelines).",
+    "text": "Q2. Review 10 randomly selected charts of pregnant and breastfeeding clients on ART >6 months.\n\nWhat percentage of charts reviewed, from pregnant and breastfeeding clients ≥15 years old on ART ≥12 months, show that the most recent viral load test was ordered within the appropriate interval, per the national guidelines?\n\nNote: Modify chart review to fit the national guidelines. Countries may opt to exclude charts if viral load was collected within the last 4 weeks to allow adequate time for results to be returned; replace any excluded charts to review a total of ten. Viral load monitoring is expected to occur on an ongoing basis (e.g., every 3, 6, or 12 months per national guidelines).",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
@@ -5569,7 +5443,7 @@
     "tableData": [],
     "numQuestion": "No of charts reviewed from pregnant and breastfeeding clients on ART >6 months, showing that the most recent viral load test was ordered within the appropriate interval, per the national guidelines",
     "denQuestion": "No of charts reviewed of pregnant and breastfeeding clients on ART >6 months",
-    "conditionalStatement": "If \u226590%, then Q3",
+    "conditionalStatement": "If ≥90%, then Q3",
     "nextQuestionCondition": "null"
   },
   {
@@ -5579,7 +5453,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <80% = Red, If \u226580% and <90% =Yellow, If >90% = Green",
+    "scoring": "If <80% = Red, If ≥80% and <90% =Yellow, If >90% = Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -5617,7 +5491,7 @@
   {
     "id": "S_04_04_Q2",
     "ceeId": "S_04_04",
-    "text": "Q2. Review 10 records (e.g., charts, high viral load register, EMR entries) of pregnant and breastfeeding clients on ART \u226512 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator and proceed to Q3.\n\nWhat percent of records from pregnant and breastfeeding women have documentation of at least one EAC session within a month (or per national guidelines) ofthe date of virologic non-suppression (e.g., VL \u226550 copies/mL or criteria based on national guidelines)?\n  \nNotes: This review should distinguish the management of clientss with non-suppressed viral load results from clients with virologic suppression.",
+    "text": "Q2. Review 10 records (e.g., charts, high viral load register, EMR entries) of pregnant and breastfeeding clients on ART ≥12 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator and proceed to Q3.\n\nWhat percent of records from pregnant and breastfeeding women have documentation of at least one EAC session within a month (or per national guidelines) ofthe date of virologic non-suppression (e.g., VL ≥50 copies/mL or criteria based on national guidelines)?\n  \nNotes: This review should distinguish the management of clientss with non-suppressed viral load results from clients with virologic suppression.",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "80",
@@ -5632,21 +5506,21 @@
       ""
     ],
     "tableData": [],
-    "numQuestion": "No of records reviewed of pregnant and breastfeeding clients on ART \u226512 months received at least 1 EAC session after date of virologic non-suppression",
-    "denQuestion": "No of records reviewed of pregnant and breastfeeding clients on ART \u226512 months with virologic non-suppression",
-    "conditionalStatement": "If \u2265 80%, then Q3",
+    "numQuestion": "No of records reviewed of pregnant and breastfeeding clients on ART ≥12 months received at least 1 EAC session after date of virologic non-suppression",
+    "denQuestion": "No of records reviewed of pregnant and breastfeeding clients on ART ≥12 months with virologic non-suppression",
+    "conditionalStatement": "If ≥ 80%, then Q3",
     "nextQuestionCondition": "null"
   },
   {
     "id": "S_04_04_Q3",
     "ceeId": "S_04_04",
-    "text": "Q3. Review the same 10 records of pregnant and breastfeeding clients on ART \u226512 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator.\n\nWhat percent of the same records of pregnant and breastfeeding women (e.g., charts, high viral load register or EMR entries) have documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL \u226550 copies/mL)?",
+    "text": "Q3. Review the same 10 records of pregnant and breastfeeding clients on ART ≥12 months with virologic non-suppression. If there are NO clients with virologic non-suppression, enter 0 for numerator and denominator.\n\nWhat percent of the same records of pregnant and breastfeeding women (e.g., charts, high viral load register or EMR entries) have documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL ≥50 copies/mL)?",
     "type": "numerator_denominator",
     "options": [
       "1) 3-5 month ARV dispensing for eligible clients receiving ARV refills"
     ],
     "correctAnswer": "80",
-    "scoring": "If <90% = Yellow, If \u226590% = Green",
+    "scoring": "If <90% = Yellow, If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -5658,8 +5532,8 @@
       "S_04_05_Q1"
     ],
     "tableData": [],
-    "numQuestion": "No of records reviwed of pregnant and breastfeeding women with documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL \u226550 copies/mL",
-    "denQuestion": "No of records reviewed of pregnant and breastfeeding women on ART \u226512 months with virologic non-suppression and eligible for follow-up viral load.",
+    "numQuestion": "No of records reviwed of pregnant and breastfeeding women with documentation of a follow-up viral load result after the first result of virologic non-suppression (e.g., VL ≥50 copies/mL",
+    "denQuestion": "No of records reviewed of pregnant and breastfeeding women on ART ≥12 months with virologic non-suppression and eligible for follow-up viral load.",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -5727,11 +5601,11 @@
   {
     "id": "S_04_07_Q3",
     "ceeId": "S_04_07",
-    "text": "Q3. Review 10 register entries or charts of pregnant and breastfeeding clients living with HIV on ART \u226512 months.\n\nWhat percent of reviewed pregnant and breastfeeding client records document provision of counseling services to support client decisions on safe disclosure or partner testing?",
+    "text": "Q3. Review 10 register entries or charts of pregnant and breastfeeding clients living with HIV on ART ≥12 months.\n\nWhat percent of reviewed pregnant and breastfeeding client records document provision of counseling services to support client decisions on safe disclosure or partner testing?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow, If \u226590% = Green",
+    "scoring": "If <90% = Yellow, If ≥90% = Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -5773,11 +5647,11 @@
   {
     "id": "S_04_08_Q2",
     "ceeId": "S_04_08",
-    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of pregnant and breastfeeding clients on ART \u226512 months.\n\nWhat percentage of reviewed charts have documentation of HIV testing status (e.g., positive, negative, declined) for all biological children <19 years of age?",
+    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of pregnant and breastfeeding clients on ART ≥12 months.\n\nWhat percentage of reviewed charts have documentation of HIV testing status (e.g., positive, negative, declined) for all biological children <19 years of age?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70%=Red, If \u226570% and <90% =Yellow, If \u226590% = Green",
+    "scoring": "If <70%=Red, If ≥70% and <90% =Yellow, If ≥90% = Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -5819,11 +5693,11 @@
   {
     "id": "S_04_09_Q2",
     "ceeId": "S_04_09",
-    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of pregnant and breastfeeding clients living with HIV on ART \u226512 months.\n\nWhat percent of pregnant and breastfeeding client records have documented TB-symptom screening results (i.e., at minimum, screen positive or negative; presence of cough, fever, night sweats, or weight loss) at the last clinical assessment?",
+    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of pregnant and breastfeeding clients living with HIV on ART ≥12 months.\n\nWhat percent of pregnant and breastfeeding client records have documented TB-symptom screening results (i.e., at minimum, screen positive or negative; presence of cough, fever, night sweats, or weight loss) at the last clinical assessment?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70%=Red, If \u226570% and <90% =Yellow, If \u226590% = Green",
+    "scoring": "If <70%=Red, If ≥70% and <90% =Yellow, If ≥90% = Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -5834,8 +5708,8 @@
       "_calculateNumeratorDenominatorScore(question) > 89"
     ],
     "tableData": [],
-    "numQuestion": "No of register entries or charts reviewed from HIV-positive pregnant and breastfeeding clients on ART \u226512 months, with documented TB-symptom screening results at the last clinical assessment",
-    "denQuestion": "No of register entries or charts reviewed from HIV-positive pregnant and breastfeeding clients on ART \u226512 months",
+    "numQuestion": "No of register entries or charts reviewed from HIV-positive pregnant and breastfeeding clients on ART ≥12 months, with documented TB-symptom screening results at the last clinical assessment",
+    "denQuestion": "No of register entries or charts reviewed from HIV-positive pregnant and breastfeeding clients on ART ≥12 months",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -5865,7 +5739,7 @@
   {
     "id": "S_04_10_Q2",
     "ceeId": "S_04_10",
-    "text": "Q2. Does this site have a TPT register and/or another method that allows tracking of who started and who completed TPT within a given reporting period?\n        \n       Note: \u201cCompleted\u201d includes those clients who started and completed 3 or 6 months of TPT and those on continuous TPT after 3 or 6 months of \u201ccompletion\u201d (3 vs 6 month is dependent on regimen-specific duration).",
+    "text": "Q2. Does this site have a TPT register and/or another method that allows tracking of who started and who completed TPT within a given reporting period?\n        \n       Note: “Completed” includes those clients who started and completed 3 or 6 months of TPT and those on continuous TPT after 3 or 6 months of “completion” (3 vs 6 month is dependent on regimen-specific duration).",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -5888,11 +5762,11 @@
   {
     "id": "S_04_10_Q3",
     "ceeId": "S_04_10",
-    "text": "Q3. Review 10 register entries or charts (whichever source has the most updated information) of pregnant and breastfeeding clients on ART \u226512 months.\n\nWhat percent of reviewed records show evidence those HIV-positive pregnant and breastfeeding clients who screened negative for active TB during their HIV clinic visits and were TPT eligible (per national guidelines) were ever initiated on TPT?",
+    "text": "Q3. Review 10 register entries or charts (whichever source has the most updated information) of pregnant and breastfeeding clients on ART ≥12 months.\n\nWhat percent of reviewed records show evidence those HIV-positive pregnant and breastfeeding clients who screened negative for active TB during their HIV clinic visits and were TPT eligible (per national guidelines) were ever initiated on TPT?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70%=Red, If \u226570% and <90% =Yellow, If \u226590% = Green",
+    "scoring": "If <70%=Red, If ≥70% and <90% =Yellow, If ≥90% = Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -5903,19 +5777,19 @@
       "_calculateNumeratorDenominatorScore(question) > 89"
     ],
     "tableData": [],
-    "numQuestion": "No of register entries or charts reviewed from ve pregnant and breastfeeding clients living with HIV on ART \u226512 months on ART \u226512 months who screened negative for active TB during their HIV clinic visits, with evidence showing the client was started on TPT?",
-    "denQuestion": "No of register entries or charts reviewed from pregnant and breastfeeding clients on ART \u226512 months who screened negative for active TB during their HIV clinic visits",
+    "numQuestion": "No of register entries or charts reviewed from ve pregnant and breastfeeding clients living with HIV on ART ≥12 months on ART ≥12 months who screened negative for active TB during their HIV clinic visits, with evidence showing the client was started on TPT?",
+    "denQuestion": "No of register entries or charts reviewed from pregnant and breastfeeding clients on ART ≥12 months who screened negative for active TB during their HIV clinic visits",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
   {
     "id": "S_04_11_Q1",
     "ceeId": "S_04_11",
-    "text": "Q1. Review 10 register entries or charts (whichever source has the most updated information) of adults and adolescent pregnant and breastfeeding clients \u226515 years old on ART >12 months.\n\nOf the total 10 records, select clients that are eligible for CTX based on the national guidelines. Include that number in the denominator, even if it is less than 10.\n\nWhat percent of pregnant and breastfeeding client records have documentation of CTX prescription per the national guidelines at the last clinical assessment?",
+    "text": "Q1. Review 10 register entries or charts (whichever source has the most updated information) of adults and adolescent pregnant and breastfeeding clients ≥15 years old on ART >12 months.\n\nOf the total 10 records, select clients that are eligible for CTX based on the national guidelines. Include that number in the denominator, even if it is less than 10.\n\nWhat percent of pregnant and breastfeeding client records have documentation of CTX prescription per the national guidelines at the last clinical assessment?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70%=Red, If \u226570% and <90% =Yellow, If \u226590% = Green",
+    "scoring": "If <70%=Red, If ≥70% and <90% =Yellow, If ≥90% = Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -5997,7 +5871,7 @@
     "tableData": [],
     "numQuestion": "No of reviewed entries of pregnant and breastfeeding clients who are presumed to have TB with documented smear microscopy, culture or Xpert MTB/RIF results",
     "denQuestion": "No of reviewed entries of pregnant and breastfeeding clients who are presumed to have TB",
-    "conditionalStatement": "If \u226580%, then Q4",
+    "conditionalStatement": "If ≥80%, then Q4",
     "nextQuestionCondition": "null"
   },
   {
@@ -6007,7 +5881,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90%=Yellow, If \u226590%=Green",
+    "scoring": "If <90%=Yellow, If ≥90%=Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -6053,7 +5927,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90%=Yellow, If \u226590%=Green",
+    "scoring": "If <90%=Yellow, If ≥90%=Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -6095,11 +5969,11 @@
   {
     "id": "S_04_14_Q2",
     "ceeId": "S_04_14",
-    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of the most recently seen women living with HIV in maternity (up to the last 12 months prior to today\u2019s SIMS assessment).\n\nWhat percent of mother-infant pair entries have documentation of receipt of ART for mothers and prophylaxis for infants?",
+    "text": "Q2. Review 10 register entries or charts (whichever source has the most updated information) of the most recently seen women living with HIV in maternity (up to the last 12 months prior to today’s SIMS assessment).\n\nWhat percent of mother-infant pair entries have documentation of receipt of ART for mothers and prophylaxis for infants?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If \u226470% = Red,If >70 and \u226490% = Yellow, If \u226590%=Green",
+    "scoring": "If ≤70% = Red,If >70 and ≤90% = Yellow, If ≥90%=Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -6111,18 +5985,18 @@
     ],
     "tableData": [],
     "numQuestion": "No of records reviewed of mother-infant pairs that have documented receipt of ART for mothers and prophylaxis for infant",
-    "denQuestion": "No of charts/register entries reviewed of HIV-positive mothers in maternity (up to the last 12 months prior to today\u2019s SIMS assessment)",
+    "denQuestion": "No of charts/register entries reviewed of HIV-positive mothers in maternity (up to the last 12 months prior to today’s SIMS assessment)",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
   {
     "id": "S_04_15_Q1",
     "ceeId": "S_04_15",
-    "text": "Q1. Review 10 records (register entries, charts, or HEI cards) of the 10 most recent HEIs (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today\u2019s SIMS assessment).\n\nWhat percent of HIV-exposed infants had a specimen collected for EID?",
+    "text": "Q1. Review 10 records (register entries, charts, or HEI cards) of the 10 most recent HEIs (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today’s SIMS assessment).\n\nWhat percent of HIV-exposed infants had a specimen collected for EID?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If \u226490% = Red",
+    "scoring": "If ≤90% = Red",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -6134,18 +6008,18 @@
     ],
     "tableData": [],
     "numQuestion": "No of HEI reviewed records with documentation of specimens collected for EID testing",
-    "denQuestion": "No of most recent HEI records reviewed (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today\u2019s SIMS assessment).",
+    "denQuestion": "No of most recent HEI records reviewed (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today’s SIMS assessment).",
     "conditionalStatement": "If >90%, then Q2",
     "nextQuestionCondition": "null"
   },
   {
     "id": "S_04_15_Q2",
     "ceeId": "S_04_15",
-    "text": "Q2. Review the same 10 records (register entries, charts, or HEI cards) of the 10 most recent HEIs (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today\u2019s SIMS assessment).\n\nLook at the EID sample collected at the site.\n\nWhat percent of HIV-exposed infants have documentation of a HIV-test result provided to a caregiver within one month of sample collection?",
+    "text": "Q2. Review the same 10 records (register entries, charts, or HEI cards) of the 10 most recent HEIs (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today’s SIMS assessment).\n\nLook at the EID sample collected at the site.\n\nWhat percent of HIV-exposed infants have documentation of a HIV-test result provided to a caregiver within one month of sample collection?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow, If \u226590%= Green",
+    "scoring": "If <90% = Yellow, If ≥90%= Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -6157,7 +6031,7 @@
     ],
     "tableData": [],
     "numQuestion": "No of HEI reviewed records with documentation that the caregiver has received the results of an HIV-test within one month of sample collection",
-    "denQuestion": "No of most recent HEI records reviewed (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today\u2019s SIMS assessment).",
+    "denQuestion": "No of most recent HEI records reviewed (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today’s SIMS assessment).",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -6235,11 +6109,11 @@
   {
     "id": "S_04_17_Q1",
     "ceeId": "S_04_17",
-    "text": "Q1. Review 10 records (register entries, charts, or HEI cards) of the most recent HIV-infected infants (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today\u2019s SIMS assessment) who had an initial positive virologic test result.\n\nWhat percent of infants with an initial positive virologic test result have documentation of a confirmatory virologic test collected?\n\nNote: This requires a separate chart pull to review records of HIV-infected infants only. If there are NO HIV-infected infants, enter 0 in both numerator and denominator, and 100% in response column.",
+    "text": "Q1. Review 10 records (register entries, charts, or HEI cards) of the most recent HIV-infected infants (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today’s SIMS assessment) who had an initial positive virologic test result.\n\nWhat percent of infants with an initial positive virologic test result have documentation of a confirmatory virologic test collected?\n\nNote: This requires a separate chart pull to review records of HIV-infected infants only. If there are NO HIV-infected infants, enter 0 in both numerator and denominator, and 100% in response column.",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If \u2264 70% = Red, If >70% and <90% = Yellow, If \u226590%= Green",
+    "scoring": "If ≤ 70% = Red, If >70% and <90% = Yellow, If ≥90%= Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -6251,18 +6125,18 @@
     ],
     "tableData": [],
     "numQuestion": "No of reviewed records of HIV-infected infants WITH documentation of a confirmatory virologic test",
-    "denQuestion": "No of records reviewed of the most recent HIV-infected infants (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today\u2019s SIMS assessment) who had an initial positive virologic test result",
+    "denQuestion": "No of records reviewed of the most recent HIV-infected infants (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today’s SIMS assessment) who had an initial positive virologic test result",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
   {
     "id": "S_04_18_Q1",
     "ceeId": "S_04_18",
-    "text": "Q1. Review 10 records (register entries, charts, or HEI cards) of the most recent HEIs of the most recent HEI (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today\u2019s SIMS assessment).\n\nWhat percent of HIV-exposed infants have documented receipt of CTX by 8 weeks of age?",
+    "text": "Q1. Review 10 records (register entries, charts, or HEI cards) of the most recent HEIs of the most recent HEI (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today’s SIMS assessment).\n\nWhat percent of HIV-exposed infants have documented receipt of CTX by 8 weeks of age?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If \u2264 70% = Red, If >70% and <90% = Yellow, If \u226590%= Green",
+    "scoring": "If ≤ 70% = Red, If >70% and <90% = Yellow, If ≥90%= Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -6274,7 +6148,7 @@
     ],
     "tableData": [],
     "numQuestion": "No of reviewed records of HEI initiated on CTX by 8 weeks of age",
-    "denQuestion": "No of reviewed records of the most recent HEI (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today\u2019s SIMS assessment)",
+    "denQuestion": "No of reviewed records of the most recent HEI (i.e. born 3 or more months prior to the SIMS assessment and up to the last 12 months prior to today’s SIMS assessment)",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -6308,7 +6182,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If \u2264 70% = Red, If >70% and <90% = Yellow, If \u226590%= Green",
+    "scoring": "If ≤ 70% = Red, If >70% and <90% = Yellow, If ≥90%= Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -6350,11 +6224,11 @@
   {
     "id": "S_04_20_Q2",
     "ceeId": "S_04_20",
-    "text": "Q2. Review 10 records (e.g., register entries, charts, and HEI cards) of the last 10 HIV-infected infants born \u22653 months but less than 12 months prior to today\u2019s SIMS assessment.\n\nThis requires a separate chart pull to review records of HIV-infected infants only.\n\nWhat percent of HIV-infected infants have documentation of linkage into ART services within 7 days from time of receipt of positive test results?\n\nNote: If there are NO HIV-infected infants, enter 0 in both numerator and denominator, and 100% in response column.",
+    "text": "Q2. Review 10 records (e.g., register entries, charts, and HEI cards) of the last 10 HIV-infected infants born ≥3 months but less than 12 months prior to today’s SIMS assessment.\n\nThis requires a separate chart pull to review records of HIV-infected infants only.\n\nWhat percent of HIV-infected infants have documentation of linkage into ART services within 7 days from time of receipt of positive test results?\n\nNote: If there are NO HIV-infected infants, enter 0 in both numerator and denominator, and 100% in response column.",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If \u226480%= Red, If > 80% and \u226490% = Yellow, If >90%= Green",
+    "scoring": "If ≤80%= Red, If > 80% and ≤90% = Yellow, If >90%= Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -6366,7 +6240,7 @@
     ],
     "tableData": [],
     "numQuestion": "No of reviewed records of HIV-infected infants with documented linkage within in 7 days from time of receipt of positive test results to ART services/initiation on treatment",
-    "denQuestion": "No of reviewed records of HIV-infected infants born \u22653 months but less than 12 months prior to today\u2019s SIMS assessment.",
+    "denQuestion": "No of reviewed records of HIV-infected infants born ≥3 months but less than 12 months prior to today’s SIMS assessment.",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -6420,7 +6294,7 @@
   {
     "id": "S_04_21_Q3",
     "ceeId": "S_04_21",
-    "text": "Q3. Are the EID supplies distributed as standardized bundles to this site\u2019s testing points?",
+    "text": "Q3. Are the EID supplies distributed as standardized bundles to this site’s testing points?",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "No",
@@ -6575,7 +6449,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90% = Yellow,  If \u226590%= Green",
+    "scoring": "If <90% = Yellow,  If ≥90%= Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -6873,7 +6747,7 @@
   {
     "id": "S_06_07_Q2",
     "ceeId": "S_06_07",
-    "text": "Q2. Randomly select 10 beneficiaries from the assessment point roster and review their case files or client records (individual or logbook) from the last three months.\n\nWhat percent of case files include documentation of the child\u2019s HIV status and the caregiver\u2019s HIV status as reported by the caregiver or child (i.e. self-report)?\n      Note: HIV status categories must include the following:\n          \u25cf Test not needed (based on HIV risk algorithm prototype)\n          \u25cf Positive\n          \u25cf Negative\n          \u25cf Undisclosed to program (child has tested but results were not disclosed to program)\n          \u25cf Not Tested and Status Unknown \u2013 File establishes that the child\u2019s status is unknown, i.e., child has not been assessed for HIV risk by the program, caregiver will not provide information that enables risk assessment; testing indicated but caregiver does not want to have child tested.",
+    "text": "Q2. Randomly select 10 beneficiaries from the assessment point roster and review their case files or client records (individual or logbook) from the last three months.\n\nWhat percent of case files include documentation of the child’s HIV status and the caregiver’s HIV status as reported by the caregiver or child (i.e. self-report)?\n      Note: HIV status categories must include the following:\n          ● Test not needed (based on HIV risk algorithm prototype)\n          ● Positive\n          ● Negative\n          ● Undisclosed to program (child has tested but results were not disclosed to program)\n          ● Not Tested and Status Unknown – File establishes that the child’s status is unknown, i.e., child has not been assessed for HIV risk by the program, caregiver will not provide information that enables risk assessment; testing indicated but caregiver does not want to have child tested.",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "80",
@@ -6888,9 +6762,9 @@
       ""
     ],
     "tableData": [],
-    "numQuestion": "No of reviewed case files or client records that include documentation of the child\u2019s HIV status and the caregiver\u2019s HIV status (as reported by the caregiver or self)",
+    "numQuestion": "No of reviewed case files or client records that include documentation of the child’s HIV status and the caregiver’s HIV status (as reported by the caregiver or self)",
     "denQuestion": "No of case files or client records assessed",
-    "conditionalStatement": "If \u2265 80%, then Q3",
+    "conditionalStatement": "If ≥ 80%, then Q3",
     "nextQuestionCondition": "null"
   },
   {
@@ -6900,7 +6774,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90%=Yellow, If \u226590%= Green",
+    "scoring": "If <90%=Yellow, If ≥90%= Green",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -6938,11 +6812,11 @@
   {
     "id": "S_06_08_Q2",
     "ceeId": "S_06_08",
-    "text": "Q2. Randomly identify 10 families with either a caregiver or child living with HIV from the site roster. Review their household case files\n\nWhat percent of case files have documentation demonstrating the site is monitoring both the child and caregiver\u2019s (if applicable) HIV treatment status and disclosure status including all of the following: Treatment enrollment, Access to multi-month ARVs (per natonal MMD policy and guidelines, Regularly attending treatment appointments, Correctly taking medication, Adhering to treatment, Virally suppressed if VL is available and accessible to site, and age-appropriate HIV Disclosure to child?",
+    "text": "Q2. Randomly identify 10 families with either a caregiver or child living with HIV from the site roster. Review their household case files\n\nWhat percent of case files have documentation demonstrating the site is monitoring both the child and caregiver’s (if applicable) HIV treatment status and disclosure status including all of the following: Treatment enrollment, Access to multi-month ARVs (per natonal MMD policy and guidelines, Regularly attending treatment appointments, Correctly taking medication, Adhering to treatment, Virally suppressed if VL is available and accessible to site, and age-appropriate HIV Disclosure to child?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "91",
-    "scoring": "If\u226490%=Red",
+    "scoring": "If≤90%=Red",
     "defaultColor": "yellow",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -6954,7 +6828,7 @@
       "S_06_08_Q3"
     ],
     "tableData": [],
-    "numQuestion": "No of reviewed case files with documentation the site is monitoring both the child and caregiver\u2019s (if applicable) HIV treatment status and disclosure status including all of the following: Treatment enrollment, Regularly attending treatment appointments, Correctly taking medication, Accessing multi-month ARVs (if eligible), Adhering to treatment, Virally suppressed if VL is available and accessible to site, and age-appropriate HIV Disclosure to child",
+    "numQuestion": "No of reviewed case files with documentation the site is monitoring both the child and caregiver’s (if applicable) HIV treatment status and disclosure status including all of the following: Treatment enrollment, Regularly attending treatment appointments, Correctly taking medication, Accessing multi-month ARVs (if eligible), Adhering to treatment, Virally suppressed if VL is available and accessible to site, and age-appropriate HIV Disclosure to child",
     "denQuestion": "No of reviewed case files with either a caregiver or child living with HIV from the site roster",
     "conditionalStatement": "If >90%, then Q3",
     "nextQuestionCondition": "null"
@@ -7008,7 +6882,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "91",
-    "scoring": "If <70%=Red, If \u226570 and <90%=Yellow, If \u226590%= Green",
+    "scoring": "If <70%=Red, If ≥70 and <90%=Yellow, If ≥90%= Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -7173,7 +7047,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "91",
-    "scoring": "If <90%=Yellow, If \u226590%= Green",
+    "scoring": "If <90%=Yellow, If ≥90%= Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -7219,7 +7093,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "81",
-    "scoring": "If <50%=Red, If \u226550% and <80%=Yellow",
+    "scoring": "If <50%=Red, If ≥50% and <80%=Yellow",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -7232,7 +7106,7 @@
     "tableData": [],
     "numQuestion": "No of reviewed records of HTS providers who completed and submitted proficiency testing panels in the last 12 months",
     "denQuestion": "No of reviewed records of HTS providers who received a proficiency testing panel in the last 12 months",
-    "conditionalStatement": "If \u226580%, then Q3",
+    "conditionalStatement": "If ≥80%, then Q3",
     "nextQuestionCondition": "null"
   },
   {
@@ -7395,7 +7269,7 @@
   {
     "id": "S_07_07_Q1",
     "ceeId": "S_07_07",
-    "text": "Q1. Does the site\u2019s standardized process/protocol/SOP that describes how to provide HTS include inquiring whether the reason for HIV testing at this current time is due to a positive HIV self-test result?",
+    "text": "Q1. Does the site’s standardized process/protocol/SOP that describes how to provide HTS include inquiring whether the reason for HIV testing at this current time is due to a positive HIV self-test result?",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -7442,7 +7316,7 @@
   {
     "id": "S_07_08_Q1",
     "ceeId": "S_07_08",
-    "text": "Q1. Have ALL staff conducting index testing services been trained according to a standardized, national training curriculum that covers the WHO\u2019s 5Cs and minimum standards for index testing, including an intimate partner violence (IPV) risk assessment and first line support following IPV disclosure, supportive supervision, and adverse event monitoring and response?",
+    "text": "Q1. Have ALL staff conducting index testing services been trained according to a standardized, national training curriculum that covers the WHO’s 5Cs and minimum standards for index testing, including an intimate partner violence (IPV) risk assessment and first line support following IPV disclosure, supportive supervision, and adverse event monitoring and response?",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -7536,7 +7410,7 @@
   {
     "id": "S_07_09_Q2",
     "ceeId": "S_07_09",
-    "text": "Q2. Are reports of social harms, including IPV, following index testing services documented in the client\u2019s charts and/or index testing register?",
+    "text": "Q2. Are reports of social harms, including IPV, following index testing services documented in the client’s charts and/or index testing register?",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -7672,7 +7546,7 @@
   {
     "id": "S_07_11_Q2",
     "ceeId": "S_07_11",
-    "text": "Q2. Does the site/facility have an SOP for how to assess for and address reports of IPV (based on IPV screening tool) as part of the provision of index testing services?\n        \n       Note: The SOP should outline the roles/responsibilities of site staff. For example, the testing provider will assess for intimate partner violence (IPV) for each named partner during the recall period. If a client discloses violence, the testing provider provides immediate psychosocial support, conducts an immediate safety check, and does not pursue notification methods for the IPV involved partner(s), but may continue with other partner(s). The provider then may refer to another staff member for referrals and follow up to other services, as well as document the client\u2019s experience in their medical chart as IPV-related support should be addressed in their care and treatment plan. The SOPs outline these roles so it is clear for everyone at the site",
+    "text": "Q2. Does the site/facility have an SOP for how to assess for and address reports of IPV (based on IPV screening tool) as part of the provision of index testing services?\n        \n       Note: The SOP should outline the roles/responsibilities of site staff. For example, the testing provider will assess for intimate partner violence (IPV) for each named partner during the recall period. If a client discloses violence, the testing provider provides immediate psychosocial support, conducts an immediate safety check, and does not pursue notification methods for the IPV involved partner(s), but may continue with other partner(s). The provider then may refer to another staff member for referrals and follow up to other services, as well as document the client’s experience in their medical chart as IPV-related support should be addressed in their care and treatment plan. The SOPs outline these roles so it is clear for everyone at the site",
     "type": "yes_no",
     "options": [],
     "correctAnswer": "Yes",
@@ -7809,11 +7683,11 @@
   {
     "id": "S_08_01_Q2",
     "ceeId": "S_08_01",
-    "text": "Q2. Review the last 10 entries in a line list/register of clients with presumptive TB. If this site serves pediatric and adult clients, choose 5 charts for pediatrics (<15 years of age) and 5 charts for adult and adolescent clients(\u226515 years of age).\n\nWhat percent of the reviewed presumptive TB clients have documented HIV-testing status?",
+    "text": "Q2. Review the last 10 entries in a line list/register of clients with presumptive TB. If this site serves pediatric and adult clients, choose 5 charts for pediatrics (<15 years of age) and 5 charts for adult and adolescent clients(≥15 years of age).\n\nWhat percent of the reviewed presumptive TB clients have documented HIV-testing status?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70% = Red, If \u226570 and <90% = Yellow, If \u226590% Green",
+    "scoring": "If <70% = Red, If ≥70 and <90% = Yellow, If ≥90% Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -7855,11 +7729,11 @@
   {
     "id": "S_08_02_Q2",
     "ceeId": "S_08_02",
-    "text": "Q2. Review the TB register to identify 10 TB clients diagnosed with HIV more than 3 months but less than 12 months prior to the SIMS assessment. If this site serves pediatric and adult clients , choose 5 register lines for pediatrics (<15 years of age) and 5 register lines for adult and adolescent clientss (\u226515 years of age).\n\nWhat percent of PLHIV with active or presumptive TB reviewed have documentation of ART initiation?\n\nNote: If NO PLHIV with active or presumptive TB were found in the specified period, enter \u2018100%\u2019 in the form of 1/1 and make a note in the COMMENTS portion of this CEE.",
+    "text": "Q2. Review the TB register to identify 10 TB clients diagnosed with HIV more than 3 months but less than 12 months prior to the SIMS assessment. If this site serves pediatric and adult clients , choose 5 register lines for pediatrics (<15 years of age) and 5 register lines for adult and adolescent clientss (≥15 years of age).\n\nWhat percent of PLHIV with active or presumptive TB reviewed have documentation of ART initiation?\n\nNote: If NO PLHIV with active or presumptive TB were found in the specified period, enter ‘100%’ in the form of 1/1 and make a note in the COMMENTS portion of this CEE.",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <70% = Red, If \u226570 and <90% = Yellow, If \u226590% Green",
+    "scoring": "If <70% = Red, If ≥70 and <90% = Yellow, If ≥90% Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -7924,7 +7798,7 @@
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
-    "scoring": "If <90%=Yellow, If \u226590%= Green",
+    "scoring": "If <90%=Yellow, If ≥90%= Green",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],
@@ -8107,7 +7981,7 @@
   {
     "id": "S_09_04_Q2",
     "ceeId": "S_09_04",
-    "text": "Q2. Review 10 of the most recent charts of clients on MAT for \u226512 months.\n\nWhat percent of reviewed charts document HIV testing within the last 12 months?",
+    "text": "Q2. Review 10 of the most recent charts of clients on MAT for ≥12 months.\n\nWhat percent of reviewed charts document HIV testing within the last 12 months?",
     "type": "numerator_denominator",
     "options": [],
     "correctAnswer": "90",
@@ -8123,7 +7997,7 @@
     ],
     "tableData": [],
     "numQuestion": "No of reviewed charts with HIV testing documented",
-    "denQuestion": "No of most recent charts of clients on MAT for \u226512 months reviewed",
+    "denQuestion": "No of most recent charts of clients on MAT for ≥12 months reviewed",
     "conditionalStatement": "",
     "nextQuestionCondition": "null"
   },
@@ -8312,7 +8186,7 @@
       "1) No PT results were returned to the site"
     ],
     "correctAnswer": "50",
-    "scoring": "If <50%=Red, If \u226550 and \u226490%=Yellow",
+    "scoring": "If <50%=Red, If ≥50 and ≤90%=Yellow",
     "defaultColor": "red",
     "tickBoxConditionRed": [],
     "tickBoxConditionGreen": [],

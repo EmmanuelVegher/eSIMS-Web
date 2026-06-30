@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useApp } from "../context/AppContext";
 import { db } from "../firebase";
-import { collection, query, where, getDocs, doc } from "firebase/firestore";
-import { Calendar, MapPin, Building2, ClipboardList, CheckCircle2, ChevronRight, Loader2, AlertCircle, ArrowLeft } from "lucide-react";
+import { collection, getDocs } from "firebase/firestore";
+import { Calendar, MapPin, Building2, ClipboardList, ChevronRight, Loader2, AlertCircle, ArrowLeft } from "lucide-react";
 
 interface SimsActivity {
   id: string;
@@ -11,133 +11,188 @@ interface SimsActivity {
   states: string;
   organizations: string;
   facilities: string;
+  status: string;
+}
+
+interface RefinedActivityTarget {
+  id: string;
+  startDate: string;
+  proposedEndDate: string;
+  states: string;
+  organizations: string;
+  facilities: string;
+  computedStatus: "Active" | "Upcoming" | "Completed" | "Closed";
 }
 
 export const Activities: React.FC = () => {
   const { profile, navigate, setActiveActivity } = useApp();
-  const [activities, setActivities] = useState<SimsActivity[]>([]);
+  
+  const [targets, setTargets] = useState<RefinedActivityTarget[]>([]);
+  const [flatFacilities, setFlatFacilities] = useState<any[]>([]);
+  const [stats, setStats] = useState<Record<string, { total: number; completed: number; red: number; yellow: number; green: number; grey: number }>>({});
+  
   const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState<Record<string, {
-    total: number;
-    completed: number;
-    red: number;
-    yellow: number;
-    green: number;
-    grey: number;
-  }>>({});
+  const [activeTab, setActiveTab] = useState<"all" | "active" | "upcoming" | "completed" | "closed">("active");
 
+  // Load flat facilities list and all scheduled activities
   useEffect(() => {
     if (!profile) return;
 
-    const fetchActivitiesAndResponses = async () => {
+    const loadAssessmentData = async () => {
       setLoading(true);
       try {
-        // Query activities for user's organization
-        const actQuery = query(
-          collection(db, "sims_activities"),
-          where("organizations", "==", profile.organizationName)
-        );
-        const actSnap = await getDocs(actQuery);
-        const activitiesList: SimsActivity[] = [];
-        actSnap.forEach(docSnap => {
-          activitiesList.push({ id: docSnap.id, ...docSnap.data() } as SimsActivity);
+        // 1. Fetch flat facilities to match metadata (LGA, exact State)
+        const facSnap = await getDocs(collection(db, "facilities"));
+        const facList: any[] = [];
+        facSnap.forEach(d => facList.push({ id: d.id, ...d.data() }));
+        setFlatFacilities(facList);
+
+        // 2. Fetch all scheduled activities
+        const actSnap = await getDocs(collection(db, "sims_activities"));
+        const rawActivities: SimsActivity[] = [];
+        actSnap.forEach(d => {
+          rawActivities.push({ id: d.id, ...d.data() } as SimsActivity);
         });
 
-        // Fallback mock activities if none exist
-        if (activitiesList.length === 0) {
-          activitiesList.push(
-            {
-              id: "ACT_001",
-              startDate: "2026-06-01",
-              proposedEndDate: "2026-06-30",
-              states: profile.state || "FCT",
-              organizations: profile.organizationName,
-              facilities: profile.facilityName || "Asokoro District Hospital"
-            },
-            {
-              id: "ACT_002",
-              startDate: "2026-06-15",
-              proposedEndDate: "2026-07-15",
-              states: "Enugu",
-              organizations: profile.organizationName,
-              facilities: "UNTH Enugu"
-            }
+        // 3. Filter activities in-memory to match user organization (including comma-separated orgs and 'All')
+        const userOrg = profile.organizationName;
+        const orgActivities = rawActivities.filter(act => {
+          if (!act.organizations) return false;
+          return (
+            act.organizations === "All" ||
+            act.organizations.split(",").map(o => o.trim()).includes(userOrg)
           );
-        }
+        });
 
-        setActivities(activitiesList);
+        // 4. Split activities containing multiple facilities (comma-separated list) into individual targets
+        const now = new Date();
+        const refinedList: RefinedActivityTarget[] = [];
 
-        // Fetch question responses for each activity to calculate progress & scores
+        orgActivities.forEach(act => {
+          const facNames = act.facilities ? act.facilities.split(",").map(f => f.trim()) : [];
+          
+          // Calculate status dynamically based on current time
+          const start = new Date(act.startDate);
+          const end = new Date(act.proposedEndDate);
+          const closedLimit = new Date(end);
+          closedLimit.setDate(closedLimit.getDate() + 15);
+
+          let computedStatus: "Active" | "Upcoming" | "Completed" | "Closed" = "Active";
+          if (now < start) {
+            computedStatus = "Upcoming";
+          } else if (now > closedLimit) {
+            computedStatus = "Closed";
+          } else if (now > end) {
+            computedStatus = "Completed";
+          } else {
+            computedStatus = "Active";
+          }
+
+          facNames.forEach(facName => {
+            if (!facName) return;
+
+            // Lookup facility details to resolve exact state
+            const matchedFac = facList.find(f => f.facilityName.toLowerCase() === facName.toLowerCase());
+            
+            refinedList.push({
+              id: act.id,
+              startDate: act.startDate,
+              proposedEndDate: act.proposedEndDate,
+              organizations: matchedFac?.organizationName || act.organizations,
+              states: matchedFac?.stateName || act.states,
+              facilities: facName,
+              computedStatus
+            });
+          });
+        });
+
+        setTargets(refinedList);
+
+        // 5. Fetch flat question responses to aggregate progress/scores
+        const respSnap = await getDocs(collection(db, "question_response"));
         const newStats: typeof stats = {};
 
-        for (const act of activitiesList) {
-          const respQuery = query(
-            collection(db, "question_response"),
-            where("eSIMS_ID", "==", act.id)
-          );
-          const respSnap = await getDocs(respQuery);
-          
-          // Group responses by ceeId
-          const ceeResponses: Record<string, string[]> = {};
+        refinedList.forEach(target => {
+          // Filter responses matching this activityID and specific facilityName
+          let completed = 0;
+          let red = 0;
+          let yellow = 0;
+          let green = 0;
+          let grey = 0;
+
           respSnap.forEach(docSnap => {
             const data = docSnap.data();
-            const ceeId = data.cee_id;
-            const status = data.status || "grey"; // red, yellow, green, grey
-            if (!ceeResponses[ceeId]) {
-              ceeResponses[ceeId] = [];
-            }
-            ceeResponses[ceeId].push(status.toLowerCase());
-          });
-
-          // Overall grade per CEE is determined by the minimum color:
-          // Red > Yellow > Green > Grey
-          let redCount = 0;
-          let yellowCount = 0;
-          let greenCount = 0;
-          let greyCount = 0;
-
-          Object.keys(ceeResponses).forEach(ceeId => {
-            const colors = ceeResponses[ceeId];
-            if (colors.includes("red")) {
-              redCount++;
-            } else if (colors.includes("yellow")) {
-              yellowCount++;
-            } else if (colors.includes("green")) {
-              greenCount++;
-            } else {
-              greyCount++;
+            if (
+              data.eSIMS_ID === target.id &&
+              data.facilityName === target.facilities
+            ) {
+              completed++;
+              const score = data.final_cee_score;
+              if (score === 3) green++;
+              else if (score === 2) yellow++;
+              else if (score === 1) red++;
+              else grey++;
             }
           });
 
-          const completed = Object.keys(ceeResponses).length;
-          // Standard SIMS CEE target is usually 38, or max out at CEE total
+          // Standard eSIMS CEE count target (typically 38 or total mapped)
           const totalCEEs = 38;
 
-          newStats[act.id] = {
+          newStats[`${target.id}_${target.facilities}`] = {
             total: totalCEEs,
             completed: completed > totalCEEs ? totalCEEs : completed,
-            red: redCount,
-            yellow: yellowCount,
-            green: greenCount,
-            grey: greyCount
+            red,
+            yellow,
+            green,
+            grey
           };
-        }
+        });
 
         setStats(newStats);
+
       } catch (e) {
-        console.error("Error fetching activities and responses:", e);
+        console.error("Error loading assessment targets:", e);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchActivitiesAndResponses();
+    loadAssessmentData();
   }, [profile]);
 
-  const handleStart = (act: SimsActivity) => {
-    setActiveActivity(act);
+  const handleStart = (target: RefinedActivityTarget) => {
+    // Pack activity context for the CEE evaluation form
+    setActiveActivity({
+      id: target.id,
+      startDate: target.startDate,
+      proposedEndDate: target.proposedEndDate,
+      organizations: target.organizations,
+      states: target.states,
+      facilities: target.facilities
+    });
     navigate("assessment");
   };
+
+  const getStatusColorClass = (status: string) => {
+    switch (status) {
+      case "Active":
+        return "bg-emerald-50 text-emerald-700 border-emerald-200";
+      case "Upcoming":
+        return "bg-amber-50 text-amber-700 border-amber-200";
+      case "Completed":
+        return "bg-blue-50 text-blue-700 border-blue-200";
+      case "Closed":
+        return "bg-red-50 text-red-700 border-red-200";
+      default:
+        return "bg-slate-50 text-slate-750 border-slate-200";
+    }
+  };
+
+  // Filter list by active tab
+  const filteredTargets = targets.filter(t => {
+    if (activeTab === "all") return true;
+    return t.computedStatus.toLowerCase() === activeTab;
+  });
 
   if (loading) {
     return (
@@ -153,7 +208,7 @@ export const Activities: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 pb-16">
       {/* Header */}
-      <header className="glass-panel sticky top-0 z-40 border-b border-slate-200/80 px-6 py-4">
+      <header className="glass-panel sticky top-0 z-40 border-b border-slate-200/80 px-6 py-4 shadow-sm">
         <div className="max-w-4xl mx-auto flex items-center gap-4">
           <button
             onClick={() => navigate("overview")}
@@ -168,50 +223,79 @@ export const Activities: React.FC = () => {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 mt-8">
-        {activities.length === 0 ? (
+      <main className="max-w-4xl mx-auto px-6 mt-8 space-y-6">
+        
+        {/* Dynamic Category Tabs */}
+        <div className="flex border-b border-slate-250 gap-4 md:gap-8 overflow-x-auto pb-1">
+          {(["active", "upcoming", "completed", "closed", "all"] as const).map(tab => {
+            const count = targets.filter(t => tab === "all" || t.computedStatus.toLowerCase() === tab).length;
+            return (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`pb-3 text-xs font-bold uppercase tracking-wider transition shrink-0 ${
+                  activeTab === tab
+                    ? "border-b-2 border-wine-800 text-wine-850"
+                    : "text-slate-400 hover:text-slate-650"
+                }`}
+              >
+                {tab} ({count})
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Targets List */}
+        {filteredTargets.length === 0 ? (
           <div className="glass-panel p-12 text-center rounded-2xl border border-slate-200">
             <ClipboardList className="w-16 h-16 text-slate-300 mx-auto mb-4" />
-            <h3 className="font-bold text-slate-800 text-lg">No Assessments Scheduled</h3>
-            <p className="text-sm text-slate-500 mt-1">There are currently no active SIMS activity targets assigned to your organization.</p>
+            <h3 className="font-bold text-slate-800 text-lg">No Assessments Found</h3>
+            <p className="text-sm text-slate-500 mt-1">There are currently no scheduled activity targets matching this category.</p>
           </div>
         ) : (
-          <div className="space-y-6">
-            {activities.map(act => {
-              const actStats = stats[act.id] || { total: 38, completed: 0, red: 0, yellow: 0, green: 0, grey: 0 };
+          <div className="space-y-4">
+            {filteredTargets.map((target, idx) => {
+              const targetKey = `${target.id}_${target.facilities}`;
+              const actStats = stats[targetKey] || { total: 38, completed: 0, red: 0, yellow: 0, green: 0, grey: 0 };
               const percent = Math.round((actStats.completed / actStats.total) * 100);
 
               return (
                 <div
-                  key={act.id}
-                  className="glass-panel rounded-2xl shadow-sm hover:shadow-md border border-slate-200/80 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 transition duration-200"
+                  key={idx}
+                  className="glass-panel rounded-2xl shadow-sm hover:shadow-md border border-slate-200/80 p-5 flex flex-col md:flex-row md:items-center justify-between gap-6 transition duration-200 bg-white"
                 >
                   <div className="space-y-4 flex-1">
                     {/* Facility Details */}
                     <div>
-                      <div className="flex items-center gap-2 text-wine-800 mb-1">
-                        <Building2 className="w-5 h-5" />
-                        <h3 className="font-bold text-slate-800 text-lg leading-snug">{act.facilities}</h3>
+                      <div className="flex flex-wrap items-center gap-3 mb-1">
+                        <div className="flex items-center gap-2 text-wine-900">
+                          <Building2 className="w-5 h-5 shrink-0" />
+                          <h3 className="font-bold text-slate-800 text-md leading-snug">{target.facilities}</h3>
+                        </div>
+                        <span className={`px-2 py-0.5 border rounded-lg text-[9px] font-black uppercase tracking-wider ${getStatusColorClass(target.computedStatus)}`}>
+                          {target.computedStatus}
+                        </span>
                       </div>
+
                       <div className="flex flex-wrap gap-x-4 gap-y-2 mt-2 text-xs text-slate-500 font-medium">
                         <span className="flex items-center gap-1">
-                          <MapPin className="w-3.5 h-3.5" />
-                          <span>{act.states} State</span>
+                          <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                          <span>{target.states} State</span>
                         </span>
                         <span className="flex items-center gap-1">
-                          <Calendar className="w-3.5 h-3.5" />
-                          <span>{act.startDate} to {act.proposedEndDate}</span>
+                          <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                          <span>{target.startDate} to {target.proposedEndDate}</span>
                         </span>
                       </div>
                     </div>
 
                     {/* Progress Tracker */}
                     <div className="space-y-1.5">
-                      <div className="flex justify-between text-xs font-semibold text-slate-600">
+                      <div className="flex justify-between text-[11px] font-bold text-slate-650">
                         <span>CEE Progress</span>
                         <span>{actStats.completed} of {actStats.total} CEEs completed ({percent}%)</span>
                       </div>
-                      <div className="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                      <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden border border-slate-200/40">
                         <div
                           className="h-full bg-gradient-to-r from-wine-900 to-wine-600 rounded-full transition-all duration-300"
                           style={{ width: `${percent}%` }}
@@ -220,34 +304,36 @@ export const Activities: React.FC = () => {
                     </div>
 
                     {/* Grading Score Summary */}
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mr-1">Tally:</span>
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-green-50 text-green-700 border border-green-200">
-                        <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
-                        <span>G: {actStats.green}</span>
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mr-1">Tally:</span>
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-green-50 text-green-700 border border-green-200">
+                        <span className="w-2 h-2 rounded-full bg-green-500" />
+                        <span>Green: {actStats.green}</span>
                       </span>
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-yellow-50 text-yellow-700 border border-yellow-200">
-                        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
-                        <span>Y: {actStats.yellow}</span>
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-yellow-50 text-yellow-700 border border-yellow-200">
+                        <span className="w-2 h-2 rounded-full bg-yellow-500" />
+                        <span>Yellow: {actStats.yellow}</span>
                       </span>
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-red-50 text-red-700 border border-red-200">
-                        <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
-                        <span>R: {actStats.red}</span>
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-red-50 text-red-700 border border-red-200">
+                        <span className="w-2 h-2 rounded-full bg-red-500" />
+                        <span>Red: {actStats.red}</span>
                       </span>
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200">
-                        <span className="w-2.5 h-2.5 rounded-full bg-slate-400" />
-                        <span>Gr: {actStats.grey}</span>
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-50 text-slate-500 border border-slate-200">
+                        <span className="w-2 h-2 rounded-full bg-slate-400" />
+                        <span>Gray: {actStats.grey}</span>
                       </span>
                     </div>
                   </div>
 
+                  {/* Action Button (Disabled if Closed or Upcoming) */}
                   <div className="shrink-0 flex items-center">
                     <button
-                      onClick={() => handleStart(act)}
-                      className="w-full md:w-auto px-6 py-3.5 bg-gradient-to-r from-wine-900 to-wine-800 hover:from-wine-800 hover:to-wine-700 text-white font-bold rounded-xl transition duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group text-sm"
+                      onClick={() => handleStart(target)}
+                      disabled={target.computedStatus === "Upcoming" || target.computedStatus === "Closed"}
+                      className="w-full md:w-auto px-5 py-3 bg-gradient-to-r from-wine-900 to-wine-800 hover:from-wine-800 hover:to-wine-700 text-white font-bold rounded-xl transition duration-200 shadow-sm hover:shadow-md disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center gap-2 group text-xs uppercase tracking-wide"
                     >
                       <span>Start Assessment</span>
-                      <ChevronRight className="w-4.5 h-4.5 group-hover:translate-x-0.5 transition duration-150" />
+                      <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition duration-150" />
                     </button>
                   </div>
                 </div>
