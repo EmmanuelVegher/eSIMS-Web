@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useApp } from "../context/AppContext";
 import { db } from "../firebase";
 import { collection, doc, getDocs, setDoc, deleteDoc } from "firebase/firestore";
-import { Building, Landmark, CheckCircle, Loader2, AlertCircle, Plus, Trash2, MapPin, Tag } from "lucide-react";
+import { Building, Landmark, CheckCircle, Loader2, AlertCircle, Plus, Trash2, MapPin, Tag, Pencil } from "lucide-react";
 import { AdminLayout } from "../components/AdminLayout";
 
 export const AdminSettings: React.FC = () => {
@@ -34,6 +34,11 @@ export const AdminSettings: React.FC = () => {
   const [newFacLga, setNewFacLga] = useState("");
   const [newFacCode, setNewFacCode] = useState("");
 
+  // Editing state trackers
+  const [editingOrgId, setEditingOrgId] = useState<string | null>(null);
+  const [editingStateId, setEditingStateId] = useState<string | null>(null);
+  const [editingFacId, setEditingFacId] = useState<string | null>(null);
+
   // Fetch all setup configurations from Firestore
   const loadData = async () => {
     setLoading(true);
@@ -46,15 +51,48 @@ export const AdminSettings: React.FC = () => {
 
       // 2. Fetch States from flat collection (fallback to empty)
       const statesSnap = await getDocs(collection(db, "states"));
-      const statesList: any[] = [];
+      let statesList: any[] = [];
       statesSnap.forEach(d => statesList.push({ id: d.id, ...d.data() }));
-      setStates(statesList);
 
       // 3. Fetch Facilities from flat collection
       const facsSnap = await getDocs(collection(db, "facilities"));
       const facsList: any[] = [];
       facsSnap.forEach(d => facsList.push({ id: d.id, ...d.data() }));
       setFacilities(facsList);
+
+      // Auto-sync states if states collection is empty but facilities exist (due to seeder/migration differences)
+      if (statesList.length === 0 && facsList.length > 0) {
+        const uniqueStates = new Map<string, { stateName: string; organizationName: string }>();
+        facsList.forEach(f => {
+          if (f.stateName && f.organizationName) {
+            const key = `${f.stateName}_${f.organizationName}`;
+            uniqueStates.set(key, { stateName: f.stateName, organizationName: f.organizationName });
+          }
+        });
+
+        const syncedList: any[] = [];
+        for (const [key, val] of uniqueStates.entries()) {
+          try {
+            await setDoc(doc(db, "states", key), {
+              stateName: val.stateName,
+              organizationName: val.organizationName
+            });
+            // Also write backward compatible path for organizations subcollection
+            await setDoc(doc(db, "organizations", val.organizationName, "Facilities", val.stateName), {
+              stateName: val.stateName,
+              organizationName: val.organizationName
+            });
+            syncedList.push({ id: key, stateName: val.stateName, organizationName: val.organizationName });
+          } catch (err) {
+            console.error("Failed to auto-sync state:", err);
+          }
+        }
+        if (syncedList.length > 0) {
+          statesList = syncedList;
+        }
+      }
+
+      setStates(statesList);
 
     } catch (e: any) {
       console.error(e);
@@ -82,21 +120,40 @@ export const AdminSettings: React.FC = () => {
 
     try {
       const orgId = newOrgName.trim();
+      
+      // If editing and ID changed, delete old document
+      if (editingOrgId && editingOrgId !== orgId) {
+        await deleteDoc(doc(db, "organizations", editingOrgId));
+      }
+
       const orgRef = doc(db, "organizations", orgId);
       await setDoc(orgRef, {
         organizationName: orgId,
         address: newOrgAddress.trim()
       });
 
-      setSuccess(`Organization "${orgId}" successfully created!`);
+      setSuccess(`Organization "${orgId}" successfully saved!`);
       setNewOrgName("");
       setNewOrgAddress("");
+      setEditingOrgId(null);
       await loadData();
     } catch (err: any) {
-      setError(err.message || "Failed to create organization.");
+      setError(err.message || "Failed to save organization.");
     } finally {
       setLoading(false);
     }
+  };
+
+  const startEditOrg = (org: any) => {
+    setEditingOrgId(org.id);
+    setNewOrgName(org.id);
+    setNewOrgAddress(org.address || "");
+  };
+
+  const cancelEditOrg = () => {
+    setEditingOrgId(null);
+    setNewOrgName("");
+    setNewOrgAddress("");
   };
 
   const handleCreateState = async (e: React.FormEvent) => {
@@ -112,26 +169,51 @@ export const AdminSettings: React.FC = () => {
     const docKey = `${stateName}_${orgName}`;
 
     try {
+      // If editing and key changed, delete the old doc keys
+      if (editingStateId && editingStateId !== docKey) {
+        await deleteDoc(doc(db, "states", editingStateId));
+        const underscoreIdx = editingStateId.indexOf("_");
+        if (underscoreIdx !== -1) {
+          const oldState = editingStateId.substring(0, underscoreIdx);
+          const oldOrg = editingStateId.substring(underscoreIdx + 1);
+          await deleteDoc(doc(db, "organizations", oldOrg, "Facilities", oldState));
+        }
+      }
+
       // 1. Save to flat state collection
       await setDoc(doc(db, "states", docKey), {
         stateName,
         organizationName: orgName
       });
 
-      // 2. Save backward compatible subcollection path: /organizations/{orgId}/Facilities/{stateId}
+      // 2. Save backward compatible subcollection path
       await setDoc(doc(db, "organizations", orgName, "Facilities", stateName), {
         stateName,
         organizationName: orgName
       });
 
-      setSuccess(`State "${stateName}" mapped to organization "${orgName}" successfully!`);
+      setSuccess(`State mapping updated successfully!`);
       setNewStateName("");
+      setSelectedOrgForState("");
+      setEditingStateId(null);
       await loadData();
     } catch (err: any) {
       setError(err.message || "Failed to map state.");
     } finally {
       setLoading(false);
     }
+  };
+
+  const startEditState = (s: any) => {
+    setEditingStateId(s.id);
+    setNewStateName(s.stateName);
+    setSelectedOrgForState(s.organizationName);
+  };
+
+  const cancelEditState = () => {
+    setEditingStateId(null);
+    setNewStateName("");
+    setSelectedOrgForState("");
   };
 
   const handleCreateFacility = async (e: React.FormEvent) => {
@@ -158,6 +240,15 @@ export const AdminSettings: React.FC = () => {
     const stateName = selectedStateForFac;
 
     try {
+      // If editing and ID changed, delete old refs
+      if (editingFacId && editingFacId !== facCode) {
+        await deleteDoc(doc(db, "facilities", editingFacId));
+        const oldFac = facilities.find(f => f.id === editingFacId);
+        if (oldFac) {
+          await deleteDoc(doc(db, "organizations", oldFac.organizationName, "Facilities", oldFac.stateName, oldFac.stateName, editingFacId));
+        }
+      }
+
       // 1. Save to flat facilities root collection
       await setDoc(doc(db, "facilities", facCode), {
         id: facCode,
@@ -168,7 +259,7 @@ export const AdminSettings: React.FC = () => {
         stateName: stateName
       });
 
-      // 2. Save backward compatible nested subcollection: /organizations/{orgId}/Facilities/{stateId}/{stateId}/{facId}
+      // 2. Save backward compatible nested subcollection
       await setDoc(doc(db, "organizations", orgName, "Facilities", stateName, stateName, facCode), {
         facilityName: facName,
         lga: facLga,
@@ -177,16 +268,37 @@ export const AdminSettings: React.FC = () => {
         stateName: stateName
       });
 
-      setSuccess(`Facility "${facName}" registered successfully!`);
+      setSuccess(`Facility "${facName}" registered/updated successfully!`);
       setNewFacName("");
       setNewFacLga("");
       setNewFacCode("");
+      setSelectedOrgForFac("");
+      setSelectedStateForFac("");
+      setEditingFacId(null);
       await loadData();
     } catch (err: any) {
-      setError(err.message || "Failed to create facility.");
+      setError(err.message || "Failed to save facility.");
     } finally {
       setLoading(false);
     }
+  };
+
+  const startEditFacility = (fac: any) => {
+    setEditingFacId(fac.id);
+    setNewFacName(fac.facilityName);
+    setNewFacLga(fac.lga || "");
+    setNewFacCode(fac.id);
+    setSelectedOrgForFac(fac.organizationName);
+    setSelectedStateForFac(fac.stateName);
+  };
+
+  const cancelEditFacility = () => {
+    setEditingFacId(null);
+    setNewFacName("");
+    setNewFacLga("");
+    setNewFacCode("");
+    setSelectedOrgForFac("");
+    setSelectedStateForFac("");
   };
 
   // Delete helpers
@@ -302,19 +414,31 @@ export const AdminSettings: React.FC = () => {
                         {org.address && <p className="text-[10px] text-slate-400 mt-0.5">{org.address}</p>}
                       </div>
                     </div>
-                    <button
-                      onClick={() => handleDeleteOrg(org.id)}
-                      className="p-1.5 rounded-lg text-slate-300 hover:text-red-600 hover:bg-red-50 transition"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={() => startEditOrg(org)}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-wine-800 hover:bg-wine-50 transition shrink-0"
+                        title="Edit Organization"
+                      >
+                        <Pencil className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteOrg(org.id)}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-red-600 hover:bg-red-50 transition shrink-0"
+                        title="Delete Organization"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 ))
               )}
             </div>
 
             <div className="glass-panel p-6 rounded-2xl border border-slate-200/80 shadow-sm bg-white self-start">
-              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wide mb-4">Add Organization</h3>
+              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wide mb-4">
+                {editingOrgId ? "Edit Organization" : "Add Organization"}
+              </h3>
               <form onSubmit={handleCreateOrg} className="space-y-4">
                 <div>
                   <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1.5">Partner Name</label>
@@ -337,14 +461,27 @@ export const AdminSettings: React.FC = () => {
                     className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-wine-800 transition resize-none"
                   />
                 </div>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full py-2.5 bg-gradient-to-r from-wine-900 to-wine-800 hover:from-wine-800 hover:to-wine-700 text-white text-xs font-bold rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span>Create Organization</span>
-                </button>
+                <div className="flex gap-2">
+                  {editingOrgId && (
+                    <button
+                      type="button"
+                      onClick={cancelEditOrg}
+                      className="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition shadow-sm"
+                    >
+                      Cancel
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={`py-2.5 text-white text-xs font-bold rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm ${
+                      editingOrgId ? "w-1/2 bg-wine-800 hover:bg-wine-700" : "w-full bg-gradient-to-r from-wine-900 to-wine-800 hover:from-wine-800 hover:to-wine-700"
+                    }`}
+                  >
+                    {editingOrgId ? <CheckCircle className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                    <span>{editingOrgId ? "Save Changes" : "Create Organization"}</span>
+                  </button>
+                </div>
               </form>
             </div>
           </div>
@@ -369,19 +506,31 @@ export const AdminSettings: React.FC = () => {
                         <p className="text-[10px] text-slate-400 mt-0.5">Assigned to: {s.organizationName}</p>
                       </div>
                     </div>
-                    <button
-                      onClick={() => handleDeleteState(s.id, s.stateName, s.organizationName)}
-                      className="p-1.5 rounded-lg text-slate-300 hover:text-red-600 hover:bg-red-50 transition"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={() => startEditState(s)}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-wine-800 hover:bg-wine-50 transition shrink-0"
+                        title="Edit State Mapping"
+                      >
+                        <Pencil className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteState(s.id, s.stateName, s.organizationName)}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-red-600 hover:bg-red-50 transition shrink-0"
+                        title="Delete State Mapping"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 ))
               )}
             </div>
 
             <div className="glass-panel p-6 rounded-2xl border border-slate-200/80 shadow-sm bg-white self-start">
-              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wide mb-4">Map Target State</h3>
+              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wide mb-4">
+                {editingStateId ? "Edit State Mapping" : "Map Target State"}
+              </h3>
               <form onSubmit={handleCreateState} className="space-y-4">
                 <div>
                   <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1.5">Organization</label>
@@ -408,14 +557,27 @@ export const AdminSettings: React.FC = () => {
                     className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-wine-800 transition"
                   />
                 </div>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full py-2.5 bg-gradient-to-r from-wine-900 to-wine-800 hover:from-wine-800 hover:to-wine-700 text-white text-xs font-bold rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span>Map State</span>
-                </button>
+                <div className="flex gap-2">
+                  {editingStateId && (
+                    <button
+                      type="button"
+                      onClick={cancelEditState}
+                      className="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition shadow-sm"
+                    >
+                      Cancel
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={`py-2.5 text-white text-xs font-bold rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm ${
+                      editingStateId ? "w-1/2 bg-wine-800 hover:bg-wine-700" : "w-full bg-gradient-to-r from-wine-900 to-wine-800 hover:from-wine-800 hover:to-wine-700"
+                    }`}
+                  >
+                    {editingStateId ? <CheckCircle className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                    <span>{editingStateId ? "Save Changes" : "Map State"}</span>
+                  </button>
+                </div>
               </form>
             </div>
           </div>
@@ -447,6 +609,13 @@ export const AdminSettings: React.FC = () => {
                         {fac.datimCode}
                       </span>
                       <button
+                        onClick={() => startEditFacility(fac)}
+                        className="p-1.5 rounded-lg text-slate-300 hover:text-wine-800 hover:bg-wine-50 transition shrink-0"
+                        title="Edit Facility"
+                      >
+                        <Pencil className="w-4 h-4" />
+                      </button>
+                      <button
                         onClick={() => handleDeleteFacility(fac.id, fac.organizationName, fac.stateName)}
                         className="p-1.5 rounded-lg text-slate-300 hover:text-red-600 hover:bg-red-50 transition shrink-0"
                       >
@@ -459,7 +628,9 @@ export const AdminSettings: React.FC = () => {
             </div>
 
             <div className="glass-panel p-6 rounded-2xl border border-slate-200/80 shadow-sm bg-white self-start">
-              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wide mb-4">Register Facility</h3>
+              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wide mb-4">
+                {editingFacId ? "Edit Facility" : "Register Facility"}
+              </h3>
               <form onSubmit={handleCreateFacility} className="space-y-4">
                 <div>
                   <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1.5">Organization</label>
@@ -532,14 +703,27 @@ export const AdminSettings: React.FC = () => {
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full py-2.5 bg-gradient-to-r from-wine-900 to-wine-800 hover:from-wine-800 hover:to-wine-700 text-white text-xs font-bold rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span>Register Facility</span>
-                </button>
+                <div className="flex gap-2">
+                  {editingFacId && (
+                    <button
+                      type="button"
+                      onClick={cancelEditFacility}
+                      className="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition shadow-sm"
+                    >
+                      Cancel
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={`py-2.5 text-white text-xs font-bold rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm ${
+                      editingFacId ? "w-1/2 bg-wine-800 hover:bg-wine-700" : "w-full bg-gradient-to-r from-wine-900 to-wine-800 hover:from-wine-800 hover:to-wine-700"
+                    }`}
+                  >
+                    {editingFacId ? <CheckCircle className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                    <span>{editingFacId ? "Save Changes" : "Register Facility"}</span>
+                  </button>
+                </div>
               </form>
             </div>
           </div>

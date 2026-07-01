@@ -202,8 +202,8 @@ export const Auth: React.FC = () => {
             <div>
               <h1 className="text-4xl xl:text-5xl font-extrabold text-white leading-[1.1] mb-4">
                 PEPFAR<br />
-                <span className="text-rosegold-300">Site Improvement</span><br />
-                Monitoring
+                <span className="text-rosegold-300">Site Improvement Through</span><br />
+                Monitoring System (SIMS)
               </h1>
               <p className="text-white/50 text-sm leading-relaxed max-w-xs">
                 A comprehensive platform for PEPFAR-funded implementing partners to conduct, track, and report site assessment outcomes across Nigeria.
@@ -324,11 +324,11 @@ export const Auth: React.FC = () => {
                 </button>
               </p>
 
-              <button type="button" onClick={() => routerNav("/seeder")}
+              {/* <button type="button" onClick={() => routerNav("/seeder")}
                 className="w-full mt-2 py-2 rounded-lg border border-white/8 text-white/20 text-xs hover:text-white/50 hover:border-white/20 transition flex items-center justify-center gap-2">
                 <Database className="w-3.5 h-3.5" />
                 First-time setup? Seed the database
-              </button>
+              </button> */}
             </form>
           )}
 

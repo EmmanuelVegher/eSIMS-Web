@@ -10,7 +10,6 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { AdminLayout } from "../components/AdminLayout";
 import { Avatar } from "../components/AdminLayout";
 import {
@@ -123,23 +122,66 @@ export const AdminProfile: React.FC = () => {
     reader.readAsDataURL(file);
   };
 
-  // ── Upload photo to Firebase Storage ──
+  // Helper to compress and convert image to base64
+  const compressImage = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = event => {
+        const img = new Image();
+        img.src = event.target?.result as string;
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const MAX_WIDTH = 250;
+          const MAX_HEIGHT = 250;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height *= MAX_WIDTH / width;
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width *= MAX_HEIGHT / height;
+              height = MAX_HEIGHT;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx?.drawImage(img, 0, 0, width, height);
+
+          // Get base64 string of compressed jpeg
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.75);
+          resolve(dataUrl);
+        };
+        img.onerror = err => reject(err);
+      };
+      reader.onerror = err => reject(err);
+    });
+  };
+
+  // ── Compress and Save photo directly to Firestore ──
   const handleUploadPhoto = async () => {
     if (!photoFile || !firebaseUser) return;
     setUploadingPhoto(true);
     try {
-      const storage = getStorage();
-      const storageRef = ref(storage, `profile_photos/${firebaseUser.uid}`);
-      await uploadBytes(storageRef, photoFile);
-      const url = await getDownloadURL(storageRef);
-      await updateProfile(firebaseUser, { photoURL: url });
-      await updateDoc(doc(db, "users", firebaseUser.uid), { photoURL: url });
-      setPhotoPreview(url);
+      // 1. Compress image to a high quality 250x250 JPG base64 data URL locally in the browser
+      const base64Url = await compressImage(photoFile);
+
+      // 2. Save it directly to the user's Firestore document
+      await updateDoc(doc(db, "users", firebaseUser.uid), { photoURL: base64Url });
+      
+      // 3. Update local state previews and refresh AppContext
+      setPhotoPreview(base64Url);
       setPhotoFile(null);
       await refreshProfile();
       setProfileStatus({ type: "ok", msg: "Profile photo updated!" });
     } catch (err: any) {
-      setProfileStatus({ type: "err", msg: err.message || "Failed to upload photo." });
+      setProfileStatus({ type: "err", msg: err.message || "Failed to process photo." });
     } finally {
       setUploadingPhoto(false);
     }

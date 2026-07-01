@@ -4,16 +4,18 @@ import { AppProvider } from "./context/AppContext";
 import { ProtectedRoute, PublicOnlyRoute } from "./components/RouteGuards";
 
 // Pages
-import { Auth }           from "./pages/Auth";
-import { Overview }       from "./pages/Overview";
-import { Activities }     from "./pages/Activities";
-import { Assessment }     from "./pages/Assessment";
-import { AdminDashboard } from "./pages/AdminDashboard";
-import { CreateActivity } from "./pages/CreateActivity";
-import { CeeManager }     from "./pages/CeeManager";
-import { AdminSettings }  from "./pages/AdminSettings";
-import { AdminProfile }   from "./pages/AdminProfile";
-import { SeederPage }     from "./pages/SeederPage";
+import { Auth }            from "./pages/Auth";
+import { Overview }        from "./pages/Overview";
+import { Activities }      from "./pages/Activities";
+import { Assessment }      from "./pages/Assessment";
+import { AdminDashboard }  from "./pages/AdminDashboard";
+import { CreateActivity }  from "./pages/CreateActivity";
+import { CeeManager }      from "./pages/CeeManager";
+import { AdminSettings }   from "./pages/AdminSettings";
+import { AdminProfile }    from "./pages/AdminProfile";
+import { AdminActivities } from "./pages/AdminActivities";
+import { SeederPage }      from "./pages/SeederPage";
+import { NotificationsManager } from "./pages/NotificationsManager";
 
 // ------------------------------------------------------------------
 // IMPORTANT: BrowserRouter must wrap AppProvider so that
@@ -49,9 +51,19 @@ function App() {
           <Route element={<ProtectedRoute requiredRole="Admin" />}>
             <Route path="/admin"                 element={<AdminDashboard />} />
             <Route path="/admin/create-activity" element={<CreateActivity />} />
+            <Route path="/admin/activities"      element={<AdminActivities />} />
             <Route path="/admin/cee-manager"     element={<CeeManager />} />
             <Route path="/admin/settings"        element={<AdminSettings />} />
             <Route path="/admin/profile"         element={<AdminProfile />} />
+            <Route path="/admin/notifications"   element={<NotificationsManager />} />
+            
+            {/* Dashboard Sub-routes mapped to AdminDashboard */}
+            <Route path="/admin/coverage/matrix" element={<AdminDashboard />} />
+            <Route path="/admin/coverage/sets"     element={<AdminDashboard />} />
+            <Route path="/admin/coverage/partners" element={<AdminDashboard />} />
+            <Route path="/admin/analytics/grades"  element={<AdminDashboard />} />
+            <Route path="/admin/analytics/sites"   element={<AdminDashboard />} />
+            <Route path="/admin/analytics/states"  element={<AdminDashboard />} />
           </Route>
 
           {/* 404 catch-all */}

@@ -14,7 +14,8 @@ import {
   CheckCircle,
   Save,
   UserCheck,
-  MessageSquare
+  MessageSquare,
+  LogOut
 } from "lucide-react";
 
 interface QuestionResponse {
@@ -25,11 +26,13 @@ interface QuestionResponse {
 }
 
 export const Assessment: React.FC = () => {
-  const { activeActivity, navigate, activeCeeId, setActiveCeeId } = useApp();
+  const { activeActivity, navigate, activeCeeId, setActiveCeeId, logout } = useApp();
 
   const [selectedSet, setSelectedSet] = useState("1A");
   const [cees, setCees] = useState<any[]>([]);
   const [questions, setQuestions] = useState<any[]>([]);
+  const [allQuestions, setAllQuestions] = useState<any[]>([]);
+  const [allCees, setAllCees] = useState<any[]>([]);
   
   // Rich web state response map
   const [responses, setResponses] = useState<Record<string, QuestionResponse>>({});
@@ -45,7 +48,7 @@ export const Assessment: React.FC = () => {
   const [success, setSuccess] = useState("");
 
   // Set titles mapping
-  const setTitles: Record<string, string> = {
+  const [setTitles, setSetTitles] = useState<Record<string, string>>({
     "1A": "Set 1A: All Sites - General",
     "1B": "Set 1B: Commodities Management",
     "1C": "Set 1C: Data Quality",
@@ -62,7 +65,7 @@ export const Assessment: React.FC = () => {
     "8": "Set 8: TB Treatment Service Point",
     "9": "Set 9: MAT Services",
     "10": "Set 10: Laboratory",
-  };
+  });
 
   // Image assets mapping helper
   const getImageAsset = (code: string) => {
@@ -107,16 +110,72 @@ export const Assessment: React.FC = () => {
     fetchStaff();
   }, []);
 
+  // Load CEE Sets dynamically from Firestore
+  useEffect(() => {
+    const fetchSets = async () => {
+      try {
+        const snap = await getDocs(collection(db, "sets"));
+        const titlesObj: Record<string, string> = {};
+        snap.forEach(d => {
+          titlesObj[d.id] = d.data().name || d.id;
+        });
+        if (Object.keys(titlesObj).length > 0) {
+          setSetTitles(titlesObj);
+        }
+      } catch (err) {
+        console.error("Error loading CEE sets:", err);
+      }
+    };
+    fetchSets();
+  }, []);
+
+  // Load Questions list once from Firestore, fallback to questionsData
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const snap = await getDocs(collection(db, "questions"));
+        const list: any[] = [];
+        snap.forEach(d => {
+          list.push({ id: d.id, ...d.data() });
+        });
+        setAllQuestions(list.length ? list : questionsData);
+      } catch (e) {
+        console.error("Error loading questions from firestore:", e);
+        setAllQuestions(questionsData);
+      }
+    };
+    fetchQuestions();
+  }, []);
+
+  // Load CEEs list once from Firestore, fallback to ceesData
+  useEffect(() => {
+    const fetchCees = async () => {
+      try {
+        const snap = await getDocs(collection(db, "cees"));
+        const list: any[] = [];
+        snap.forEach(d => {
+          list.push({ id: d.id, ...d.data() });
+        });
+        setAllCees(list.length ? list : ceesData);
+      } catch (e) {
+        console.error("Error loading cees from firestore:", e);
+        setAllCees(ceesData);
+      }
+    };
+    fetchCees();
+  }, []);
+
   // Filter CEEs by active set
   useEffect(() => {
-    const filteredCees = ceesData.filter((cee: any) => cee.setId === selectedSet);
+    const cSource = allCees.length > 0 ? allCees : ceesData;
+    const filteredCees = cSource.filter((cee: any) => cee.setId === selectedSet && cee.isActive !== false);
     setCees(filteredCees);
     
     // Default first CEE as active if none selected
     if (filteredCees.length > 0 && (!activeCeeId || !filteredCees.some(c => c.id === activeCeeId))) {
       setActiveCeeId(filteredCees[0].id);
     }
-  }, [selectedSet]);
+  }, [selectedSet, allCees]);
 
   // Fetch Questions & Existing Responses from Deeply Nested path
   useEffect(() => {
@@ -127,8 +186,9 @@ export const Assessment: React.FC = () => {
       setError("");
       setSuccess("");
       try {
-        // Filter questions for active CEE
-        const filteredQ = questionsData.filter((q: any) => q.ceeId === activeCeeId);
+        // Filter questions for active CEE and filter out inactive ones
+        const qSource = allQuestions.length > 0 ? allQuestions : questionsData;
+        const filteredQ = qSource.filter((q: any) => q.ceeId === activeCeeId && q.isActive !== false);
         setQuestions(filteredQ);
 
         // Nested Path: /sims_activities/{eSIMS_ID}/{org}/{state}/{state}/{setId}/{ceeId}/{ceeId}
@@ -166,7 +226,7 @@ export const Assessment: React.FC = () => {
     };
 
     loadQuestionsAndResponses();
-  }, [activeCeeId, activeActivity, selectedSet]);
+  }, [activeCeeId, activeActivity, selectedSet, allQuestions]);
 
   // Scoring engine rules mapping
   const calculateScoreAndStatus = (q: any, answer: any): { score: number; status: "Red" | "Yellow" | "Green" | "Gray" } => {
@@ -282,6 +342,39 @@ export const Assessment: React.FC = () => {
         status
       }
     }));
+  };
+
+  const getOverallCeeScore = (): { score: number; color: "Red" | "Yellow" | "Green" | "Gray" } => {
+    if (naChecked) {
+      return { score: 0, color: "Gray" };
+    }
+
+    let overallColor: "Red" | "Yellow" | "Green" | "Gray" = "Green";
+    let answeredCount = 0;
+
+    const visibleQuestions = questions.filter(q => isQuestionVisible(q.id, responses));
+    if (visibleQuestions.length === 0) {
+      return { score: 0, color: "Gray" };
+    }
+
+    visibleQuestions.forEach(q => {
+      const resp = responses[q.id];
+      if (resp) {
+        answeredCount++;
+        if (resp.status === "Red") {
+          overallColor = "Red";
+        } else if (resp.status === "Yellow" && overallColor !== "Red") {
+          overallColor = "Yellow";
+        }
+      }
+    });
+
+    if (answeredCount === 0) {
+      return { score: 0, color: "Gray" };
+    }
+
+    const scoreIntMap = { Gray: 0, Red: 1, Yellow: 2, Green: 3 };
+    return { score: scoreIntMap[overallColor], color: overallColor };
   };
 
   // Save/Submit the CEE data
@@ -432,7 +525,7 @@ export const Assessment: React.FC = () => {
     }
   };
 
-  const activeCee = ceesData.find((c: any) => c.id === activeCeeId);
+  const activeCee = cees.find((c: any) => c.id === activeCeeId);
 
   return (
     <div className="min-h-screen bg-[#FAF7F8] flex flex-col">
@@ -458,10 +551,25 @@ export const Assessment: React.FC = () => {
               onChange={e => setSelectedSet(e.target.value)}
               className="px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-wine-600 transition shadow-sm cursor-pointer"
             >
-              {Object.entries(setTitles).map(([key, label]) => (
-                <option key={key} value={key}>{label}</option>
-              ))}
+              {Object.keys(setTitles)
+                .sort((a, b) => {
+                  const numA = parseInt(a, 10);
+                  const numB = parseInt(b, 10);
+                  if (numA !== numB) return numA - numB;
+                  return a.localeCompare(b);
+                })
+                .map(key => (
+                  <option key={key} value={key}>{setTitles[key]}</option>
+                ))}
             </select>
+            <button
+              onClick={logout}
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-red-100 bg-white hover:bg-red-50 text-red-650 hover:text-red-750 transition text-xs font-bold shadow-sm"
+              title="Sign Out"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Sign Out</span>
+            </button>
           </div>
         </div>
       </header>
@@ -572,6 +680,36 @@ export const Assessment: React.FC = () => {
                       <p className="whitespace-pre-line text-slate-600">{activeCee.instructions}</p>
                     </div>
                   )}
+                </div>
+
+                {/* Final CEE Score Block */}
+                <div className="flex items-center justify-between border-t border-slate-100 pt-4">
+                  <span className="text-xs font-bold text-wine-905 uppercase tracking-wider">Final CEE Score:</span>
+                  {(() => {
+                    const { score, color } = getOverallCeeScore();
+                    let label = "Not Answered";
+                    let bgClass = "bg-slate-50 text-slate-400 border-slate-205";
+                    
+                    if (color === "Green") {
+                      label = "Meets Standard";
+                      bgClass = "bg-emerald-50 text-emerald-705 border-emerald-250/30";
+                    } else if (color === "Yellow") {
+                      label = "Needs Action";
+                      bgClass = "bg-amber-50 text-amber-705 border-amber-250/30";
+                    } else if (color === "Red") {
+                      label = "Critical";
+                      bgClass = "bg-red-50 text-red-755 border-red-250/30";
+                    } else if (color === "Gray" && naChecked) {
+                      label = "Not Applicable";
+                      bgClass = "bg-slate-105 text-slate-505 border-slate-205";
+                    }
+
+                    return (
+                      <span className={`px-3.5 py-1.5 rounded-xl border text-xs font-black uppercase tracking-wider shadow-sm transition ${bgClass}`}>
+                        Score: {score} ({label})
+                      </span>
+                    );
+                  })()}
                 </div>
 
                 {/* Not Applicable Toggle Check */}
@@ -853,6 +991,14 @@ export const Assessment: React.FC = () => {
                   </button>
                 </div>
               </div>
+            </div>
+          ) : cees.length === 0 ? (
+            <div className="h-full flex flex-col items-center justify-center p-8 text-center bg-white rounded-3xl border border-slate-150/80 shadow-sm max-w-xl mx-auto my-12 space-y-4">
+              <Info className="w-12 h-12 text-slate-350" />
+              <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wider">No CEE or Questions Available</h3>
+              <p className="text-xs text-slate-500 max-w-sm leading-relaxed">
+                There are no active CEEs or questions available for this set.
+              </p>
             </div>
           ) : (
             <div className="h-full flex items-center justify-center">

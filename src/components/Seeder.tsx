@@ -74,6 +74,20 @@ export const Seeder: React.FC = () => {
 
         // Create Facilities grouped by state
         for (const fac of org.facilities) {
+          // Create state mapping doc
+          const stateDocRef = doc(db, "organizations", org.name, "Facilities", fac.state);
+          await setDoc(stateDocRef, {
+            stateName: fac.state,
+            organizationName: org.name
+          });
+
+          // Create flat state doc
+          const flatStateRef = doc(db, "states", `${fac.state}_${org.name}`);
+          await setDoc(flatStateRef, {
+            stateName: fac.state,
+            organizationName: org.name
+          });
+
           const facRef = doc(db, "organizations", org.name, "Facilities", fac.state, fac.state, fac.code);
           await writeBatch(db).set(facRef, {
             facilityName: fac.name,
@@ -96,7 +110,7 @@ export const Seeder: React.FC = () => {
         }
       }
 
-      // 2b. Migrate any existing custom nested facilities to flat facilities
+      // 2b. Migrate any existing custom nested facilities & states to flat collections
       setProgress("Migrating any custom nested facilities...");
       const orgsSnapForMigration = await getDocs(collection(db, "organizations"));
       for (const orgDoc of orgsSnapForMigration.docs) {
@@ -104,6 +118,14 @@ export const Seeder: React.FC = () => {
         const statesSnap = await getDocs(collection(db, "organizations", orgId, "Facilities"));
         for (const stateDoc of statesSnap.docs) {
           const stateId = stateDoc.id;
+
+          // Migrate state doc to flat states collection
+          const docKey = `${stateId}_${orgId}`;
+          await setDoc(doc(db, "states", docKey), {
+            stateName: stateId,
+            organizationName: orgId
+          });
+
           const facSnap = await getDocs(collection(db, "organizations", orgId, "Facilities", stateId, stateId));
           for (const facDoc of facSnap.docs) {
             const facData = facDoc.data();
@@ -159,7 +181,7 @@ export const Seeder: React.FC = () => {
         const chunk = ceesData.slice(i, i + 20);
         chunk.forEach(cee => {
           const ref = doc(db, "cees", cee.id);
-          batch.set(ref, cee);
+          batch.set(ref, cee, { merge: true });
         });
         await batch.commit();
       }
@@ -174,7 +196,7 @@ export const Seeder: React.FC = () => {
         const chunk = questionsData.slice(i, i + 20);
         chunk.forEach(q => {
           const ref = doc(db, "questions", q.id);
-          batch.set(ref, q);
+          batch.set(ref, q, { merge: true });
         });
         await batch.commit();
       }

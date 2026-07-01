@@ -20,7 +20,8 @@ import {
   Map,
   FileBarChart,
   Building2,
-  Activity
+  Activity,
+  Bell
 } from "lucide-react";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -61,7 +62,8 @@ const navItems: NavItem[] = [
       { label: "State Comparison", path: "/admin/analytics/states",  icon: Map },
     ],
   },
-  { label: "CEE Manager",        path: "/admin/cee-manager",      icon: Grid3x3 },
+  { label: "SET & CEE Manager",        path: "/admin/cee-manager",      icon: Grid3x3 },
+  { label: "Notifications",      path: "/admin/notifications",    icon: Bell },
   {
     label: "Settings",
     path: "/admin/settings",

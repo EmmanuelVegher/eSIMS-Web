@@ -1,10 +1,82 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useApp } from "../context/AppContext";
 import { motion } from "framer-motion";
-import { LogOut, Shield, ArrowRight } from "lucide-react";
+import { LogOut, Shield, ArrowRight, Bell } from "lucide-react";
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 export const Overview: React.FC = () => {
   const { profile, navigate, logout } = useApp();
+  const [notifications, setNotifications] = useState<any[]>([]);
+
+  // Fuzzy matches organization names
+  const isMatchOrg = (userOrgName: string, orgNameInDb: string): boolean => {
+    if (!userOrgName || !orgNameInDb) return false;
+    const normUser = userOrgName.toLowerCase().replace(/[^a-z0-9]/g, "");
+    const normDb = orgNameInDb.toLowerCase().replace(/[^a-z0-9]/g, "");
+    
+    const match = normDb.includes(normUser) || normUser.includes(normDb);
+    if (match) return true;
+
+    const isUserCaritas = normUser.includes("caritas") || normUser.includes("ccfn");
+    const isDbCaritas = normDb.includes("caritas") || normDb.includes("ccfn");
+    if (isUserCaritas && isDbCaritas) return true;
+
+    const isUserIhvn = normUser.includes("ihvn") || normUser.includes("virology");
+    const isDbIhvn = normDb.includes("ihvn") || normDb.includes("virology");
+    if (isUserIhvn && isDbIhvn) return true;
+
+    const isUserApin = normUser.includes("apin") || normUser.includes("publichealth");
+    const isDbApin = normDb.includes("apin") || normDb.includes("publichealth");
+    if (isUserApin && isDbApin) return true;
+
+    return false;
+  };
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      if (!profile) return;
+      try {
+        const snap = await getDocs(collection(db, "admin_notifications"));
+        const list: any[] = [];
+        snap.forEach(d => {
+          list.push({ id: d.id, ...d.data() });
+        });
+
+        const now = new Date();
+        // Client side filtering for scheduled and targeted alerts
+        const filtered = list.filter(n => {
+          // 1. Scheduled delivery check
+          if (n.scheduledAt && new Date(n.scheduledAt) > now) {
+            return false;
+          }
+
+          // 2. Audience scoping checks
+          if (n.type === "Broadcast") return true;
+          if (n.type === "State" && profile.state) {
+            return n.targetValue?.toLowerCase() === profile.state.toLowerCase();
+          }
+          if (n.type === "Facility" && profile.facilityName) {
+            return n.targetValue?.toLowerCase() === profile.facilityName.toLowerCase();
+          }
+          if (n.type === "User" && profile.email) {
+            return n.targetValue?.toLowerCase() === profile.email.toLowerCase();
+          }
+          if (n.type === "Partner" && profile.organizationName) {
+            return isMatchOrg(profile.organizationName, n.targetValue);
+          }
+          return false;
+        });
+
+        // Sort descending by createdAt
+        filtered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        setNotifications(filtered);
+      } catch (err) {
+        console.error("Failed to load notifications:", err);
+      }
+    };
+    fetchNotifications();
+  }, [profile]);
 
   const getInitials = () => {
     if (!profile) return "E";
@@ -96,10 +168,11 @@ export const Overview: React.FC = () => {
             )}
             <button
               onClick={logout}
-              className="p-1.5 rounded-lg hover:bg-red-50 text-slate-500 hover:text-red-600 transition"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-red-100 hover:bg-red-50 text-red-650 hover:text-red-750 transition text-xs font-bold shadow-sm"
               title="Sign Out"
             >
-              <LogOut className="w-4 h-4" />
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Sign Out</span>
             </button>
           </div>
         </div>
@@ -131,6 +204,32 @@ export const Overview: React.FC = () => {
                 </p>
               </div>
             </motion.div>
+
+            {/* Broadcasts & Alerts Card */}
+            {notifications.length > 0 && (
+              <div className="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-sm space-y-3">
+                <h3 className="text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
+                  <Bell className="w-4 h-4 text-wine-800 animate-bounce" />
+                  <span>Alerts & Notifications</span>
+                </h3>
+                <div className="space-y-3 max-h-48 overflow-y-auto pr-1">
+                  {notifications.map((n: any) => (
+                    <div key={n.id} className="p-3 bg-slate-50 rounded-2xl border border-slate-100/50 space-y-1 hover:border-wine-100 transition">
+                      <div className="flex justify-between items-start gap-2">
+                        <span className="text-[9px] font-black text-wine-900 bg-wine-50 px-1.5 py-0.5 rounded uppercase tracking-wider">
+                          {n.type || "Broadcast"}
+                        </span>
+                        <span className="text-[9px] text-slate-400 font-medium">
+                          {n.createdAt ? new Date(n.createdAt).toLocaleDateString() : ""}
+                        </span>
+                      </div>
+                      <p className="text-xs font-bold text-slate-800">{n.title}</p>
+                      <p className="text-[11px] text-slate-500 leading-normal">{n.message}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Assessment Tool Info */}
             <div className="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-sm space-y-4">

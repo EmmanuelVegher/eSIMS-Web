@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useApp } from "../context/AppContext";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { Calendar, MapPin, Building2, ClipboardList, ChevronRight, Loader2, AlertCircle, ArrowLeft } from "lucide-react";
+import { Calendar, MapPin, Building2, ClipboardList, ChevronRight, Loader2, AlertCircle, ArrowLeft, LogOut } from "lucide-react";
 
 interface SimsActivity {
   id: string;
@@ -25,7 +25,7 @@ interface RefinedActivityTarget {
 }
 
 export const Activities: React.FC = () => {
-  const { profile, navigate, setActiveActivity } = useApp();
+  const { profile, navigate, setActiveActivity, logout } = useApp();
   
   const [targets, setTargets] = useState<RefinedActivityTarget[]>([]);
   const [flatFacilities, setFlatFacilities] = useState<any[]>([]);
@@ -54,14 +54,26 @@ export const Activities: React.FC = () => {
           rawActivities.push({ id: d.id, ...d.data() } as SimsActivity);
         });
 
-        // 3. Filter activities in-memory to match user organization (including comma-separated orgs and 'All')
+        // 3. Filter activities in-memory to match user organization and state (if defined)
         const userOrg = profile.organizationName;
+        const userState = profile.state;
+
         const orgActivities = rawActivities.filter(act => {
           if (!act.organizations) return false;
-          return (
-            act.organizations === "All" ||
-            act.organizations.split(",").map(o => o.trim()).includes(userOrg)
-          );
+          const matchesOrg = act.organizations === "All" ||
+            act.organizations.split(",").map(o => o.trim()).includes(userOrg);
+          
+          if (!matchesOrg) return false;
+
+          // If the user has a state, check if the activity is for this state or All
+          if (userState) {
+            if (!act.states) return false;
+            const matchesState = act.states === "All" ||
+              act.states.split(",").map(s => s.trim().toLowerCase()).includes(userState.trim().toLowerCase());
+            if (!matchesState) return false;
+          }
+
+          return true;
         });
 
         // 4. Split activities containing multiple facilities (comma-separated list) into individual targets
@@ -93,13 +105,21 @@ export const Activities: React.FC = () => {
 
             // Lookup facility details to resolve exact state
             const matchedFac = facList.find(f => f.facilityName.toLowerCase() === facName.toLowerCase());
-            
+            const resolvedState = matchedFac?.stateName || act.states || "";
+
+            // Filter out if userState is defined and does not match resolvedState
+            if (userState && resolvedState) {
+              const stateMatch = resolvedState.toLowerCase().includes(userState.toLowerCase()) ||
+                                 userState.toLowerCase().includes(resolvedState.toLowerCase());
+              if (!stateMatch) return;
+            }
+
             refinedList.push({
               id: act.id,
               startDate: act.startDate,
               proposedEndDate: act.proposedEndDate,
               organizations: matchedFac?.organizationName || act.organizations,
-              states: matchedFac?.stateName || act.states,
+              states: resolvedState,
               facilities: facName,
               computedStatus
             });
@@ -209,17 +229,27 @@ export const Activities: React.FC = () => {
     <div className="min-h-screen bg-slate-50 pb-16">
       {/* Header */}
       <header className="glass-panel sticky top-0 z-40 border-b border-slate-200/80 px-6 py-4 shadow-sm">
-        <div className="max-w-4xl mx-auto flex items-center gap-4">
-          <button
-            onClick={() => navigate("overview")}
-            className="p-2 rounded-lg hover:bg-wine-50 text-slate-500 hover:text-wine-800 transition"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div>
-            <h1 className="text-xl font-bold text-wine-900">Scheduled Site Assessments</h1>
-            <p className="text-xs text-slate-500 mt-0.5">Select a target facility to begin evaluation</p>
+        <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate("overview")}
+              className="p-2 rounded-lg hover:bg-wine-50 text-slate-500 hover:text-wine-800 transition"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <div>
+              <h1 className="text-xl font-bold text-wine-900">Scheduled Site Assessments</h1>
+              <p className="text-xs text-slate-500 mt-0.5">Select a target facility to begin evaluation</p>
+            </div>
           </div>
+          <button
+            onClick={logout}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-red-100 hover:bg-red-50 text-red-650 hover:text-red-750 transition text-xs font-bold shadow-sm"
+            title="Sign Out"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            <span>Sign Out</span>
+          </button>
         </div>
       </header>
 

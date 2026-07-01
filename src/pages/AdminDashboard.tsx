@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useApp } from "../context/AppContext";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { useLocation } from "react-router-dom";
 import {
   BarChart,
   Bar,
@@ -22,15 +23,21 @@ import {
   Download,
   Filter,
   Grid,
-  BarChart3
+  BarChart3,
+  MapPin,
+  Building2,
+  TrendingUp,
+  Shield,
+  Activity
 } from "lucide-react";
 import { AdminLayout } from "../components/AdminLayout";
 
 export const AdminDashboard: React.FC = () => {
+  const { profile } = useApp();
+  const location = useLocation();
   const [activities, setActivities] = useState<any[]>([]);
   const [responses, setResponses] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"overview" | "coverage">("overview");
 
   // Filters
   const [selectedOrg, setSelectedOrg] = useState("All");
@@ -40,12 +47,25 @@ export const AdminDashboard: React.FC = () => {
   const [orgs, setOrgs] = useState<string[]>([]);
   const [states, setStates] = useState<string[]>([]);
 
+  const getNormalizedOrgNames = (orgId: string): string[] => {
+    if (orgId === "Catholic Caritas Foundation of Nigeria (CCFN)" || orgId === "CCFN" || orgId === "Caritas Nigeria") {
+      return ["Catholic Caritas Foundation of Nigeria (CCFN)", "CCFN", "Caritas Nigeria"];
+    }
+    if (orgId === "Institute of Human Virology, Nigeria (IHVN)" || orgId === "IHVN") {
+      return ["Institute of Human Virology, Nigeria (IHVN)", "IHVN"];
+    }
+    if (orgId === "APIN Public Health Initiatives (APIN)" || orgId === "APIN") {
+      return ["APIN Public Health Initiatives (APIN)", "APIN"];
+    }
+    return [orgId];
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const actSnap = await getDocs(collection(db, "sims_activities"));
-        const activitiesList: any[] = [];
+        let activitiesList: any[] = [];
         const orgList = new Set<string>();
         const stateList = new Set<string>();
 
@@ -69,12 +89,8 @@ export const AdminDashboard: React.FC = () => {
           stateList.add("Enugu");
         }
 
-        setActivities(activitiesList);
-        setOrgs(["All", ...Array.from(orgList)]);
-        setStates(["All", ...Array.from(stateList)]);
-
         const respSnap = await getDocs(collection(db, "question_response"));
-        const responsesList: any[] = [];
+        let responsesList: any[] = [];
         respSnap.forEach(docSnap => {
           responsesList.push(docSnap.data());
         });
@@ -92,6 +108,30 @@ export const AdminDashboard: React.FC = () => {
           }
         }
 
+        // Apply Super Admin vs regular Admin visibility logic
+        if (profile && profile.role !== "Super Admin" && profile.organizationName) {
+          const userOrg = profile.organizationName;
+          const allowedNames = getNormalizedOrgNames(userOrg);
+
+          activitiesList = activitiesList.filter(act => {
+            const actOrgs = act.organizations ? act.organizations.split(",") : [];
+            return actOrgs.some((orgName: string) => allowedNames.includes(orgName));
+          });
+
+          responsesList = responsesList.filter(resp => {
+            return allowedNames.includes(resp.organizationName);
+          });
+
+          const matchedOrgs = Array.from(orgList).filter(o => allowedNames.includes(o));
+          const finalOrgs = matchedOrgs.length > 0 ? matchedOrgs : [userOrg];
+          setOrgs(finalOrgs);
+          setSelectedOrg(finalOrgs[0]);
+        } else {
+          setOrgs(["All", ...Array.from(orgList)]);
+        }
+
+        setActivities(activitiesList);
+        setStates(["All", ...Array.from(stateList)]);
         setResponses(responsesList);
       } catch (e) {
         console.error("Error loading admin stats:", e);
@@ -99,8 +139,10 @@ export const AdminDashboard: React.FC = () => {
         setLoading(false);
       }
     };
-    fetchData();
-  }, []);
+    if (profile) {
+      fetchData();
+    }
+  }, [profile]);
 
   // Filter logic
   const filteredActivities = activities.filter(act => {
@@ -155,6 +197,31 @@ export const AdminDashboard: React.FC = () => {
   });
 
   const barData = Object.values(orgPerformance);
+
+  // Group by site performance for deeper analytics
+  const sitePerformance: Record<string, { facilityName: string; organizationName: string; state: string; completed: number; green: number; yellow: number; red: number }> = {};
+  
+  filteredResponses.forEach(r => {
+    const key = r.facilityName || r.eSIMS_ID || "Unknown Facility";
+    if (!sitePerformance[key]) {
+      sitePerformance[key] = {
+        facilityName: key,
+        organizationName: r.organizationName || "Unknown",
+        state: r.state || "Unknown",
+        completed: 0,
+        green: 0,
+        yellow: 0,
+        red: 0
+      };
+    }
+    sitePerformance[key].completed++;
+    const s = r.status?.toLowerCase();
+    if (s === "green") sitePerformance[key].green++;
+    else if (s === "yellow") sitePerformance[key].yellow++;
+    else if (s === "red") sitePerformance[key].red++;
+  });
+  
+  const sitePerformanceList = Object.values(sitePerformance);
 
   // CSV Export Utility
   const handleExportCSV = () => {
@@ -331,10 +398,407 @@ export const AdminDashboard: React.FC = () => {
     }
   };
 
+  // Group by state performance for State Comparison view
+  const statePerformance: Record<string, { stateName: string; Green: number; Yellow: number; Red: number }> = {};
+  filteredResponses.forEach(r => {
+    const st = r.state || "Unknown";
+    if (!statePerformance[st]) {
+      statePerformance[st] = { stateName: st, Green: 0, Yellow: 0, Red: 0 };
+    }
+    const s = r.status?.toLowerCase();
+    if (s === "green") statePerformance[st].Green++;
+    if (s === "yellow") statePerformance[st].Yellow++;
+    if (s === "red") statePerformance[st].Red++;
+  });
+  const statePerformanceList = Object.values(statePerformance);
+
+  const renderContent = () => {
+    const path = location.pathname;
+
+    if (path === "/admin/coverage/matrix") {
+      return (
+        <div className="space-y-8 animate-slide-in-up">
+          {/* Heatmap Matrix Grid */}
+          <section className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between border-b border-slate-200/80 pb-4 mb-6 gap-4">
+              <div>
+                <h3 className="font-bold text-slate-800 text-base">SIMS Site & Set Coverage Matrix</h3>
+                <p className="text-xs text-slate-400 mt-0.5">Live site assessment statuses across CEE clusters.</p>
+              </div>
+
+              {/* Key Indicators block */}
+              <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-600 bg-slate-50 px-4 py-2.5 rounded-2xl border border-slate-200/50">
+                <span className="text-[9px] text-slate-400 uppercase tracking-widest font-black mr-2">Grade Status:</span>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3.5 h-3.5 rounded bg-emerald-500 border border-emerald-600" />
+                  <span>Meets Standard</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3.5 h-3.5 rounded bg-amber-500 border border-amber-600" />
+                  <span>Needs Action</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3.5 h-3.5 rounded bg-red-500 border border-red-600" />
+                  <span>Urgent Remediation</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3.5 h-3.5 rounded bg-slate-400 border border-slate-500" />
+                  <span>N/A</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="overflow-x-auto w-full border border-slate-200/60 rounded-2xl shadow-inner bg-white">
+              <table className="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr className="bg-slate-50/80 border-b border-slate-200 text-slate-700 font-bold uppercase tracking-wider text-[9px] font-black">
+                    <th className="p-4 border-r border-slate-200/80 min-w-[280px]">SET OF CEEs</th>
+                    {facilitiesList.map(fac => (
+                      <th key={fac} className="p-4 text-center border-r border-slate-200/80 w-28 tracking-widest">{fac}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 font-medium">
+                  {ceeSetsList.map(setKey => (
+                    <tr key={setKey} className="hover:bg-slate-50/45 transition">
+                      <td className="p-4 border-r border-slate-200/80 font-bold text-slate-700 text-xs">{setKey}</td>
+                      {facilitiesList.map(fac => {
+                        const status = baseMatrix[setKey]?.[fac] || "White";
+                        return (
+                          <td key={fac} className="p-3 border-r border-slate-200/80 text-center">
+                            {getCellBadge(status)}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      );
+    }
+
+    if (path === "/admin/coverage/sets") {
+      return (
+        <div className="space-y-8 animate-slide-in-up">
+          {/* Baseline Charts Grid */}
+          <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Chart 1: Baseline SIMS Coverage */}
+            <div className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md flex flex-col transition hover:shadow-lg duration-300">
+              <div className="border-b border-slate-100 pb-3 mb-4">
+                <h3 className="font-bold text-slate-800 text-xs uppercase tracking-wider flex items-center gap-2">
+                  <BarChart3 className="w-4 h-4 text-wine-800" />
+                  <span>Baseline SIMS: SET Coverage</span>
+                </h3>
+                <p className="text-[11px] text-slate-400 mt-0.5">Frequency assessed and coverage proportion by CEE set.</p>
+              </div>
+              <div className="h-[340px] w-full mt-2">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={setCoverageData} margin={{ top: 10, right: 10, left: -20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                    <XAxis dataKey="name" stroke="#64748B" fontSize={9} tickLine={false} />
+                    <YAxis stroke="#64748B" fontSize={9} tickLine={false} />
+                    <Tooltip content={<BarCustomTooltip />} cursor={{ fill: "rgba(128, 0, 32, 0.02)" }} />
+                    <Legend verticalAlign="bottom" height={36} iconType="circle" />
+                    <Bar dataKey="assessed" name="SET Freq Ass" fill="#3B82F6" radius={[3, 3, 0, 0]} />
+                    <Bar dataKey="percentage" name="SET %Coverage" fill="#F59E0B" radius={[3, 3, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            {/* Chart 2: SRT SIMS Coverage */}
+            <div className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md flex flex-col transition hover:shadow-lg duration-300">
+              <div className="border-b border-slate-100 pb-3 mb-4">
+                <h3 className="font-bold text-slate-800 text-xs uppercase tracking-wider flex items-center gap-2">
+                  <BarChart3 className="w-4 h-4 text-wine-800" />
+                  <span>SRT SIMS Coverage</span>
+                </h3>
+                <p className="text-[11px] text-slate-400 mt-0.5">Target vs achieved SIMS facility completions by state resource team.</p>
+              </div>
+              <div className="h-[340px] w-full mt-2">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={srtCoverageData} margin={{ top: 10, right: 10, left: -20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                    <XAxis dataKey="name" stroke="#64748B" fontSize={9} tickLine={false} />
+                    <YAxis stroke="#64748B" fontSize={9} tickLine={false} />
+                    <Tooltip content={<BarCustomTooltip />} cursor={{ fill: "rgba(128, 0, 32, 0.02)" }} />
+                    <Legend verticalAlign="bottom" height={36} iconType="circle" />
+                    <Bar dataKey="facilities" name="#Facilities Target" fill="#EA580C" radius={[3, 3, 0, 0]} />
+                    <Bar dataKey="completed" name="SIMS Completed" fill="#EAB308" radius={[3, 3, 0, 0]} />
+                    <Bar dataKey="percentage" name="% Coverage" fill="#16A34A" radius={[3, 3, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </section>
+        </div>
+      );
+    }
+
+    if (path === "/admin/coverage/partners") {
+      return (
+        <div className="space-y-8 animate-slide-in-up">
+          <div className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md flex flex-col h-[450px]">
+            <div className="border-b border-slate-100 pb-3 mb-4 flex justify-between items-center">
+              <h3 className="font-bold text-slate-800 text-xs uppercase tracking-wider">CEE Grades by Implementing Partner</h3>
+            </div>
+            <div className="flex-1 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={barData} margin={{ top: 15, right: 10, left: -20, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  <XAxis dataKey="name" stroke="#94a3b8" fontSize={10} tickLine={false} />
+                  <YAxis stroke="#94a3b8" fontSize={10} tickLine={false} />
+                  <Tooltip content={<BarCustomTooltip />} cursor={{ fill: "rgba(128, 0, 32, 0.02)" }} />
+                  <Legend verticalAlign="bottom" height={36} iconType="circle" />
+                  <Bar dataKey="Green" name="Green (Meets)" fill="#10B981" radius={[3, 3, 0, 0]} />
+                  <Bar dataKey="Yellow" name="Yellow (Needs Action)" fill="#F59E0B" radius={[3, 3, 0, 0]} />
+                  <Bar dataKey="Red" name="Red (Urgent)" fill="#EF4444" radius={[3, 3, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (path === "/admin/analytics/grades") {
+      return (
+        <div className="space-y-8 animate-slide-in-up">
+          <div className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md flex flex-col h-[450px]">
+            <div className="border-b border-slate-100 pb-3 mb-4 flex items-center justify-between">
+              <h3 className="font-bold text-slate-800 text-xs uppercase tracking-wider">CEE Color Grade Breakdown</h3>
+              <span className="text-[10px] font-bold text-slate-400">Total Scored: {totalScored}</span>
+            </div>
+            <div className="flex-1 w-full relative">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={80}
+                    outerRadius={110}
+                    paddingAngle={4}
+                    dataKey="value"
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip content={<ChartCustomTooltip />} />
+                  <Legend verticalAlign="bottom" height={36} iconType="circle" />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (path === "/admin/analytics/sites") {
+      return (
+        <div className="space-y-8 animate-slide-in-up">
+          <div className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md">
+            <div className="border-b border-slate-100 pb-3 mb-4">
+              <h3 className="font-bold text-slate-850 text-base">Facility Site Performance Analytics</h3>
+              <p className="text-xs text-slate-400 mt-0.5">Detailed breakdown of CEE evaluation grades per facility</p>
+            </div>
+            <div className="overflow-x-auto w-full border border-slate-200/60 rounded-2xl shadow-inner bg-white">
+              <table className="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr className="bg-slate-50/80 border-b border-slate-200 text-slate-700 font-bold uppercase tracking-wider text-[9px] font-black">
+                    <th className="p-4">Facility Name</th>
+                    <th className="p-4">Implementing Partner</th>
+                    <th className="p-4">State</th>
+                    <th className="p-4 text-center">Completed CEEs</th>
+                    <th className="p-4 text-center">Green</th>
+                    <th className="p-4 text-center">Yellow</th>
+                    <th className="p-4 text-center">Red</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 font-semibold text-slate-700">
+                  {sitePerformanceList.map(site => (
+                    <tr key={site.facilityName} className="hover:bg-slate-50/50 transition">
+                      <td className="p-4 font-bold text-slate-800">{site.facilityName}</td>
+                      <td className="p-4">{site.organizationName}</td>
+                      <td className="p-4">{site.state}</td>
+                      <td className="p-4 text-center text-wine-900 font-bold">{site.completed} / 38</td>
+                      <td className="p-4 text-center">
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-black">
+                          {site.green}
+                        </span>
+                      </td>
+                      <td className="p-4 text-center">
+                        <span className="px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 text-[10px] font-black">
+                          {site.yellow}
+                        </span>
+                      </td>
+                      <td className="p-4 text-center">
+                        <span className="px-2 py-0.5 rounded-full bg-red-50 text-red-700 text-[10px] font-black">
+                          {site.red}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (path === "/admin/analytics/states") {
+      return (
+        <div className="space-y-8 animate-slide-in-up">
+          <div className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md flex flex-col h-[450px]">
+            <div className="border-b border-slate-100 pb-3 mb-4">
+              <h3 className="font-bold text-slate-800 text-xs uppercase tracking-wider">CEE Grades comparison by State</h3>
+            </div>
+            <div className="flex-1 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={statePerformanceList} margin={{ top: 15, right: 10, left: -20, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  <XAxis dataKey="stateName" stroke="#94a3b8" fontSize={10} tickLine={false} />
+                  <YAxis stroke="#94a3b8" fontSize={10} tickLine={false} />
+                  <Tooltip content={<BarCustomTooltip />} cursor={{ fill: "rgba(128, 0, 32, 0.02)" }} />
+                  <Legend verticalAlign="bottom" height={36} iconType="circle" />
+                  <Bar dataKey="Green" name="Green" fill="#10B981" radius={[3, 3, 0, 0]} />
+                  <Bar dataKey="Yellow" name="Yellow" fill="#F59E0B" radius={[3, 3, 0, 0]} />
+                  <Bar dataKey="Red" name="Red" fill="#EF4444" radius={[3, 3, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // Default Overview
+    return (
+      <div className="space-y-8 animate-slide-in-up">
+        {/* KPI Grid */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="glass-panel p-6 rounded-3xl shadow-sm border border-slate-200/80 flex items-center gap-4 relative overflow-hidden animate-hover-lift group duration-300">
+            <div className="absolute top-0 left-0 w-full h-[3px] bg-blue-500" />
+            <div className="p-3 rounded-2xl bg-blue-50 text-blue-600 group-hover:scale-110 transition duration-300 shadow-inner">
+              <LayoutDashboard className="w-7 h-7" />
+            </div>
+            <div>
+              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Active SIMS Sites</p>
+              <h3 className="text-2xl font-black text-slate-800 mt-1">{activeSimsCount}</h3>
+              <p className="text-[10px] text-slate-400 mt-0.5">Monitoring target facilities</p>
+            </div>
+          </div>
+
+          <div className="glass-panel p-6 rounded-3xl shadow-sm border border-slate-200/80 flex items-center gap-4 relative overflow-hidden animate-hover-lift group duration-300">
+            <div className="absolute top-0 left-0 w-full h-[3px] bg-emerald-500" />
+            <div className="p-3 rounded-2xl bg-emerald-50 text-emerald-600 group-hover:scale-110 transition duration-300 shadow-inner">
+              <ClipboardCheck className="w-7 h-7" />
+            </div>
+            <div>
+              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Completed Assessments</p>
+              <h3 className="text-2xl font-black text-slate-800 mt-1">{greenCount + yellowCount + redCount} CEEs</h3>
+              <p className="text-[10px] text-slate-400 mt-0.5">Total answers captured</p>
+            </div>
+          </div>
+
+          <div className="glass-panel p-6 rounded-3xl shadow-sm border border-slate-200/80 flex items-center gap-4 relative overflow-hidden animate-hover-lift group duration-300">
+            <div className="absolute top-0 left-0 w-full h-[3px] bg-wine-600" />
+            <div className="p-3 rounded-2xl bg-wine-50 text-wine-800 group-hover:scale-110 transition duration-300 shadow-inner">
+              <Percent className="w-7 h-7" />
+            </div>
+            <div>
+              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Overall Remediation Rate</p>
+              <h3 className="text-2xl font-black text-slate-800 mt-1">{remediationRate}%</h3>
+              <p className="text-[10px] text-slate-400 mt-0.5">Meets standard targets</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Charts Section */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md flex flex-col h-[400px] transition hover:shadow-lg duration-300">
+            <div className="border-b border-slate-100 pb-3 mb-4 flex items-center justify-between">
+              <h3 className="font-bold text-slate-800 text-xs uppercase tracking-wider">CEE Color Grade Breakdown</h3>
+              <span className="text-[10px] font-bold text-slate-400">Total Scored: {totalScored}</span>
+            </div>
+            <div className="flex-1 w-full relative">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={65}
+                    outerRadius={95}
+                    paddingAngle={4}
+                    dataKey="value"
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip content={<ChartCustomTooltip />} />
+                  <Legend verticalAlign="bottom" height={36} iconType="circle" />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          <div className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md flex flex-col h-[400px] transition hover:shadow-lg duration-300">
+            <div className="border-b border-slate-100 pb-3 mb-4">
+              <h3 className="font-bold text-slate-800 text-xs uppercase tracking-wider">CEE Grades by Implementing Partner</h3>
+            </div>
+            <div className="flex-1 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={barData} margin={{ top: 15, right: 10, left: -20, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  <XAxis dataKey="name" stroke="#94a3b8" fontSize={10} tickLine={false} />
+                  <YAxis stroke="#94a3b8" fontSize={10} tickLine={false} />
+                  <Tooltip content={<BarCustomTooltip />} cursor={{ fill: "rgba(128, 0, 32, 0.02)" }} />
+                  <Legend verticalAlign="bottom" height={36} iconType="circle" />
+                  <Bar dataKey="Green" name="Green (Meets)" fill="#10B981" radius={[3, 3, 0, 0]} />
+                  <Bar dataKey="Yellow" name="Yellow (Needs Action)" fill="#F59E0B" radius={[3, 3, 0, 0]} />
+                  <Bar dataKey="Red" name="Red (Urgent)" fill="#EF4444" radius={[3, 3, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  };
+
+  const getPageTitleAndSubtitle = () => {
+    const path = location.pathname;
+    switch (path) {
+      case "/admin/coverage/matrix":
+        return { title: "Coverage Matrix", subtitle: "Coverage Matrix Reports" };
+      case "/admin/coverage/sets":
+        return { title: "SET Reports", subtitle: "SET Coverage Reports" };
+      case "/admin/coverage/partners":
+        return { title: "Partner Reports", subtitle: "Implementing Partner Reports" };
+      case "/admin/analytics/grades":
+        return { title: "CEE Grade Trends", subtitle: "CEE Grade Trends Analytics" };
+      case "/admin/analytics/sites":
+        return { title: "Site Performance", subtitle: "Deeper Site Analytics" };
+      case "/admin/analytics/states":
+        return { title: "State Comparison", subtitle: "State Level Comparisons" };
+      default:
+        return { title: "Analytics & Management", subtitle: "Admin Space" };
+    }
+  };
+
+  const { title, subtitle } = getPageTitleAndSubtitle();
+
   return (
     <AdminLayout
-      title="Analytics & Management"
-      subtitle="Admin Space"
+      title={title}
+      subtitle={subtitle}
       headerRight={
         <button
           onClick={handleExportCSV}
@@ -346,36 +810,7 @@ export const AdminDashboard: React.FC = () => {
       }
     >
       <div className="space-y-8 pb-16">
-
-        {/* Segmented Pill Tab Controls */}
-        <div className="flex justify-center">
-          <div className="bg-slate-100 p-1 rounded-2xl flex gap-1 shadow-inner border border-slate-200/50">
-            <button
-              onClick={() => setActiveTab("overview")}
-              className={`px-6 py-2.5 rounded-xl font-bold text-xs transition duration-300 flex items-center gap-2 ${
-                activeTab === "overview"
-                  ? "bg-wine-800 text-white shadow-md shadow-wine-950/20"
-                  : "text-slate-500 hover:text-slate-800 hover:bg-slate-50"
-              }`}
-            >
-              <LayoutDashboard className="w-4 h-4" />
-              Overview Dashboard
-            </button>
-            <button
-              onClick={() => setActiveTab("coverage")}
-              className={`px-6 py-2.5 rounded-xl font-bold text-xs transition duration-300 flex items-center gap-2 ${
-                activeTab === "coverage"
-                  ? "bg-wine-800 text-white shadow-md shadow-wine-950/20"
-                  : "text-slate-500 hover:text-slate-800 hover:bg-slate-50"
-              }`}
-            >
-              <Grid className="w-4 h-4" />
-              SIMS Coverage Reports
-            </button>
-          </div>
-        </div>
-
-        {/* Filters & Export (common) */}
+        {/* Filters & Export */}
         <section className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md flex flex-col md:flex-row items-center justify-between gap-6 transition hover:shadow-lg duration-300">
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-xl bg-wine-50 text-wine-900 shadow-inner">
@@ -424,217 +859,7 @@ export const AdminDashboard: React.FC = () => {
           </div>
         </section>
 
-        {activeTab === "overview" ? (
-          /* TAB 1: OVERVIEW ANALYTICS */
-          <div className="space-y-8 animate-slide-in-up">
-            {/* KPI Grid */}
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="glass-panel p-6 rounded-3xl shadow-sm border border-slate-200/80 flex items-center gap-4 relative overflow-hidden animate-hover-lift group duration-300">
-                <div className="absolute top-0 left-0 w-full h-[3px] bg-blue-500" />
-                <div className="p-3 rounded-2xl bg-blue-50 text-blue-600 group-hover:scale-110 transition duration-300 shadow-inner">
-                  <LayoutDashboard className="w-7 h-7" />
-                </div>
-                <div>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Active SIMS Sites</p>
-                  <h3 className="text-2xl font-black text-slate-800 mt-1">{activeSimsCount}</h3>
-                  <p className="text-[10px] text-slate-400 mt-0.5">Monitoring target facilities</p>
-                </div>
-              </div>
-
-              <div className="glass-panel p-6 rounded-3xl shadow-sm border border-slate-200/80 flex items-center gap-4 relative overflow-hidden animate-hover-lift group duration-300">
-                <div className="absolute top-0 left-0 w-full h-[3px] bg-emerald-500" />
-                <div className="p-3 rounded-2xl bg-emerald-50 text-emerald-600 group-hover:scale-110 transition duration-300 shadow-inner">
-                  <ClipboardCheck className="w-7 h-7" />
-                </div>
-                <div>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Completed Assessments</p>
-                  <h3 className="text-2xl font-black text-slate-800 mt-1">{greenCount + yellowCount + redCount} CEEs</h3>
-                  <p className="text-[10px] text-slate-400 mt-0.5">Total answers captured</p>
-                </div>
-              </div>
-
-              <div className="glass-panel p-6 rounded-3xl shadow-sm border border-slate-200/80 flex items-center gap-4 relative overflow-hidden animate-hover-lift group duration-300">
-                <div className="absolute top-0 left-0 w-full h-[3px] bg-wine-600" />
-                <div className="p-3 rounded-2xl bg-wine-50 text-wine-800 group-hover:scale-110 transition duration-300 shadow-inner">
-                  <Percent className="w-7 h-7" />
-                </div>
-                <div>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Overall Remediation Rate</p>
-                  <h3 className="text-2xl font-black text-slate-800 mt-1">{remediationRate}%</h3>
-                  <p className="text-[10px] text-slate-400 mt-0.5">Meets standard targets</p>
-                </div>
-              </div>
-            </section>
-
-            {/* Charts Section */}
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md flex flex-col h-[400px] transition hover:shadow-lg duration-300">
-                <div className="border-b border-slate-100 pb-3 mb-4 flex items-center justify-between">
-                  <h3 className="font-bold text-slate-800 text-xs uppercase tracking-wider">CEE Color Grade Breakdown</h3>
-                  <span className="text-[10px] font-bold text-slate-400">Total Scored: {totalScored}</span>
-                </div>
-                <div className="flex-1 w-full relative">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={pieData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={65}
-                        outerRadius={95}
-                        paddingAngle={4}
-                        dataKey="value"
-                      >
-                        {pieData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <Tooltip content={<ChartCustomTooltip />} />
-                      <Legend verticalAlign="bottom" height={36} iconType="circle" />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-
-              <div className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md flex flex-col h-[400px] transition hover:shadow-lg duration-300">
-                <div className="border-b border-slate-100 pb-3 mb-4">
-                  <h3 className="font-bold text-slate-800 text-xs uppercase tracking-wider">CEE Grades by Implementing Partner</h3>
-                </div>
-                <div className="flex-1 w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={barData} margin={{ top: 15, right: 10, left: -20, bottom: 5 }}>
-                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                      <XAxis dataKey="name" stroke="#94a3b8" fontSize={10} tickLine={false} />
-                      <YAxis stroke="#94a3b8" fontSize={10} tickLine={false} />
-                      <Tooltip content={<BarCustomTooltip />} cursor={{ fill: "rgba(128, 0, 32, 0.02)" }} />
-                      <Legend verticalAlign="bottom" height={36} iconType="circle" />
-                      <Bar dataKey="Green" name="Green (Meets)" fill="#10B981" radius={[3, 3, 0, 0]} />
-                      <Bar dataKey="Yellow" name="Yellow (Needs Action)" fill="#F59E0B" radius={[3, 3, 0, 0]} />
-                      <Bar dataKey="Red" name="Red (Urgent)" fill="#EF4444" radius={[3, 3, 0, 0]} />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-            </section>
-          </div>
-        ) : (
-          /* TAB 2: COVERAGE MATRIX & CHARTS */
-          <div className="space-y-8 animate-slide-in-up">
-            
-            {/* Heatmap Matrix Grid */}
-            <section className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md">
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between border-b border-slate-200/80 pb-4 mb-6 gap-4">
-                <div>
-                  <h3 className="font-bold text-slate-800 text-base">SIMS Site & Set Coverage Matrix</h3>
-                  <p className="text-xs text-slate-400 mt-0.5">Live site assessment statuses across CEE clusters.</p>
-                </div>
-
-                {/* Key Indicators block */}
-                <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-600 bg-slate-50 px-4 py-2.5 rounded-2xl border border-slate-200/50">
-                  <span className="text-[9px] text-slate-400 uppercase tracking-widest font-black mr-2">Grade Status:</span>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-3.5 h-3.5 rounded bg-emerald-500 border border-emerald-600" />
-                    <span>Meets Standard</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-3.5 h-3.5 rounded bg-amber-500 border border-amber-600" />
-                    <span>Needs Action</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-3.5 h-3.5 rounded bg-red-500 border border-red-600" />
-                    <span>Urgent Remediation</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-3.5 h-3.5 rounded bg-slate-400 border border-slate-500" />
-                    <span>N/A</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="overflow-x-auto w-full border border-slate-200/60 rounded-2xl shadow-inner bg-white">
-                <table className="w-full text-left text-xs border-collapse">
-                  <thead>
-                    <tr className="bg-slate-50/80 border-b border-slate-200 text-slate-700 font-bold uppercase tracking-wider text-[9px] font-black">
-                      <th className="p-4 border-r border-slate-200/80 min-w-[280px]">SET OF CEEs</th>
-                      {facilitiesList.map(fac => (
-                        <th key={fac} className="p-4 text-center border-r border-slate-200/80 w-28 tracking-widest">{fac}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100 font-medium">
-                    {ceeSetsList.map(setKey => (
-                      <tr key={setKey} className="hover:bg-slate-50/45 transition">
-                        <td className="p-4 border-r border-slate-200/80 font-bold text-slate-700 text-xs">{setKey}</td>
-                        {facilitiesList.map(fac => {
-                          const status = baseMatrix[setKey]?.[fac] || "White";
-                          return (
-                            <td key={fac} className="p-3 border-r border-slate-200/80 text-center">
-                              {getCellBadge(status)}
-                            </td>
-                          );
-                        })}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-
-            {/* Baseline Charts Grid */}
-            <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              
-              {/* Chart 1: Baseline SIMS Coverage */}
-              <div className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md flex flex-col transition hover:shadow-lg duration-300">
-                <div className="border-b border-slate-100 pb-3 mb-4">
-                  <h3 className="font-bold text-slate-800 text-xs uppercase tracking-wider flex items-center gap-2">
-                    <BarChart3 className="w-4 h-4 text-wine-800" />
-                    <span>Baseline SIMS: SET Coverage</span>
-                  </h3>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Frequency assessed and coverage proportion by CEE set.</p>
-                </div>
-                <div className="h-[340px] w-full mt-2">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={setCoverageData} margin={{ top: 10, right: 10, left: -20, bottom: 5 }}>
-                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                      <XAxis dataKey="name" stroke="#64748B" fontSize={9} tickLine={false} />
-                      <YAxis stroke="#64748B" fontSize={9} tickLine={false} />
-                      <Tooltip content={<BarCustomTooltip />} cursor={{ fill: "rgba(128, 0, 32, 0.02)" }} />
-                      <Legend verticalAlign="bottom" height={36} iconType="circle" />
-                      <Bar dataKey="assessed" name="SET Freq Ass" fill="#3B82F6" radius={[3, 3, 0, 0]} />
-                      <Bar dataKey="percentage" name="SET %Coverage" fill="#F59E0B" radius={[3, 3, 0, 0]} />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-
-              {/* Chart 2: SRT SIMS Coverage */}
-              <div className="glass-panel p-6 rounded-3xl border border-slate-200/80 shadow-md flex flex-col transition hover:shadow-lg duration-300">
-                <div className="border-b border-slate-100 pb-3 mb-4">
-                  <h3 className="font-bold text-slate-800 text-xs uppercase tracking-wider flex items-center gap-2">
-                    <BarChart3 className="w-4 h-4 text-wine-800" />
-                    <span>SRT SIMS Coverage</span>
-                  </h3>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Target vs achieved SIMS facility completions by state resource team.</p>
-                </div>
-                <div className="h-[340px] w-full mt-2">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={srtCoverageData} margin={{ top: 10, right: 10, left: -20, bottom: 5 }}>
-                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                      <XAxis dataKey="name" stroke="#64748B" fontSize={9} tickLine={false} />
-                      <YAxis stroke="#64748B" fontSize={9} tickLine={false} />
-                      <Tooltip content={<BarCustomTooltip />} cursor={{ fill: "rgba(128, 0, 32, 0.02)" }} />
-                      <Legend verticalAlign="bottom" height={36} iconType="circle" />
-                      <Bar dataKey="facilities" name="#Facilities Target" fill="#EA580C" radius={[3, 3, 0, 0]} />
-                      <Bar dataKey="completed" name="SIMS Completed" fill="#EAB308" radius={[3, 3, 0, 0]} />
-                      <Bar dataKey="percentage" name="% Coverage" fill="#16A34A" radius={[3, 3, 0, 0]} />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-
-            </section>
-          </div>
-        )}
+        {renderContent()}
 
       </div>
     </AdminLayout>

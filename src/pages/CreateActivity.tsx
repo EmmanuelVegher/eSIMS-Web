@@ -6,7 +6,7 @@ import { Calendar, Building, Landmark, CheckCircle, Loader2, AlertCircle, Layers
 import { AdminLayout } from "../components/AdminLayout";
 
 export const CreateActivity: React.FC = () => {
-  const { navigate } = useApp();
+  const { navigate, profile } = useApp();
 
   const [startDate, setStartDate] = useState("");
   const [startTime, setStartTime] = useState("00:00");        // default midnight
@@ -29,10 +29,49 @@ export const CreateActivity: React.FC = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Load flat facilities once
+  const [organizationsList, setOrganizationsList] = useState<any[]>([]);
+
+  // Fuzzy matches organization names
+  const isMatchOrg = (userOrgName: string, orgNameInDb: string): boolean => {
+    if (!userOrgName || !orgNameInDb) return false;
+    const normUser = userOrgName.toLowerCase().replace(/[^a-z0-9]/g, "");
+    const normDb = orgNameInDb.toLowerCase().replace(/[^a-z0-9]/g, "");
+    
+    const match = normDb.includes(normUser) || normUser.includes(normDb);
+    if (match) return true;
+
+    const isUserCaritas = normUser.includes("caritas") || normUser.includes("ccfn");
+    const isDbCaritas = normDb.includes("caritas") || normDb.includes("ccfn");
+    if (isUserCaritas && isDbCaritas) return true;
+
+    const isUserIhvn = normUser.includes("ihvn") || normUser.includes("virology");
+    const isDbIhvn = normDb.includes("ihvn") || normDb.includes("virology");
+    if (isUserIhvn && isDbIhvn) return true;
+
+    const isUserApin = normUser.includes("apin") || normUser.includes("publichealth");
+    const isDbApin = normDb.includes("apin") || normDb.includes("publichealth");
+    if (isUserApin && isDbApin) return true;
+
+    return false;
+  };
+
+  // Map organization name to their public logo image
+  const getOrgLogo = (orgId: string): string => {
+    const id = orgId.toLowerCase();
+    if (id.includes("apin")) return "/APIN1.png";
+    if (id.includes("caritas") && !id.includes("ccfn")) return "/CARITAS.png";
+    if (id.includes("ccfn") || id.includes("catholic caritas")) return "/ccfn.png";
+    if (id.includes("cihp") || id.includes("center for integrated")) return "/CIHP.png";
+    if (id.includes("ecews") || id.includes("excellence community")) return "/ECEWS.png";
+    if (id.includes("ihvn") || id.includes("institute of human")) return "/IHVN.png";
+    return "";
+  };
+
+  // Load flat facilities and organizations once
   useEffect(() => {
-    const fetchAllFacilities = async () => {
+    const fetchAllData = async () => {
       try {
+        // Fetch Facilities
         const snap = await getDocs(collection(db, "facilities"));
         const list: any[] = [];
         snap.forEach(docSnap => {
@@ -49,29 +88,53 @@ export const CreateActivity: React.FC = () => {
           );
         }
         setAllFacilities(list);
+
+        // Fetch Organizations directly from Firestore root collection
+        const orgsSnap = await getDocs(collection(db, "organizations"));
+        let orgsList: any[] = [];
+        orgsSnap.forEach(docSnap => {
+          orgsList.push({ id: docSnap.id, organizationName: docSnap.data().organizationName || docSnap.id });
+        });
+        
+        if (orgsList.length === 0) {
+          orgsList.push(
+            { id: "Caritas Nigeria", organizationName: "Caritas Nigeria" },
+            { id: "CCFN", organizationName: "CCFN" },
+            { id: "IHVN", organizationName: "IHVN" }
+          );
+        }
+
+        // Apply Super Admin vs regular Admin logic with fuzzy matches
+        if (profile && profile.role !== "Super Admin" && profile.organizationName) {
+          const userOrg = profile.organizationName;
+          orgsList = orgsList.filter(o => isMatchOrg(userOrg, o.id) || isMatchOrg(userOrg, o.organizationName));
+          if (orgsList.length > 0) {
+            setSelectedOrgs([orgsList[0].id]);
+          }
+        }
+
+        setOrganizationsList(orgsList);
       } catch (e) {
-        console.error("Error loading facilities:", e);
+        console.error("Error loading facilities/organizations:", e);
       }
     };
-    fetchAllFacilities();
-  }, []);
-
-  // Derive unique organizations from the flat facilities list
-  const organizationsList = Array.from(new Set(allFacilities.map(f => f.organizationName)))
-    .map(name => ({ id: name, organizationName: name }));
+    if (profile) {
+      fetchAllData();
+    }
+  }, [profile]);
 
   // Derive unique states for the selected organizations
   const statesList = Array.from(
     new Set(
       allFacilities
-        .filter(f => selectedOrgs.includes(f.organizationName))
+        .filter(f => selectedOrgs.some(orgId => isMatchOrg(orgId, f.organizationName)))
         .map(f => f.stateName)
     )
   );
 
   // Derive facilities for the selected states & organizations
   const facilitiesList = allFacilities.filter(
-    f => selectedOrgs.includes(f.organizationName) && selectedStates.includes(f.stateName)
+    f => selectedOrgs.some(orgId => isMatchOrg(orgId, f.organizationName)) && selectedStates.includes(f.stateName)
   );
 
   // Toggle checks helper
@@ -199,14 +262,18 @@ export const CreateActivity: React.FC = () => {
               <div className="bg-white border border-slate-200 rounded-xl p-3.5 space-y-2 max-h-36 overflow-y-auto">
                 {organizationsList.map(org => {
                   const checked = selectedOrgs.includes(org.id);
+                  const logo = getOrgLogo(org.id);
                   return (
-                    <label key={org.id} className="flex items-center gap-3 text-xs font-medium text-slate-700 cursor-pointer select-none">
+                    <label key={org.id} className="flex items-center gap-3 text-xs font-medium text-slate-700 cursor-pointer select-none py-1 px-1.5 hover:bg-slate-50 rounded-lg transition">
                       <input
                         type="checkbox"
                         checked={checked}
                         onChange={() => handleToggle(selectedOrgs, setSelectedOrgs, org.id)}
                         className="rounded text-wine-800 focus:ring-wine-800/10"
                       />
+                      {logo && (
+                        <img src={logo} className="w-5 h-5 object-contain rounded border border-slate-100 bg-white" alt="" />
+                      )}
                       <span>{org.organizationName || org.id}</span>
                     </label>
                   );
